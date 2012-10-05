@@ -1,0 +1,31 @@
+Dechhin Lama, Ashwin Ramachandran, Adil Sadik
+EECS 4340
+HW1 Algorithms
+
+READ ALGORITHM
+
+1. Decode the read address into a one-hot signal
+2. Send the 32-bit decoded signal to the 32 rows of the CAM memory (1 bit per row)
+3. If it is a negative clock edge
+	a. If the address bit is a 1 and the read enable signal is 1, output the data stored in the flip-flops
+	b. Otherwise output a zero
+4. Feed data output of all rows to the mux
+5. Use the read_index_i input to select the proper row to output
+
+WRITE ALGORITHM
+
+1. Decode the write address into a one-hot signal
+2. Send the 32-bit decoded signal to the 32 rows of the CAM memory (1 bit per row) 
+3. If it is a positive clock edge
+	a. If the address bit is 1 and the write enable signal is 1, copy the data in value to the flip flops
+	b. Otherwise hold the current value
+
+SEARCH ALGORITHM
+
+1. Feed the search signal and key to all rows of the CAM memory
+2. If it is a negative clock edge
+	a. If the search signal is 1
+		i. Check if the stored value equals the key. If so, output 1. Otherwise, output 0.
+3. Send the match signal from each row (a 32-bit signal) into a priority encoder to convert it to an address
+	a. If the 32-bit match signal is equal to 0, set the search_valid output to 0, otherwise 1.
+	b. Priority encode the address based on the 32-bit match signal as input.
