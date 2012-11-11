@@ -1,7 +1,7 @@
 TOP=top.sv
 INTERFACE=interface.sv
-BENCH=bench.sv
-DUT=../../src/router.sv
+BENCH=arb_bench.sv
+DUT=../../src/arbiter.sv
 
 .PHONY: help
 
