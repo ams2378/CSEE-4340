@@ -1,7 +1,7 @@
 TOP=top.sv
 INTERFACE=interface.sv
-BENCH=bench.sv
-DUT=router.sv
+BENCH=addr_bench.sv
+DUT=../../src/address_gen.sv
 
 .PHONY: help
 

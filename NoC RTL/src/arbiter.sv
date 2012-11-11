@@ -9,23 +9,8 @@
 */
 
 module arbiter (
-
-	input [2:0] req_port_addr1_i,
-	input [2:0] req_port_addr2_i,	
-	input [2:0] req_port_addr3_i,
-	input [2:0] req_port_addr4_i,
-	input [2:0] req_port_addr5_i,
-
-	output [2:0] req_port_addr1_o,
-	output [2:0] req_port_addr2_o,	
-	output [2:0] req_port_addr3_o,
-	output [2:0] req_port_addr4_o,
-	output [2:0] req_port_addr5_o
-
-)
-
-
-
+		ifc_arb.dut d
+		);
 
 endmodule
 

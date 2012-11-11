@@ -8,10 +8,7 @@
 */
 
 module counter(
-	input incr_i,
-	input decr_i, 
-
-	output credit_en_o;	
+	ifc_counter.dut d
 );
 
 endmodule
