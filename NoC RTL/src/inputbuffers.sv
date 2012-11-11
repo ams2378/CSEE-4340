@@ -1,7 +1,7 @@
 module inputbuffers (
 	
 	input clk,
-	input rst_n,
+	input rst,
 
 	input pop_req_n_i,
 	input pop_req_s_i,
@@ -28,7 +28,7 @@ module inputbuffers (
 queue n_queue (
 	
 	.clk (clk),
-	.rst_n (rst_n),
+	.rst (rst),
 	.pop_req_i(pop_req_n_i),
 	.data_i(north_i),
 
@@ -38,7 +38,7 @@ queue n_queue (
 queue s_queue (
 	
 	.clk (clk),
-	.rst_n (rst_n),
+	.rst (rst),
 	.pop_req_i(pop_req_s_i),
 	.data_i(south_i),
 
@@ -48,7 +48,7 @@ queue s_queue (
 queue e_queue (
 	
 	.clk (clk),
-	.rst_n (rst_n),
+	.rst (rst),
 	.pop_req_i(pop_req_e_i),
 	.data_i(east_i),
 
@@ -58,7 +58,7 @@ queue e_queue (
 queue w_queue (
 	
 	.clk (clk),
-	.rst_n (rst_n),
+	.rst (rst),
 	.pop_req_i(pop_req_w_i),
 	.data_i(west_i),
 
@@ -68,7 +68,7 @@ queue w_queue (
 queue l_queue (
 	
 	.clk (clk),
-	.rst_n (rst_n),
+	.rst (rst),
 	.pop_req_i(pop_req_l_i),
 	.data_i(local_i),
 
