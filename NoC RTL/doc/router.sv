@@ -38,15 +38,51 @@ module router (
 
 /*
  * instantiate the queue buffers
- 
-queue inputbuffers(
-	.north_i(north_i),
-	.south_i(south_i),
-	.east_i(east_i),
- 	.west_i(west_i),
-	.local_i(local_i)
+ * north queue */
+queue north_buffer(
+	.clk(clk),
+	.rst(rst),
+
+	.north_i(data_i)	
 	);
-*/	
+
+/*
+ * south queue */
+queue south_buffer(
+	.clk(clk),
+	.rst(rst),
+
+	.south_i(data_i)	
+	);
+
+/*
+ * east queue */
+queue east_buffer(
+	.clk(clk),
+	.rst(rst),
+
+	.east_i(data_i)	
+	);
+
+/*
+ * west queue */
+queue west_buffer(
+	.clk(clk),
+	.rst(rst),
+
+	.west_i(data_i)	
+	);
+
+/*
+ * local queue */
+queue local_buffer(
+	.clk(clk),
+	.rst(rst),
+
+	.local_i(data_i)	
+	);
+
+
 
 endmodule
 
