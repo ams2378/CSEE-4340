@@ -11,60 +11,31 @@ module router (
 	ifc.dut d
 	);
 
+/*
+ * instantiate the fcc */
+fcc fcc_unit(
+	
+);
 
 /*
- * instantiate the queue buffers
- * north queue */
-queue north_buffer(
-	.clk(clk),
-	.rst(rst),
+ * instantiate the inputbuffers */
+inputbuffer inputbuffer_unit(
 
-	.north_i(data_i)	
-	);
+);
 
 /*
- * south queue */
-queue south_buffer(
-	.clk(clk),
-	.rst(rst),
-
-	.south_i(data_i)	
-	);
+ * instantiate the arbiter */
 
 /*
- * east queue */
-queue east_buffer(
-	.clk(clk),
-	.rst(rst),
-
-	.east_i(data_i)	
-	);
+ * instantiate the fcu */
 
 /*
- * west queue */
-queue west_buffer(
-	.clk(clk),
-	.rst(rst),
-
-	.west_i(data_i)	
-	);
-
-/*
- * local queue */
-queue local_buffer(
-	.clk(clk),
-	.rst(rst),
-
-	.local_i(data_i)	
-	);
+ * instantiate the address generator */
 
 
 /*
- * instantiate the counters
- * north neighbor counter */
-counter north_counter(
-	n_incr_i(incr_i)
-)
+ * instantiate the xbar */
+
 
 
 
