@@ -19,20 +19,20 @@ module router (
 	output [15:0] south_o,
 	output [15:0] east_o,
 	output [15:0] west_o,
-	output [15:0] local_o,
+	output [15:0] local_o
 	);
 
 /*
- * instantiate the queu buffers
- */
+ * instantiate the queue buffers
+ 
 queue inputbuffers(
-	.north_i(north_i);
-	.south_i(south_i);
-	.east_i(east_i);
- 	.west_i(west_i);
-	.local_i(local_i);
+	.north_i(north_i),
+	.south_i(south_i),
+	.east_i(east_i),
+ 	.west_i(west_i),
+	.local_i(local_i)
 	);
-	
+*/	
 
 endmodule
 
