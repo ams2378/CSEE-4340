@@ -29,7 +29,7 @@ queue inputbuffers(
 	.north_i(north_i);
 	.south_i(south_i);
 	.east_i(east_i);
-	.west_i(west_i);
+ 	.west_i(west_i);
 	.local_i(local_i);
 	);
 	
