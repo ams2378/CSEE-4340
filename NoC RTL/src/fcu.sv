@@ -1,3 +1,15 @@
+/**
+* filename  		fcu.sv 
+* brief			Flow Control Unit- implements credit based flow control    		
+* authors   		Adil sadik <ams2378@columbia.edu>
+* data creation		11/11/12	
+* 
+* 
+*	 
+*/
+
+
+
 module fcu (
 	
 	input [2:0] req_port_addr1_i,

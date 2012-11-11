@@ -1,3 +1,14 @@
+/**
+* filename  		inputbuffers.sv 
+* brief			instantiating queues to have top level input fifo buffers for each input port     		
+* authors   		Adil sadik <ams2378@columbia.edu>
+* data creation		11/11/12	
+* 
+* 
+*	 
+*/
+
+
 module inputbuffers (
 	
 	input clk,
