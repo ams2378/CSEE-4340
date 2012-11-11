@@ -12,16 +12,32 @@ module router (
 	);
 
 /*
- * instantiate the queue buffers
- 
-queue inputbuffers(
-	.north_i(d.north_i),
-	.south_i(d.south_i),
-	.east_i(d.east_i),
- 	.west_i(d.west_i),
-	.local_i(d.local_i)
-	);
-*/	
+ * instantiate the fcc */
+fcc fcc_unit(
+	
+);
+
+/*
+ * instantiate the inputbuffers */
+inputbuffer inputbuffer_unit(
+
+);
+
+/*
+ * instantiate the arbiter */
+
+/*
+ * instantiate the fcu */
+
+/*
+ * instantiate the address generator */
+
+
+/*
+ * instantiate the xbar */
+
+
+
 
 endmodule
 
