@@ -1,9 +1,9 @@
 /**
 * @filename  		bench.sv 
 *
-* @brief     		The file includes the software model of the router and the random verification tb
-* @authors   		Ayushi Rajeev <ar3110@columbia.edu>
-			Ashwin Ramachandran <ar2648@columbia.edu>
+* @brief     		The file includes the software model of the router and the random verification TB
+* @authors   		Ayushi Rajeev		<ar3110@columbia.edu>
+*			Ashwin Ramachandran	<ar2648@columbia.edu>
 *	     		
 *  	 
 */

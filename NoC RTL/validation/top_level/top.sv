@@ -1,10 +1,9 @@
 /**
 * @filename  		top.sv
 *
-* @brief     		Top Level - assign clock, instantiate DUT and Testbench
-* @authors   		Ashwin Ramachandran <ar2648@columbia.edu>
-			Ayushi Rajeev <ar3110@columbia.edu>
-*				 
+* @brief     		Top Level - assigns clock, instantiates DUT and Testbench
+* @authors   		Ayushi Rajeev		<ar3110@columbia.edu>
+*			Ashwin Ramachandran	<ar2648@columbia.edu>
 */
 
 

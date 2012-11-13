@@ -1,10 +1,9 @@
 /**
 * @filename  		interface.sv 
 *
-* @brief     		The file defines the interfaces for test bench and DUT
-* @authors   		Ashwin Ramachandran <ar2648@columbia.edu>
-			Ayushi Rajeev <ar3110@columbia.edu>
-*	 
+* @brief     		This file defines the interfaces for the testbench and top-level DUT
+* @authors   		Ayushi Rajeev		<ar3110@columbia.edu>
+*	 		Ashwin Ramachandran	<ar2648@columbia.edu>
 */
 
 interface ifc (input bit clk);
