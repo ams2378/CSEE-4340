@@ -1,79 +1,57 @@
 module inputbuffers (
-	
-	input clk,
-	input rst,
-
-	input pop_req_n_i,
-	input pop_req_s_i,
-	input pop_req_e_i,
-	input pop_req_w_i,
-	input pop_req_l_i,
-
-	input [15:0] north_i,		
-	input [15:0] south_i,	
-	input [15:0] east_i,	
-	input [15:0] west_i,	
-	input [15:0] local_i,	
-
-	output [15:0] north_o,		
-	output [15:0] south_o,	
-	output [15:0] east_o,	
-	output [15:0] west_o,	
-	output [15:0] local_o,	
-
-
-)
+	ifc_buffer.dut d	
+);
 
 
 queue n_queue (
 	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_n_i),
-	.data_i(north_i),
+	.clk (d.clk),
+	.rst (d.rst),
+	.pop_req_i(d.pop_req_n_i),
+	.data_i(d.north_i),
 
-	.data_o(north_o)	
-)
+	.data_o(d.north_o)	
+);
 
 queue s_queue (
 	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_s_i),
-	.data_i(south_i),
+	.clk (d.clk),
+	.rst (d.rst),
+	.pop_req_i(d.pop_req_s_i),
+	.data_i(d.south_i),
 
-	.data_o(south_o)	
-)
+	.data_o(d.south_o)	
+);
 
 queue e_queue (
 	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_e_i),
-	.data_i(east_i),
+	.clk (d.clk),
+	.rst (d.rst),
+	.pop_req_i(d.pop_req_e_i),
+	.data_i(d.east_i),
 
-	.data_o(east_o)	
-)
+	.data_o(d.east_o)	
+);
 
 queue w_queue (
 	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_w_i),
-	.data_i(west_i),
+	.clk (d.clk),
+	.rst (d.rst),
+	.pop_req_i(d.pop_req_w_i),
+	.data_i(d.west_i),
 
-	.data_o(west_o)	
-)
+	.data_o(d.west_o)	
+);
 
 queue l_queue (
 	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_l_i),
-	.data_i(local_i),
+	.clk (d.clk),
+	.rst (d.rst),
+	.pop_req_i(d.pop_req_l_i),
+	.data_i(d.local_i),
 
-	.data_o(local_o)	
-)
+	.data_o(d.local_o)	
+);
 
 
 endmodule
