@@ -79,8 +79,6 @@ program tb (ifc_fcu.bench ds);
        *  pass data to DUT
        */
 
-      @(ds.cb);
-
       test.golden_result();
    endtask
 

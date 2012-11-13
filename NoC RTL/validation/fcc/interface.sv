@@ -7,7 +7,7 @@
  *	 
  */
 
-interface ifc_fcc (input bit clk);
+interface ifc_fcc ();
    logic n_incr_i;
    logic s_incr_i;
    logic e_incr_i;
@@ -26,31 +26,7 @@ interface ifc_fcc (input bit clk);
    logic credit_en_west_o;
    logic credit_en_local_o;
 
-   clocking cb @(posedge clk);
-      default output #1;
-
-      output n_incr_i;
-      output s_incr_i;
-      output e_incr_i;
-      output w_incr_i;
-      output l_incr_i;
-
-      output n_decr_i; 
-      output s_decr_i; 
-      output e_decr_i; 
-      output w_decr_i; 
-      output l_decr_i;
-
-      input  credit_en_north_o;
-      input  credit_en_south_o;
-      input  credit_en_east_o;
-      input  credit_en_west_o;
-      input  credit_en_local_o;
-   endclocking
-
    modport dut (
-		input  clk,
-
 		input  n_incr_i,
 		input  s_incr_i,
 		input  e_incr_i,
@@ -70,5 +46,23 @@ interface ifc_fcc (input bit clk);
 		output credit_en_local_o
 		);
 
-   modport bench (clocking cb);
+   modport bench (
+      		output n_incr_i,
+     		output s_incr_i,
+      		output e_incr_i,
+      		output w_incr_i,
+      		output l_incr_i,
+
+      		output n_decr_i, 
+      		output s_decr_i, 
+      		output e_decr_i, 
+      		output w_decr_i, 
+      		output l_decr_i,
+
+      		input  credit_en_north_o,
+      		input  credit_en_south_o,
+      		input  credit_en_east_o,
+      		input  credit_en_west_o,
+      		input  credit_en_local_o
+   );
 endinterface

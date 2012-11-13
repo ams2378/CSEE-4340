@@ -81,8 +81,6 @@ program tb (ifc_arb.bench ds);
 	 	 *  pass data to DUT
 	 	 */
 
-		@(ds.cb);
-
 		test.golden_result();
 	endtask
 

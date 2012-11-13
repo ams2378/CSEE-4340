@@ -26,31 +26,7 @@ interface ifc_fcu (input bit clk);
 	logic grant_access_west;
 	logic grant_access_local;
 
-   	clocking cb @(posedge clk);
-      		default output #1;
-
-		output       req_port_addr1_i;
-		output       req_port_addr2_i; 
-		output       req_port_addr3_i;
-		output       req_port_addr4_i; 
-		output 	    req_port_addr5_i;
-
-		output 	    credit_en_north;
-		output 	    credit_en_south;
-		output 	    credit_en_east;
-		output 	    credit_en_west;
-		output 	    credit_en_local;
-
-		input 	    grant_access_north;
-		input 	    grant_access_south;
-		input 	    grant_access_east;
-		input 	    grant_access_west;
-		input 	    grant_access_local;
-	endclocking
-
    	modport dut (
-		input 	    clk,
-
 		input       req_port_addr1_i,
 		input       req_port_addr2_i, 
 		input       req_port_addr3_i,
@@ -70,5 +46,23 @@ interface ifc_fcu (input bit clk);
 		output 	    grant_access_local
 		);
 
-   	modport bench (clocking cb);
+   	modport bench (
+		output      req_port_addr1_i,
+		output      req_port_addr2_i, 
+		output      req_port_addr3_i,
+		output      req_port_addr4_i, 
+		output 	    req_port_addr5_i,
+
+		output 	    credit_en_north,
+		output 	    credit_en_south,
+		output 	    credit_en_east,
+		output 	    credit_en_west,
+		output 	    credit_en_local,
+
+		input 	    grant_access_north,
+		input 	    grant_access_south,
+		input 	    grant_access_east,
+		input 	    grant_access_west,
+		input 	    grant_access_local
+	);
 endinterface

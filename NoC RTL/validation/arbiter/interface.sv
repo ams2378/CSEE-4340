@@ -7,7 +7,7 @@
 *	 
 */
 
-interface ifc_arb (input bit clk);
+interface ifc_arb ();
 	logic [2:0] req_port_addr1_i;
 	logic [2:0] req_port_addr2_i;	
 	logic [2:0] req_port_addr3_i;
@@ -20,26 +20,7 @@ interface ifc_arb (input bit clk);
 	logic [2:0] req_port_addr4_o;
 	logic [2:0] req_port_addr5_o;
 
-	clocking cb @(posedge clk);
-		default output #1;
-
-		output req_port_addr1_i;
-		output req_port_addr2_i;	
-		output req_port_addr3_i;
-		output req_port_addr4_i;
-		output req_port_addr5_i;
-
-		input req_port_addr1_o;
-		input req_port_addr2_o;	
-		input req_port_addr3_o;
-		input req_port_addr4_o;
-		input req_port_addr5_o;
-
-	endclocking
-
 	modport dut (
-		input clk,
-
 		input req_port_addr1_i,
 		input req_port_addr2_i,	
 		input req_port_addr3_i,
@@ -53,5 +34,17 @@ interface ifc_arb (input bit clk);
 		output req_port_addr5_o
 	);
 
-	modport bench (clocking cb);
+	modport bench (
+		output req_port_addr1_i,
+		output req_port_addr2_i,	
+		output req_port_addr3_i,
+		output req_port_addr4_i,
+		output req_port_addr5_i,
+
+		input req_port_addr1_o,
+		input req_port_addr2_o,	
+		input req_port_addr3_o,
+		input req_port_addr4_o,
+		input req_port_addr5_o
+	);
 endinterface

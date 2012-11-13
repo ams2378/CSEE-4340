@@ -15,11 +15,11 @@ module fcc(
  * instantiate ifc_counter interfaces and perform the
  * mapping from ifc_fcc signals to ifc_counter signals
  */
-ifc_counter n(d.clk);
-ifc_counter s(d.clk);
-ifc_counter e(d.clk);
-ifc_counter w(d.clk);
-ifc_counter l(d.clk);
+ifc_counter n();
+ifc_counter s();
+ifc_counter e();
+ifc_counter w();
+ifc_counter l();
 
 assign n.incr_i = d.n_incr_i;
 assign s.incr_i = d.s_incr_i;

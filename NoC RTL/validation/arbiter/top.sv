@@ -16,7 +16,7 @@ module top();
  
    initial $vcdpluson;
 
-   ifc_arb IFC(clk); // instantiate the interface file
+   ifc_arb IFC(); // instantiate the interface file
    arbiter dut(IFC.dut); 
    tb arb_bench(IFC.bench);
 endmodule

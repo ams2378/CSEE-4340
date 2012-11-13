@@ -15,7 +15,7 @@ module top();
    
    initial $vcdpluson;
 
-   ifc_fcu IFC(clk); // instantiate the interface file
+   ifc_fcu IFC(); // instantiate the interface file
    fcu dut(IFC.dut); 
    tb fcu_bench(IFC.bench);
 endmodule

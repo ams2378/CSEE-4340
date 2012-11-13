@@ -7,7 +7,7 @@
 *	 
 */
 
-interface ifc_addr (input bit clk);
+interface ifc_addr ();
 	logic [15:0] north_q_i;
 	logic [15:0] south_q_i;
 	logic [15:0] east_q_i;
@@ -22,28 +22,7 @@ interface ifc_addr (input bit clk);
 	logic [2:0] req_port_addr4_o;
 	logic [2:0] req_port_addr5_o;
 
-	clocking cb @(posedge clk);
-		default output #1;
-
-		output north_q_i;
-		output south_q_i;
-		output east_q_i;
-		output west_q_i;
-		output local_q_i;
-
-		output myaddr_i;
-
-		input req_port_addr1_o;
-		input req_port_addr2_o;
-		input req_port_addr3_o;
-		input req_port_addr4_o;
-		input req_port_addr5_o;
-
-	endclocking
-
 	modport dut (
-		input clk,
-
 		input north_q_i,
 		input south_q_i,
 		input east_q_i,
@@ -59,5 +38,19 @@ interface ifc_addr (input bit clk);
 		output req_port_addr5_o
 	);
 
-	modport bench (clocking cb);
+	modport bench (
+		output north_q_i,
+		output south_q_i,
+		output east_q_i,
+		output west_q_i,
+		output local_q_i,
+
+		output myaddr_i,
+
+		input req_port_addr1_o,
+		input req_port_addr2_o,
+		input req_port_addr3_o,
+		input req_port_addr4_o,
+		input req_port_addr5_o
+	);
 endinterface

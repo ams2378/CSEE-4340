@@ -7,29 +7,23 @@
 *	 
 */
 
-interface ifc_counter (input bit clk);
+interface ifc_counter ();
 	logic incr_i;
 	logic decr_i; 
 
-	logic credit_en_o;	
-
-	clocking cb @(posedge clk);
-		default output #1;
-
-		output incr_i;
-		output decr_i; 
-
-		input credit_en_o;	
-	endclocking
+	logic credit_en_o;
 
 	modport dut (
-		input clk,
-
 		input incr_i,
 		input decr_i, 
 
 		output credit_en_o	
 	);
 
-	modport bench (clocking cb);
+	modport bench (
+		output incr_i,
+		output decr_i, 
+
+		input credit_en_o
+	);
 endinterface
