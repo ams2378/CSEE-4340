@@ -47,22 +47,22 @@ interface ifc_fcc ();
 		);
 
    modport bench (
-      		output n_incr_i,
-     		output s_incr_i,
-      		output e_incr_i,
-      		output w_incr_i,
-      		output l_incr_i,
+      		  output n_incr_i,
+     		  output s_incr_i,
+      		  output e_incr_i,
+      		  output w_incr_i,
+      		  output l_incr_i,
 
-      		output n_decr_i, 
-      		output s_decr_i, 
-      		output e_decr_i, 
-      		output w_decr_i, 
-      		output l_decr_i,
+      		  output n_decr_i, 
+      		  output s_decr_i, 
+      		  output e_decr_i, 
+      		  output w_decr_i, 
+      		  output l_decr_i,
 
-      		input  credit_en_north_o,
-      		input  credit_en_south_o,
-      		input  credit_en_east_o,
-      		input  credit_en_west_o,
-      		input  credit_en_local_o
-   );
+      		  input  credit_en_north_o,
+      		  input  credit_en_south_o,
+      		  input  credit_en_east_o,
+      		  input  credit_en_west_o,
+      		  input  credit_en_local_o
+		  );
 endinterface

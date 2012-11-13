@@ -8,30 +8,30 @@
  */
 
 interface ifc_queue (input bit clk);
-	logic rst;
-	logic pop_req_i;
-	logic [15:0] data_i;	
+   logic rst;
+   logic pop_req_i;
+   logic [15:0] data_i;	
 
-	logic [15:0] data_o;
+   logic [15:0] data_o;
 
-   	clocking cb @(posedge clk);
-      		default output #1;
+   clocking cb @(posedge clk);
+      default output #1;
 
-		output 	rst;
-		output 	pop_req_i;
-		output 	data_i;	
+      output 	rst;
+      output 	pop_req_i;
+      output 	data_i;	
 
-		input	data_o;
-	endclocking
+      input	data_o;
+   endclocking
 
-   	modport dut (
-		input	clk,
-		input 	rst,
-		input 	pop_req_i,
-		input 	data_i,		
+   modport dut (
+		input  clk,
+		input  rst,
+		input  pop_req_i,
+		input  data_i, 
 
-		output 	data_o
+		output data_o
 		);
 
-   	modport bench (clocking cb);
+   modport bench (clocking cb);
 endinterface

@@ -1,35 +1,35 @@
 /**
- * @filename  		arb_bench.sv 
+ * @filename  		bench.sv 
  *
- * @brief     		The file includes the software model of the router and the random verification tb
- * @authors   		Ayushi Rajeev <ar3110@columbia.edu>
- Ashwin Ramachandran <ar2648@columbia.edu>
+ * @brief     		The file includes the software model of the router and the random verification TB
+ * @authors   		Ayushi Rajeev		<ar3110@columbia.edu>
+ *			Ashwin Ramachandran	<ar2648@columbia.edu>
  *	     		
  *  	 
  */
 
-class arb_transaction;
+class router_transaction;
 
    function new();
    endfunction
 
 endclass
 
-class arb_test;
+class router_test;
 
    function void golden_result();
    endfunction
 
 endclass
 
-class arb_check;
+class router_check;
 
    function bit check_results();
    endfunction
 
 endclass
 
-class arb_env;
+class router_env;
    int cycle = 0;
    int max_transactions = 10000;
    int warmup_time = 10;
@@ -60,11 +60,11 @@ class arb_env;
    endfunction
 endclass
 
-program tb (ifc_arb.bench ds);
-   arb_transaction packet;
-   arb_test test;
-   arb_check checker;
-   arb_env env;
+program tb (ifc.bench ds);
+   router_transaction packet;
+   router_test test;
+   router_check checker;
+   router_env env;
 
    int cycle;
 
@@ -80,6 +80,8 @@ program tb (ifc_arb.bench ds);
       /*
        *  pass data to DUT
        */
+
+      @(ds.cb);
 
       test.golden_result();
    endtask

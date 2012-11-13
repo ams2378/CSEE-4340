@@ -36,8 +36,5 @@ inputbuffer inputbuffer_unit(
 /*
  * instantiate the xbar */
 
-
-
-
 endmodule
 
