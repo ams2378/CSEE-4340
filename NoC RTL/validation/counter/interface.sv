@@ -1,9 +1,9 @@
 /**
 * @filename  		interface.sv 
 *
-* @brief     		The file defines the interfaces for test bench and DUT for the arbiter
-* @authors   		Ashwin Ramachandran <ar2648@columbia.edu>
-			Ayushi Rajeev <ar3110@columbia.edu>
+* @brief     		This file defines the interfaces for the testbench and DUT for the counter
+* @authors   		Ayushi Rajeev		<ar3110@columbia.edu>
+*			Ashwin Ramachandran	<ar2648@columbia.edu>
 *	 
 */
 
@@ -15,6 +15,7 @@ interface ifc_counter (input bit clk);
 
 	clocking cb @(posedge clk);
 		default output #1;
+
 		output incr_i;
 		output decr_i; 
 
@@ -22,6 +23,8 @@ interface ifc_counter (input bit clk);
 	endclocking
 
 	modport dut (
+		input clk,
+
 		input incr_i,
 		input decr_i, 
 

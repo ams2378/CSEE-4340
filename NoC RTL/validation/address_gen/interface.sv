@@ -42,6 +42,8 @@ interface ifc_addr (input bit clk);
 	endclocking
 
 	modport dut (
+		input clk,
+
 		input north_q_i,
 		input south_q_i,
 		input east_q_i,

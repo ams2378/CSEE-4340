@@ -38,8 +38,6 @@ interface ifc_arb (input bit clk);
 	endclocking
 
 	modport dut (
-		input clk,
-
 		input req_port_addr1_i,
 		input req_port_addr2_i,	
 		input req_port_addr3_i,

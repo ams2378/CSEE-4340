@@ -1,5 +1,5 @@
 TOP=top.sv
-INTERFACE=interface.sv
+INTERFACE=../counter/interface.sv
 BENCH=counter_bench.sv
 DUT=../../src/counter.sv
 
