@@ -1,7 +1,7 @@
 TOP=top.sv
-INTERFACE=../queue/interface.sv interface.sv
-BENCH=buffer_bench.sv
-DUT=../../src/queue.sv ../../src/inputbuffers.sv
+INTERFACE=interface.sv
+BENCH=queue_bench.sv
+DUT=../../src/queue.sv
 
 .PHONY: help
 
