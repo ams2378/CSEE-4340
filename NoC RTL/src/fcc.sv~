@@ -2,7 +2,7 @@
 * @filename  		fcc.sv 
 *
 * @brief		Flow control counters for all five neighboring buffers     
-* @author   		Dechhin Lama	<ddl2126@columbia.edu>
+* @author   		ddl2126	<ddl2126@columbia.edu>
 *	     		
 *  	 
 */
