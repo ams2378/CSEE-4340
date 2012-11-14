@@ -1,6 +1,8 @@
 TOP=top.sv
+SUBINTERFACES=../address_gen/interface.sv ../arbiter/interface.sv ../counter/interface.sv ../fcc/interface.sv ../fcu/interface.sv ../inputbuffers/interface.sv ../queue/interface.sv ../xbar/interface.sv
 INTERFACE=interface.sv
 BENCH=bench.sv
+SUBMODS=../../src/address_gen.sv ../../src/arbiter.sv ../../src/counter.sv ../../src/fcc.sv ../../src/fcu.sv ../../src/queue.sv ../../src/inputbuffers.sv ../../src/xbar.sv
 DUT=../../src/router.sv
 
 .PHONY: help
@@ -24,10 +26,10 @@ dut:
 	vcs -full64 -PP -sverilog +define+SV +define+VPD +lint=all,noVCDE -notice $(INTERFACE) $(DUT) 
 
 test: 
-	vcs -PP -sverilog +define+SV +define+VPD $(INTERFACE) $(BENCH)
+	vcs -PP -sverilog +define+SV +define+VPD $(SUBINTERFACES) $(INTERFACE) $(BENCH)
 
 bench: 
-	vcs -full64 -PP -sverilog +define+SV +define+VPD $(TOP) $(INTERFACE) $(DUT) $(BENCH) -o testbench.exe
+	vcs -full64 -PP -sverilog +define+SV +define+VPD $(TOP) $(SUBINTERFACES) $(INTERFACE) $(SUBMODS) $(DUT) $(BENCH) -o testbench.exe
         
 wave:
 	vcs -vpd2vcd vcdplus.vpd waveform.vcd

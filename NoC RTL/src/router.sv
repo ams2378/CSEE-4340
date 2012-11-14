@@ -36,7 +36,7 @@ assign b.pop_req_l_i=f.grant_access_local;
 
 
 /*
- * instantiate the inputbuffers */
+ * instantiate the inputbuffers 
  */
 inputbuffers inputbuffers_unit(
 	.d (b.dut)
@@ -56,7 +56,7 @@ assign a.west_q_i = b.east_o;
 assign a.east_q_i = b.west_o;
 assign a.local_q_i = b.local_o;
 
-assign a.myaddr_i= '0;
+//assign a.myaddr_i= '0;
 
 
 
@@ -138,7 +138,7 @@ assign c.l_decr_i=f.grant_access_local;
 
 	
 /*
- * instantiate the fcc */
+ * instantiate the fcc 
  */
 fcc fcc_unit(
 	.d (c.dut)
