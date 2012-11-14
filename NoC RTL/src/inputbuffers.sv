@@ -10,81 +10,62 @@
 
 
 module inputbuffers (
-	
-	input clk,
-	input rst,
+	ifc_buffer.dut d	
+);
 
-	input pop_req_n_i,
-	input pop_req_s_i,
-	input pop_req_e_i,
-	input pop_req_w_i,
-	input pop_req_l_i,
+/*
+ * instantiate the ifc_queue interfaces and map the inpus and
+ * outputs from an inputbuffer interface to a queue interface
+ */
+ifc_queue n (d.clk);
+ifc_queue s (d.clk);
+ifc_queue e (d.clk);
+ifc_queue w (d.clk);
+ifc_queue l (d.clk);
 
-	input [15:0] north_i,		
-	input [15:0] south_i,	
-	input [15:0] east_i,	
-	input [15:0] west_i,	
-	input [15:0] local_i,	
+assign n.rst = d.rst;
+assign s.rst = d.rst;
+assign e.rst = d.rst;
+assign w.rst = d.rst;
+assign l.rst = d.rst;
 
-	output [15:0] north_o,		
-	output [15:0] south_o,	
-	output [15:0] east_o,	
-	output [15:0] west_o,	
-	output [15:0] local_o,	
+assign n.pop_req_i = d.pop_req_n_i;
+assign s.pop_req_i = d.pop_req_s_i;
+assign e.pop_req_i = d.pop_req_e_i;
+assign w.pop_req_i = d.pop_req_w_i;
+assign l.pop_req_i = d.pop_req_l_i;
 
+assign n.data_i = d.north_i;	
+assign s.data_i = d.south_i;
+assign e.data_i = d.east_i;
+assign w.data_i = d.west_i;
+assign l.data_i = d.local_i;
 
-)
-
+assign n.data_o = d.north_o;
+assign s.data_o = d.south_o;
+assign e.data_o = d.east_o;
+assign w.data_o = d.west_o;
+assign l.data_o = d.local_o;
 
 queue n_queue (
-	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_n_i),
-	.data_i(north_i),
-
-	.data_o(north_o)	
-)
+	.d (n.dut)
+);
 
 queue s_queue (
-	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_s_i),
-	.data_i(south_i),
-
-	.data_o(south_o)	
-)
+	.d (s.dut)	
+);
 
 queue e_queue (
-	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_e_i),
-	.data_i(east_i),
-
-	.data_o(east_o)	
-)
+	.d (e.dut)	
+);
 
 queue w_queue (
-	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_w_i),
-	.data_i(west_i),
-
-	.data_o(west_o)	
-)
+	.d (w.dut)
+);
 
 queue l_queue (
-	
-	.clk (clk),
-	.rst (rst),
-	.pop_req_i(pop_req_l_i),
-	.data_i(local_i),
-
-	.data_o(local_o)	
-)
+	.d (l.dut)	
+);
 
 
 endmodule

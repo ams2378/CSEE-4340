@@ -1,8 +1,8 @@
 /**
 * @filename  		counter.sv 
 *
-* @brief     		counter for credits avaible for neighboring router buffers
-* @author   		ddl2126	<ddl2126@columbia.edu>
+* @brief     		Counter for credits avaible for neighboring router buffers
+* @author   		Dechhin Lama	<ddl2126@columbia.edu>
 *	     		
 *  	 
 */

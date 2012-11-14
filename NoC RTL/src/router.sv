@@ -13,15 +13,15 @@ module router (
 
 /*
  * instantiate the fcc */
-fcc fcc_unit(
+/*fcc fcc_unit(
 	
-);
+);*/
 
 /*
  * instantiate the inputbuffers */
-inputbuffer inputbuffer_unit(
+/*inputbuffer inputbuffer_unit(
 
-);
+);*/
 
 /*
  * instantiate the arbiter */
@@ -35,9 +35,6 @@ inputbuffer inputbuffer_unit(
 
 /*
  * instantiate the xbar */
-
-
-
 
 endmodule
 

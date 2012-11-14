@@ -2,71 +2,77 @@
 * @filename  		fcc.sv 
 *
 * @brief		Flow control counters for all five neighboring buffers     
-* @author   		ddl2126	<ddl2126@columbia.edu>
+* @author   		Dechhin Lama	<ddl2126@columbia.edu>
 *	     		
 *  	 
 */
 
 module fcc(
-	input n_incr_i;
-	input s_incr_i;
-	input e_incr_i;
-	input w_incr_i;
-	input l_incr_i;
-
-	input n_decr_i, 
-	input s_decr_i, 
-	input e_decr_i, 
-	input w_decr_i, 
-	input l_decr_i,
-
-	output credit_en_north,
-	output credit_en_south,
-	output credit_en_east,
-	output credit_en_west,
-	output credit_en_local, 
+	ifc_fcc.dut d
 );
 
+/* 
+ * instantiate ifc_counter interfaces and perform the
+ * mapping from ifc_fcc signals to ifc_counter signals
+ */
+ifc_counter n();
+ifc_counter s();
+ifc_counter e();
+ifc_counter w();
+ifc_counter l();
+
+assign n.incr_i = d.n_incr_i;
+assign s.incr_i = d.s_incr_i;
+assign e.incr_i = d.e_incr_i;
+assign w.incr_i = d.w_incr_i;
+assign l.incr_i = d.l_incr_i;
+
+assign n.decr_i = d.n_decr_i;
+assign s.decr_i = d.s_decr_i;
+assign e.decr_i = d.e_decr_i;
+assign w.decr_i = d.w_decr_i;
+assign l.decr_i = d.l_decr_i;
+
+assign n.credit_en_o = d.credit_en_north_o;
+assign s.credit_en_o = d.credit_en_south_o;
+assign e.credit_en_o = d.credit_en_east_o;
+assign w.credit_en_o = d.credit_en_west_o;
+assign l.credit_en_o = d.credit_en_local_o;
 
 /*
  * instantiate the counters
- * north counter */
+ * north counter
+ */
 counter north_counter(
-	.incr_i(n_incr_i),
-	.decr_i(n_decr_i),
-	.credit_en_o(credit_en_north)
+	.d(n.dut)
 );
 
 /*
- * south counter */
+ * south counter
+ */
 counter south_counter(
-	.incr_i(s_incr_i),
-	.decr_i(s_decr_i),
-	.credit_en_o(credit_en_south)
+	.d(s.dut)
 );
 
 /*
- * east counter */
+ * east counter
+ */
 counter east_counter(
-	.incr_i(e_incr_i),
-	.decr_i(e_decr_i),
-	.credit_en_o(credit_en_east)
+	.d(e.dut)
 );
 
 /*
- * west counter */
+ * west counter
+ */
 counter west_counter(
-	.incr_i(w_incr_i),
-	.decr_i(w_decr_i),
-	.credit_en_o(credit_en_west)
+	.d(w.dut)
 );
 
 /*
- * local counter */
+ * local counter
+ */
 counter local_counter(
-	.incr_i(l_incr_i),
-	.decr_i(l_decr_i),
-	.credit_en_o(credit_en_local)
+	.d(l.dut)
 );
 
 endmodule
