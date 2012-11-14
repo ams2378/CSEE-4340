@@ -158,6 +158,12 @@ assign x.grant_access_east_i= f.grant_access_east;
 assign x.grant_access_west_i= f.grant_access_west;
 assign x.grant_access_local_i= f.grant_access_local;
 
+assign x.address_route_n_i =  ar.req_port_addr1_o;
+assign x.address_route_s_i =  ar.req_port_addr2_o;
+assign x.address_route_e_i =  ar.req_port_addr3_o;
+assign x.address_route_w_i =  ar.req_port_addr4_o;
+assign x.address_route_l_i =  ar.req_port_addr5_o;
+
 assign x.pop_northq_i = b.north_o;
 assign x.pop_southq_i= b.south_o;
 assign x.pop_eastq_i= b.east_o;
