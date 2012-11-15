@@ -16,7 +16,7 @@ module top();
    
    initial $vcdpluson;
 
-   ifc_fcc IFC(); // instantiate the interface file
+   ifc_fcc IFC(clk); // instantiate the interface file
    fcc dut(IFC.dut); 
    tb fcc_bench(IFC.bench);
 endmodule

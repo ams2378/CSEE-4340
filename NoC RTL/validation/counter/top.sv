@@ -16,7 +16,7 @@ module top();
    
    initial $vcdpluson;
 
-   ifc_counter IFC(); // instantiate the interface file
+   ifc_counter IFC(clk); // instantiate the interface file
    counter dut(IFC.dut); 
    tb counter_bench(IFC.bench);
 endmodule

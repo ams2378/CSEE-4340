@@ -81,6 +81,8 @@ program tb (ifc_counter.bench ds);
        *  pass data to DUT
        */
 
+      @(ds.cb);
+
       test.golden_result();
    endtask
 

@@ -50,11 +50,11 @@ inputbuffers inputbuffers_unit(
  */
 ifc_agu a ();
 
-assign a.north_q_i = b.north_o;
-assign a.south_q_i = b.south_o;
-assign a.west_q_i = b.east_o;
-assign a.east_q_i = b.west_o;
-assign a.local_q_i = b.local_o;
+assign a.north_q_i = b.north_q_o;
+assign a.south_q_i = b.south_q_o;
+assign a.west_q_i = b.east_q_o;
+assign a.east_q_i = b.west_q_o;
+assign a.local_q_i = b.local_q_o;
 
 //assign a.myaddr_i= '0;
 
@@ -62,7 +62,7 @@ assign a.local_q_i = b.local_o;
 
 /*
  * instantiate the address generator */
-address_gen address_gen_unit(
+address_gen agu(
     .d (a.dut)
 );
 
@@ -119,7 +119,9 @@ fcu fcu_unit(
  * instantiate ifc_fcc interface and map the inputs and
  * outputs
  */
-ifc_fcc c ();
+ifc_fcc c (d.clk);
+
+assign c.rst = d.rst;
 
 assign c.n_incr_i= d.n_incr_i;
 assign c.s_incr_i= d.s_incr_i;
@@ -162,11 +164,11 @@ assign x.address_route_e_i =  ar.req_port_addr3_o;
 assign x.address_route_w_i =  ar.req_port_addr4_o;
 assign x.address_route_l_i =  ar.req_port_addr5_o;
 
-assign x.north_q_i = b.north_o;
-assign x.south_q_i= b.south_o;
-assign x.east_q_i= b.east_o;
-assign x.west_q_i= b.west_o;
-assign x.local_q_i= b.local_o;
+assign x.north_q_i = b.north_q_o;
+assign x.south_q_i= b.south_q_o;
+assign x.east_q_i= b.east_q_o;
+assign x.west_q_i= b.west_q_o;
+assign x.local_q_i= b.local_q_o;
 
 assign x.north_o = d.north_o;
 assign x.south_o = d.south_o;
