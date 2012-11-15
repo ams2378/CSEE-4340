@@ -7,7 +7,7 @@
  *	 
  */
 
-interface ifc_fcu (input bit clk);
+interface ifc_fcu ();
    logic [2:0] req_port_addr1_i;
    logic [2:0] req_port_addr2_i;
    logic [2:0] req_port_addr3_i;

@@ -93,7 +93,7 @@ arbiter arbiter_unit(
  * instantiate ifc_fcu interface and map the inputs and
  * outputs
  */
-ifc_fcu f (d.clk);
+ifc_fcu f ();
 
 assign f.req_port_addr1_i= ar.req_port_addr1_o;
 assign f.req_port_addr2_i= ar.req_port_addr2_o;
