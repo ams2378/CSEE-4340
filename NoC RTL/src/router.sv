@@ -56,7 +56,7 @@ assign a.west_q_i = b.east_q_o;
 assign a.east_q_i = b.west_q_o;
 assign a.local_q_i = b.local_q_o;
 
-//assign a.myaddr_i= '0;
+assign a.myaddr_i= ff.read_data_o;
 
 
 
@@ -64,6 +64,26 @@ assign a.local_q_i = b.local_q_o;
  * instantiate the address generator */
 address_gen agu(
     .d (a.dut)
+);
+
+
+
+
+/*
+ * instantiate ifc_FF interface and map the inputs and
+ * outputs 
+ */
+ifc_FF ff (d.clk);
+
+assign ff.rst = d.rst;
+//assign ff.write_en_i=;
+//assign ff.write_data_i=;
+
+
+/*
+ * instantiate the FF */
+FF loc(
+    .d (ff.dut)
 );
 
 
