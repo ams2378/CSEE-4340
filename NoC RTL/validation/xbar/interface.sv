@@ -20,11 +20,11 @@ interface ifc_xbar ();
    logic [2:0] address_route_w_i;
    logic [2:0] address_route_l_i;
 
-   logic [15:0] pop_northq_i;
-   logic [15:0] pop_southq_i;
-   logic [15:0] pop_eastq_i;
-   logic [15:0] pop_westq_i;
-   logic [15:0] pop_localq_i;
+   logic [15:0] north_q_i;
+   logic [15:0] south_q_i;
+   logic [15:0] east_q_i;
+   logic [15:0] west_q_i;
+   logic [15:0] local_q_i;
 
    logic [15:0] north_o;
    logic [15:0] south_o;
@@ -45,11 +45,11 @@ interface ifc_xbar ();
    		input  address_route_w_i,
    		input  address_route_l_i,
 
-		input  pop_northq_i,
-		input  pop_southq_i,
-		input  pop_eastq_i,
-		input  pop_westq_i,
-		input  pop_localq_i,
+		input  north_q_i,
+		input  south_q_i,
+		input  east_q_i,
+		input  west_q_i,
+		input  local_q_i,
 
 		output north_o,
 		output south_o,
@@ -71,11 +71,11 @@ interface ifc_xbar ();
    		  output  address_route_w_i,
    		  output  address_route_l_i,
 
-		  output pop_northq_i,
-		  output pop_southq_i,
-		  output pop_eastq_i,
-		  output pop_westq_i,
-		  output pop_localq_i,
+		  output north_q_i,
+		  output south_q_i,
+		  output east_q_i,
+		  output west_q_i,
+		  output local_q_i,
 
 		  input  north_o, 
 		  input  south_o,

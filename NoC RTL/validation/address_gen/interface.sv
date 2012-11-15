@@ -7,7 +7,7 @@
  *	 
  */
 
-interface ifc_addr ();
+interface ifc_agu ();
    logic [15:0] north_q_i;
    logic [15:0] south_q_i;
    logic [15:0] east_q_i;

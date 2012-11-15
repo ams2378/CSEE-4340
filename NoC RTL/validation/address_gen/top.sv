@@ -16,7 +16,7 @@ module top();
    
    initial $vcdpluson;
 
-   ifc_addr IFC(); // instantiate the interface file
+   ifc_agu IFC(); // instantiate the interface file
    address_gen dut(IFC.dut); 
    tb addr_bench(IFC.bench);
 endmodule

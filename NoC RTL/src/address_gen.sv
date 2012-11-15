@@ -9,7 +9,7 @@
 */
 
 module address_gen (
-		ifc_addr.dut d
+		ifc_agu.dut d
 		);
 
 endmodule

@@ -60,7 +60,7 @@ class addr_env;
    endfunction
 endclass
 
-program tb (ifc_addr.bench ds);
+program tb (ifc_agu.bench ds);
    addr_transaction packet;
    addr_test test;
    addr_check checker;
