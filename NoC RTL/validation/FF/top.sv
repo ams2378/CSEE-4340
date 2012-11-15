@@ -1,10 +1,9 @@
-/**
+/*
  * @filename  		top.sv
  *
  * @brief     		Top Level - assigns clock, instantiates DUT and Testbench
- * @authors   		Ashwin Ramachandran <ar2648@columbia.edu>
- Ayushi Rajeev <ar3110@columbia.edu>
- *				 
+ * @authors   		Ayushi Rajeev		<ar3110@columbia.edu>
+ *			Ashwin Ramachandran	<ar2648@columbia.edu>				 
  */
 
 
@@ -16,7 +15,7 @@ module top();
    
    initial $vcdpluson;
 
-   ifc_fcc IFC(clk); // instantiate the interface file
-   fcc dut(IFC.dut); 
-   tb fcc_bench(IFC.bench);
+   ifc_FF IFC(clk); // instantiate the interface file
+   FF dut(IFC.dut); 
+   tb FF_bench(IFC.bench);
 endmodule

@@ -1,35 +1,33 @@
 /**
- * @filename  		counter_bench.sv 
+ * @filename  		FF_bench.sv 
  *
- * @brief     		The file includes the software model of the router and the random verification tb
- * @authors   		Ayushi Rajeev <ar3110@columbia.edu>
- Ashwin Ramachandran <ar2648@columbia.edu>
- *	     		
- *  	 
+ * @brief     		This file includes the software model of the flipflops and the random verification tb
+ * @authors   		Ayushi Rajeev		<ar3110@columbia.edu>
+ *			Ashwin Ramachandran	<ar2648@columbia.edu> 	 
  */
 
-class counter_transaction;
+class FF_transaction;
 
    function new();
    endfunction
 
 endclass
 
-class counter_test;
+class FF_test;
 
    function void golden_result();
    endfunction
 
 endclass
 
-class counter_check;
+class FF_check;
 
    function bit check_results();
    endfunction
 
 endclass
 
-class counter_env;
+class FF_env;
    int cycle = 0;
    int max_transactions = 10000;
    int warmup_time = 10;
@@ -60,11 +58,11 @@ class counter_env;
    endfunction
 endclass
 
-program tb (ifc_counter.bench ds);
-   counter_transaction packet;
-   counter_test test;
-   counter_check checker;
-   counter_env env;
+program tb (ifc_FF.bench ds);
+   FF_transaction packet;
+   FF_test test;
+   FF_check checker;
+   FF_env env;
 
    int cycle;
 

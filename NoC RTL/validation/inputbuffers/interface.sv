@@ -22,11 +22,11 @@ interface ifc_buffer (input bit clk);
    logic [15:0] west_i;	
    logic [15:0] local_i;	
 
-   logic [15:0] north_o;			
-   logic [15:0] south_o;	
-   logic [15:0] east_o;	
-   logic [15:0] west_o;	
-   logic [15:0] local_o;
+   logic [15:0] north_q_o;			
+   logic [15:0] south_q_o;	
+   logic [15:0] east_q_o;	
+   logic [15:0] west_q_o;	
+   logic [15:0] local_q_o;
 
    clocking cb @(posedge clk);
       default output #1;
@@ -45,11 +45,11 @@ interface ifc_buffer (input bit clk);
       output 	west_i;	
       output 	local_i;	
 
-      input 	north_o;			
-      input 	south_o;	
-      input 	east_o;	
-      input 	west_o;	
-      input 	local_o;
+      input 	north_q_o;			
+      input 	south_q_o;	
+      input 	east_q_o;	
+      input 	west_q_o;	
+      input 	local_q_o;
    endclocking
 
    modport dut (
@@ -68,11 +68,11 @@ interface ifc_buffer (input bit clk);
 		input  west_i, 
 		input  local_i, 
 
-		output north_o, 
-		output south_o, 
-		output east_o, 
-		output west_o, 
-		output local_o	
+		output north_q_o, 
+		output south_q_o, 
+		output east_q_o, 
+		output west_q_o, 
+		output local_q_o	
 		);
 
    modport bench (clocking cb);

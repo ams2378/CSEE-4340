@@ -26,17 +26,17 @@ assign b.east_i = d.east_i;
 assign b.west_i = d.west_i;
 assign b.local_i = d.local_i;
 
-assign b.pop_req_n_i=f.grant_access_north;
-assign b.pop_req_s_i=f.grant_access_south;
-assign b.pop_req_e_i=f.grant_access_east;
-assign b.pop_req_w_i=f.grant_access_west;
-assign b.pop_req_l_i=f.grant_access_local;
+assign b.pop_req_n_i=f.grant_access_north_o;
+assign b.pop_req_s_i=f.grant_access_south_o;
+assign b.pop_req_e_i=f.grant_access_east_o;
+assign b.pop_req_w_i=f.grant_access_west_o;
+assign b.pop_req_l_i=f.grant_access_local_o;
 
 
 
 
 /*
- * instantiate the inputbuffers */
+ * instantiate the inputbuffers 
  */
 inputbuffers inputbuffers_unit(
 	.d (b.dut)
@@ -45,25 +45,45 @@ inputbuffers inputbuffers_unit(
 
 
 /*
- * instantiate ifc_addr interface and map the inputs and
+ * instantiate ifc_agu interface and map the inputs and
  * outputs 
  */
-ifc_addr a ();
+ifc_agu a ();
 
-assign a.north_q_i = b.north_o;
-assign a.south_q_i = b.south_o;
-assign a.west_q_i = b.east_o;
-assign a.east_q_i = b.west_o;
-assign a.local_q_i = b.local_o;
+assign a.north_q_i = b.north_q_o;
+assign a.south_q_i = b.south_q_o;
+assign a.west_q_i = b.east_q_o;
+assign a.east_q_i = b.west_q_o;
+assign a.local_q_i = b.local_q_o;
 
-assign a.myaddr_i= '0;
+assign a.myaddr_i= ff.read_data_o;
 
 
 
 /*
  * instantiate the address generator */
-address_gen address_gen_unit(
+address_gen agu(
     .d (a.dut)
+);
+
+
+
+
+/*
+ * instantiate ifc_FF interface and map the inputs and
+ * outputs 
+ */
+ifc_FF ff (d.clk);
+
+assign ff.rst = d.rst;
+//assign ff.write_en_i=;
+//assign ff.write_data_i=;
+
+
+/*
+ * instantiate the FF */
+FF loc(
+    .d (ff.dut)
 );
 
 
@@ -93,7 +113,7 @@ arbiter arbiter_unit(
  * instantiate ifc_fcu interface and map the inputs and
  * outputs
  */
-ifc_fcu f (d.clk);
+ifc_fcu f ();
 
 assign f.req_port_addr1_i= ar.req_port_addr1_o;
 assign f.req_port_addr2_i= ar.req_port_addr2_o;
@@ -101,14 +121,12 @@ assign f.req_port_addr3_i= ar.req_port_addr3_o;
 assign f.req_port_addr4_i= ar.req_port_addr4_o;
 assign f.req_port_addr5_i= ar.req_port_addr5_o;
 
-assign f.credit_en_north= c.credit_en_north_o;
-assign f.credit_en_south= c.credit_en_south_o;
-assign f.credit_en_east= c.credit_en_east_o;
-assign f.credit_en_west= c.credit_en_west_o;
-assign f.credit_en_local= c.credit_en_local_o;
-
-
-     
+assign f.credit_en_north_i = c.credit_en_north_o;
+assign f.credit_en_south_i = c.credit_en_south_o;
+assign f.credit_en_east_i  = c.credit_en_east_o;
+assign f.credit_en_west_i  = c.credit_en_west_o;
+assign f.credit_en_local_i = c.credit_en_local_o;
+   
 /*
  * instantiate the fcu */
 fcu fcu_unit(
@@ -121,7 +139,9 @@ fcu fcu_unit(
  * instantiate ifc_fcc interface and map the inputs and
  * outputs
  */
-ifc_fcc c ();
+ifc_fcc c (d.clk);
+
+assign c.rst = d.rst;
 
 assign c.n_incr_i= d.n_incr_i;
 assign c.s_incr_i= d.s_incr_i;
@@ -129,16 +149,16 @@ assign c.e_incr_i= d.e_incr_i;
 assign c.w_incr_i= d.w_incr_i;
 assign c.l_incr_i= d.l_incr_i;
 
-assign c.n_decr_i=f.grant_access_north;
-assign c.s_decr_i=f.grant_access_south;
-assign c.e_decr_i=f.grant_access_east;
-assign c.w_decr_i=f.grant_access_west;
-assign c.l_decr_i=f.grant_access_local;
+assign c.n_decr_i=f.grant_access_north_o;
+assign c.s_decr_i=f.grant_access_south_o;
+assign c.e_decr_i=f.grant_access_east_o;
+assign c.w_decr_i=f.grant_access_west_o;
+assign c.l_decr_i=f.grant_access_local_o;
 
 
 	
 /*
- * instantiate the fcc */
+ * instantiate the fcc 
  */
 fcc fcc_unit(
 	.d (c.dut)
@@ -152,11 +172,11 @@ fcc fcc_unit(
  */
 ifc_xbar x ();
 
-assign x.grant_access_north_i= f.grant_access_north;
-assign x.grant_access_south_i= f.grant_access_south;
-assign x.grant_access_east_i= f.grant_access_east;
-assign x.grant_access_west_i= f.grant_access_west;
-assign x.grant_access_local_i= f.grant_access_local;
+assign x.grant_access_north_i= f.grant_access_north_o;
+assign x.grant_access_south_i= f.grant_access_south_o;
+assign x.grant_access_east_i= f.grant_access_east_o;
+assign x.grant_access_west_i= f.grant_access_west_o;
+assign x.grant_access_local_i= f.grant_access_local_o;
 
 assign x.address_route_n_i =  ar.req_port_addr1_o;
 assign x.address_route_s_i =  ar.req_port_addr2_o;
@@ -164,11 +184,11 @@ assign x.address_route_e_i =  ar.req_port_addr3_o;
 assign x.address_route_w_i =  ar.req_port_addr4_o;
 assign x.address_route_l_i =  ar.req_port_addr5_o;
 
-assign x.pop_northq_i = b.north_o;
-assign x.pop_southq_i= b.south_o;
-assign x.pop_eastq_i= b.east_o;
-assign x.pop_westq_i= b.west_o;
-assign x.pop_localq_i= b.local_o;
+assign x.north_q_i = b.north_q_o;
+assign x.south_q_i= b.south_q_o;
+assign x.east_q_i= b.east_q_o;
+assign x.west_q_i= b.west_q_o;
+assign x.local_q_i= b.local_q_o;
 
 assign x.north_o = d.north_o;
 assign x.south_o = d.south_o;

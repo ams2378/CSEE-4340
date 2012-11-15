@@ -79,6 +79,8 @@ program tb (ifc_fcc.bench ds);
        *  pass data to DUT
        */
 
+      @(ds.cb);
+
       test.golden_result();
    endtask
 

@@ -1,56 +1,30 @@
 /*-----------------------------------------------------
 Design Name : router
 File Name   : FF.sv
-Function    : Top level file 
+Function    : Flip flops for saving router's own addresses 
 
 author	    : Dechhin Lama <ddl2126@columbia.edu>
 *///-----------------------------------------------------
 
 
 module FF #(parameter WIDTH = 1) (
-	input clk,
-	input rst,
-
-	input readEn_i,
-	input writeEn_i,
-
-	input [WIDTH-1:0] writedat_i,
-
-	output read_valid_o,
-	output [WIDTH-1:0] read_o
-);
+	ifc_FF d
+	);
 
 reg [WIDTH-1:0] data;
-reg [WIDTH-1:0] read;
-reg read_valid;
 
 /*
  * the write block
  */
-always_ff @(posedge clk) begin
-	if (rst)
+always_ff @(posedge d.clk) begin
+	if (d.rst)
 		data <= '0;
-	else if (writeEn_i)
-		data <= writedat_i;
+	else if (d.write_en_i)
+		data <= d.write_data_i;
 	else
-		data <=data;		// keep writing the data back
+		data <= data;		// keep writing the data back
 end
 
-/*
- * the read block
- */
-always_ff @(negedge clk) begin
-	if (readEn_i) begin
-		read <= data;
-		read_valid <= 1;
-	end
-	else begin
-		read <= '0;
-		read_valid <= 0;
-	end
-end
-
-assign read_o = read;
-assign read_valid_o = read_valid;
+assign d.read_data_o = data;
 
 endmodule

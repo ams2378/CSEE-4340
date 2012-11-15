@@ -41,11 +41,11 @@ assign e.data_i = d.east_i;
 assign w.data_i = d.west_i;
 assign l.data_i = d.local_i;
 
-assign n.data_o = d.north_o;
-assign s.data_o = d.south_o;
-assign e.data_o = d.east_o;
-assign w.data_o = d.west_o;
-assign l.data_o = d.local_o;
+assign n.data_o = d.north_q_o;
+assign s.data_o = d.south_q_o;
+assign e.data_o = d.east_q_o;
+assign w.data_o = d.west_q_o;
+assign l.data_o = d.local_q_o;
 
 queue n_queue (
 	.d (n.dut)
