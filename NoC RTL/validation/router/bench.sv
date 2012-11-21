@@ -193,6 +193,13 @@ class router_test;
    bit 	w_incr_o;
    bit 	l_incr_o;
 
+   /* local count of free spaces in our input queues */
+   int n_q_free = 5;
+   int s_q_free = 5;
+   int e_q_free = 5;
+   int w_q_free = 5;
+   int l_q_free = 5;
+
    function void golden_result();
    endfunction
 
@@ -224,6 +231,16 @@ class router_env;
    int e_incr_density = 20;
    int w_incr_density = 20;
    int l_incr_density = 20;
+
+   /* 
+    * local count of how many flits of a message have
+    * been sent to the router node
+    */
+   int n_sent = 0;
+   int s_sent = 0;
+   int e_sent = 0;
+   int w_sent = 0;
+   int l_sent = 0;
 
    function configure(string filename);
       int file, value, chars_returned;
@@ -296,6 +313,23 @@ program tb (ifc.bench ds);
       cycle = env.cycle;
       packet.randomize();
 
+      if (test.n_q_free > 0) begin // there is space in our input queue
+	if (env.n_sent == 0) begin // need a header flit
+		if (packet.north_req == 1) begin
+			// make a header packet
+			packet.north_flit = '0;
+			packet.north_flit[onepos_x_north] = 1;
+			packet.north_flit[onepos_y_north] = 1;
+			env.n_sent++;
+		end
+	end
+	else if (env.n_sent == 4) begin // sending the last body flit
+		env.n_sent = 0;
+	end
+	else begin // sending a middle body flit
+		env.n_sent++;	
+	end
+      end
       /*
        *  pass data to golden model
        */
