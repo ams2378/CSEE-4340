@@ -8,297 +8,96 @@
  *  	 
  */
 
-class router_transaction;
-   /*
-    * incoming packet transaction densities
-    */
+/*
+ * these 5 functions assemble a either a header or a body
+ * flit based on how many flits were sent before it and whether
+ * or not we randomly choose to send a flit to the router this
+ * cycle
+ */
+function make_north(router_transaction packet, router_env env);
+	if (env.n_sent == 0) begin // need a header flit
+		if (packet.north_req == 1) begin
+			packet.north_flit = '0;
+			packet.north_flit[packet.onepos_x_north] = 1;
+			packet.north_flit[packet.onepos_y_north] = 1;
+			env.n_sent++;
+		end
+	end
+	else if (env.n_sent == 4) begin // sending the last body flit
+		env.n_sent = 0;
+	end
+	else begin // sending a middle body flit
+		env.n_sent++;	
+	end
+endfunction
 
-   int reset_density;
-   
-   /* whether or not a flit is send */
-   int north_density;
-   int south_density;
-   int east_density;
-   int west_density;
-   int local_density;
+function make_south(router_transaction packet, router_env env);
+	if (env.s_sent == 0) begin // need a header flit
+		if (packet.south_req == 1) begin
+			packet.south_flit = '0;
+			packet.south_flit[packet.onepos_x_south] = 1;
+			packet.south_flit[packet.onepos_y_south] = 1;
+			env.s_sent++;
+		end
+	end
+	else if (env.s_sent == 4) begin // sending the last body flit
+		env.s_sent = 0;
+	end
+	else begin // sending a middle body flit
+		env.s_sent++;	
+	end
+endfunction
 
-   /* the flit itself */
-   rand bit [15:0] north_flit;
-   rand bit [15:0] south_flit;
-   rand bit [15:0] east_flit;
-   rand bit [15:0] west_flit;
-   rand bit [15:0] local_flit;
+function make_east(router_transaction packet, router_env env);
+	if (env.e_sent == 0) begin // need a header flit
+		if (packet.east_req == 1) begin
+			packet.east_flit = '0;
+			packet.east_flit[packet.onepos_x_east] = 1;
+			packet.east_flit[packet.onepos_y_east] = 1;
+			env.e_sent++;
+		end
+	end
+	else if (env.e_sent == 4) begin // sending the last body flit
+		env.e_sent = 0;
+	end
+	else begin // sending a middle body flit
+		env.e_sent++;	
+	end
+endfunction
 
-   /* 
-    * random position of the hot bit in
-    * the header flit's x coordinate
-    */
-   rand int onepos_x_north;
-   rand int onepos_x_south;
-   rand int onepos_x_east;
-   rand int onepos_x_west;
-   rand int onepos_x_local;
+function make_west(router_transaction packet, router_env env);
+	if (env.w_sent == 0) begin // need a header flit
+		if (packet.west_req == 1) begin
+			packet.west_flit = '0;
+			packet.west_flit[packet.onepos_x_west] = 1;
+			packet.west_flit[packet.onepos_y_west] = 1;
+			env.w_sent++;
+		end
+	end
+	else if (env.w_sent == 4) begin // sending the last body flit
+		env.w_sent = 0;
+	end
+	else begin // sending a middle body flit
+		env.w_sent++;	
+	end
+endfunction
 
-   /* 
-    * random position of the hot bit in
-    * the header flit's y coordinate
-    */
-   rand int onepos_y_north;
-   rand int onepos_y_south;
-   rand int onepos_y_east;
-   rand int onepos_y_west;
-   rand int onepos_y_local;
-
-   constraint hotBits {
-	onepos_x_north >= 4;
-        onepos_x_north <= 7;
-
-	onepos_x_south >= 4;
-        onepos_x_south <= 7;
-
-	onepos_x_east >= 4;
-        onepos_x_east <= 7;
-
-	onepos_x_west >= 4;
-        onepos_x_west <= 7;
-
-	onepos_x_local >= 4;
-        onepos_x_local <= 7;
-
-	onepos_y_north >= 0;
-        onepos_y_north <= 3;
-
-	onepos_y_south >= 0;
-        onepos_y_south <= 3;
-
-	onepos_y_east >= 0;
-        onepos_y_east <= 3;
-
-	onepos_y_west >= 0;
-        onepos_y_west <= 3;
-
-	onepos_y_local >= 0;
-        onepos_y_local <= 3;
-   }
-
-   /* counter increment requests */
-   int n_incr_density;
-   int s_incr_density;
-   int e_incr_density;
-   int w_incr_density;
-   int l_incr_density;
-
-   function new(int rst_d,
-		int north_d,
-		int south_d,
-		int east_d,
-		int west_d,
-		int loc_d,
-
-		int n_incr_d,
-		int s_incr_d,
-		int e_incr_d,
-		int w_incr_d,
-		int l_incr_d);
-
-	reset_density = rst_d;
-
-	north_density = north_d;
-	south_density = south_d;
-	east_density = east_d;
-	west_density = west_d;
-	local_density = loc_d;
-
-	n_incr_density = n_incr_d;
-	s_incr_density = s_incr_d;
-	e_incr_density = e_incr_d;
-	w_incr_density = w_incr_d;
-	l_incr_density = l_incr_d;
-   endfunction
-
-   /*
-    * randomly generated values to determine if we have
-    * a flit transaction on any of the 5 input ports
-    */
-   rand bit reset_req;
-
-   rand bit north_req;
-   rand bit south_req;
-   rand bit east_req;
-   rand bit west_req;
-   rand bit local_req;
-
-   /*
-    * randomly generated values to determine if we have
-    * a increment request for any of the 5 neighbors
-    */
-   rand bit n_incr_req;
-   rand bit s_incr_req;
-   rand bit e_incr_req;
-   rand bit w_incr_req;
-   rand bit l_incr_req;
-
-   /*
-    * constrain the values so that they are 0 or 1 based on
-    * the randomly generated value
-    */
-   constraint density_dist {
-	reset_req dist {0:/100-reset_density, 1:/reset_density};
-
-	north_req dist {0:/100-north_density, 1:/north_density};
-	south_req dist {0:/100-south_density, 1:/south_density};
-	east_req dist {0:/100-east_density, 1:/east_density};
-	west_req dist {0:/100-west_density, 1:/west_density};
-	local_req dist {0:/100-local_density, 1:/local_density};
-
-	n_incr_req dist {0:/100-n_incr_density, 1:/n_incr_density};
-	s_incr_req dist {0:/100-s_incr_density, 1:/s_incr_density};
-	e_incr_req dist {0:/100-e_incr_density, 1:/e_incr_density};
-	w_incr_req dist {0:/100-w_incr_density, 1:/w_incr_density};
-	l_incr_req dist {0:/100-l_incr_density, 1:/l_incr_density};
-   }
-
-   int flit_cnt_n = 0;
-   int flit_cnt_s = 0;
-   int flit_cnt_e = 0;
-   int flit_cnt_w = 0;
-   int flit_cnt_l = 0;
-endclass
-
-class router_test;
-
-   bit rst;
-
-   logic [15:0] north_i;
-   logic [15:0] south_i;
-   logic [15:0] east_i;
-   logic [15:0] west_i;
-   logic [15:0] local_i;
-
-   bit 	n_incr_i;
-   bit 	s_incr_i;
-   bit 	e_incr_i;
-   bit 	w_incr_i;
-   bit 	l_incr_i;
-
-   logic [15:0] north_o;
-   logic [15:0] south_o;
-   logic [15:0] east_o;
-   logic [15:0] west_o;
-   logic [15:0] local_o;
-
-   bit 	n_incr_o;
-   bit 	s_incr_o;
-   bit 	e_incr_o;
-   bit 	w_incr_o;
-   bit 	l_incr_o;
-
-   /* local count of free spaces in our input queues */
-   int n_q_free = 5;
-   int s_q_free = 5;
-   int e_q_free = 5;
-   int w_q_free = 5;
-   int l_q_free = 5;
-
-   function void golden_result();
-   endfunction
-
-endclass
-
-class router_check;
-
-   function bit check_results();
-   endfunction
-
-endclass
-
-class router_env;
-   int cycle = 0;
-   int max_transactions = 10000;
-   int warmup_time = 10;
-   bit verbose = 1;
-
-   int reset_density = 10;
-
-   int north_density = 20;
-   int south_density = 20;
-   int east_density = 20;
-   int west_density = 20;
-   int local_density = 20;
-
-   int n_incr_density = 20;
-   int s_incr_density = 20;
-   int e_incr_density = 20;
-   int w_incr_density = 20;
-   int l_incr_density = 20;
-
-   /* 
-    * local count of how many flits of a message have
-    * been sent to the router node
-    */
-   int n_sent = 0;
-   int s_sent = 0;
-   int e_sent = 0;
-   int w_sent = 0;
-   int l_sent = 0;
-
-   function configure(string filename);
-      int file, value, chars_returned;
-      int seed = 3;
-      string param;
-      file = $fopen (filename, "r");
-      while (!$feof(file)) begin
-	 chars_returned = $fscanf(file, "%s %d", param, value);
-	 if ("RANDOM_SEED" == param) begin
-	    seed = value;
-	    $srandom(seed);
-	 end
-	 else if("TRANSACTIONS" == param) begin
-	    max_transactions = value;
-	 end
-	 else if("VERBOSE" == param) begin
-	    verbose = value;
-	 end
-	 else if("RESET_DENSITY" == param) begin
-	    reset_density = value;
-	 end
-	 else if("NORTH_DENSITY" == param) begin
-	    north_density = value;
-	 end
-	 else if("SOUTH_DENSITY" == param) begin
-	    south_density = value;
-	 end
-	 else if("EAST_DENSITY" == param) begin
-	    east_density = value;
-	 end
-	 else if("WEST_DENSITY" == param) begin
-	    west_density = value;
-	 end
-	 else if("LOCAL_DENSITY" == param) begin
-	    local_density = value;
-	 end
-	 else if("N_INCR_DENSITY" == param) begin
-	    n_incr_density = value;
-	 end
-	 else if("S_INCR_DENSITY" == param) begin
-	    s_incr_density = value;
-	 end
-	 else if("E_INCR_DENSITY" == param) begin
-	    e_incr_density = value;
-	 end
-	 else if("W_INCR_DENSITY" == param) begin
-	    w_incr_density = value;
-	 end
-	 else if("L_INCRA_DENSITY" == param) begin
-	    l_incr_density = value;
-	 end
-	 else begin
-	    $display ("Never heard of a: %s\n", param);
-	    $exit();
-	 end
-      end
-   endfunction
-endclass
+function make_local(router_transaction packet, router_env env);
+	if (env.l_sent == 0) begin // need a header flit
+		if (packet.local_req == 1) begin
+			packet.local_flit = '0;
+			packet.local_flit[packet.onepos_x_local] = 1;
+			packet.local_flit[packet.onepos_y_local] = 1;
+			env.l_sent++;
+		end
+	end
+	else if (env.l_sent == 4) begin // sending the last body flit
+		env.l_sent = 0;
+	end
+	else begin // sending a middle body flit
+		env.l_sent++;	
+	end
+endfunction
 
 program tb (ifc.bench ds);
    router_transaction packet;
@@ -313,22 +112,24 @@ program tb (ifc.bench ds);
       cycle = env.cycle;
       packet.randomize();
 
-      if (test.n_q_free > 0) begin // there is space in our input queue
-	if (env.n_sent == 0) begin // need a header flit
-		if (packet.north_req == 1) begin
-			// make a header packet
-			packet.north_flit = '0;
-			packet.north_flit[onepos_x_north] = 1;
-			packet.north_flit[onepos_y_north] = 1;
-			env.n_sent++;
-		end
-	end
-	else if (env.n_sent == 4) begin // sending the last body flit
-		env.n_sent = 0;
-	end
-	else begin // sending a middle body flit
-		env.n_sent++;	
-	end
+      /* 
+       * determine whether or not we have to send a flit to
+       * the router based on if it has space in its input buffer
+       */
+      if (test.n_q_free > 0) begin
+	make_north(packet, env);
+      end
+      if (test.s_q_free > 0) begin
+	make_south(packet, env);
+      end
+      if (test.e_q_free > 0) begin
+	make_east(packet, env);
+      end
+      if (test.w_q_free > 0) begin
+	make_west(packet, env);
+      end
+      if (test.l_q_free > 0) begin
+	make_local(packet, env);
       end
       /*
        *  pass data to golden model
