@@ -1,7 +1,7 @@
 TOP=top.sv
 SUBINTERFACES=../address_gen/interface.sv ../arbiter/interface.sv ../counter/interface.sv ../fcc/interface.sv ../fcu/interface.sv ../inputbuffers/interface.sv ../queue/interface.sv ../xbar/interface.sv ../FF/interface.sv
 INTERFACE=interface.sv
-BENCH=bench.sv
+BENCH=router_check.sv router_env.sv router_test.sv router_transaction.sv bench.sv
 SUBMODS=../../src/address_gen.sv ../../src/arbiter.sv ../../src/counter.sv ../../src/fcc.sv ../../src/fcu.sv ../../src/queue.sv ../../src/inputbuffers.sv ../../src/xbar.sv ../../src/FF.sv
 DUT=../../src/router.sv
 
