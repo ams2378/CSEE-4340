@@ -9,6 +9,12 @@
 interface ifc (input bit clk);
    logic rst;
 
+   logic valid_n_i;
+   logic valid_s_i;
+   logic valid_e_i;
+   logic valid_w_i;
+   logic valid_l_i;
+
    logic [15:0] north_i;
    logic [15:0] south_i;
    logic [15:0] east_i;
@@ -20,6 +26,12 @@ interface ifc (input bit clk);
    logic 	e_incr_i;
    logic 	w_incr_i;
    logic 	l_incr_i;
+
+   logic valid_n_o;
+   logic valid_s_o;
+   logic valid_e_o;
+   logic valid_w_o;
+   logic valid_l_o;
 
    logic [15:0] north_o;
    logic [15:0] south_o;
@@ -38,6 +50,12 @@ interface ifc (input bit clk);
 
       output 	rst;
 
+      output valid_n_i;
+      output valid_s_i;
+      output valid_e_i;
+      output valid_w_i;
+      output valid_l_i;
+
       output 	north_i;
       output 	south_i;
       output 	east_i;
@@ -49,6 +67,12 @@ interface ifc (input bit clk);
       output 	e_incr_i;
       output 	w_incr_i;
       output 	l_incr_i;
+
+      input valid_n_o;
+      input valid_s_o;
+      input valid_e_o;
+      input valid_w_o;
+      input valid_l_o;
 
       input 	north_o;
       input 	south_o;
@@ -67,6 +91,12 @@ interface ifc (input bit clk);
 		input  clk,
 		input  rst,
 
+   	        input valid_n_i,
+      		input valid_s_i,
+      		input valid_e_i,
+      		input valid_w_i,
+      		input valid_l_i,
+
 		input  north_i,
 		input  south_i,
 		input  east_i,
@@ -78,6 +108,12 @@ interface ifc (input bit clk);
 		input  e_incr_i,
 		input  w_incr_i,
 		input  l_incr_i,
+
+   	        output valid_n_o,
+      		output valid_s_o,
+      		output valid_e_o,
+      		output valid_w_o,
+      		output valid_l_o,
 
 		output north_o,
 		output south_o,

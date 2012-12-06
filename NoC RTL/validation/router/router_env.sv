@@ -38,6 +38,13 @@ class router_env;
    int w_sent = 0;
    int l_sent = 0;
 
+   /* local count of free spaces in our input queues */
+   int n_q_free = 5;
+   int s_q_free = 5;
+   int e_q_free = 5;
+   int w_q_free = 5;
+   int l_q_free = 5;
+
    function configure(string filename);
       int file, value, chars_returned;
       int seed = 3;
