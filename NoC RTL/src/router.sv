@@ -17,8 +17,9 @@ module router (
  * instantiate ifc_buffer interface and map the inputs and
  * outputs
  */
-ifc_buffer b(d.clk);
+ifc_buffer b ();
 
+assign b.clk = d.clk;
 assign b.rst = d.rst;
 assign b.north_i = d.north_i;
 assign b.south_i = d.south_i;
@@ -73,8 +74,9 @@ address_gen agu(
  * instantiate ifc_FF interface and map the inputs and
  * outputs 
  */
-ifc_FF ff (d.clk);
+ifc_FF ff ();
 
+assign ff.clk = d.clk;
 assign ff.rst = d.rst;
 //assign ff.write_en_i=;
 //assign ff.write_data_i=;
@@ -139,8 +141,9 @@ fcu fcu_unit(
  * instantiate ifc_fcc interface and map the inputs and
  * outputs
  */
-ifc_fcc c (d.clk);
+ifc_fcc c ();
 
+assign c.clk = d.clk;
 assign c.rst = d.rst;
 
 assign c.n_incr_i= d.n_incr_i;

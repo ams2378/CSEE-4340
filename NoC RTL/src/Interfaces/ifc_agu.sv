@@ -1,9 +1,10 @@
 /**
- * @filename  		interface.sv 
+ * @filename  		ifc_agu.sv 
  *
  * @brief     		The file defines the interfaces for test bench and DUT for the arbiter
  * @authors   		Ashwin Ramachandran <ar2648@columbia.edu>
- Ayushi Rajeev <ar3110@columbia.edu>
+ 			Ayushi Rajeev <ar3110@columbia.edu>
+			Dechhin Lama <ddl2126@columbia.edu>
  *	 
  */
 
