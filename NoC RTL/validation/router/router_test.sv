@@ -66,6 +66,11 @@ class router_test;
    bit [4:0] one_hot_addr [5] = '{5'b00001, 5'b00010, 5'b00100, 5'b01000, 5'b10000};
 
    /*
+    * grant for the xbar to output valid data
+    */
+   bit grant[5] = '{0, 0, 0, 0, 0};
+
+   /*
     * inputs: 5 5-bit signals indicating desired output
     * outputs: 5 3-bit signals indicating the input granted a specific direction
     * operates in round-robin fashion
@@ -151,6 +156,14 @@ class router_test;
 				grant_arb[ind] = '1;
 			end
 		end	
+	end
+   endfunction
+
+   function void fcu(bit count_en[5]);	
+	for (int ind = 0; ind < 5; ind++) begin
+		if ((grant_arb[ind] != '1) && count_en[ind]) begin
+			grant[ind] = 1;
+		end
 	end
    endfunction
 
