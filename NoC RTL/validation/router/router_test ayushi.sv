@@ -63,30 +63,27 @@ bit en_e;
 bit en_w;
 bit en_l;
 
-function void adress_gen (logic [7:0] Myaddr_i);
+function void address_gen (logic [7:0] Myaddr_i);
      for (int ind =0; ind<5; ind++) begin
             if ([7:4] dir_i[ind] != [7:4] Myaddr_i) begin
-
-              		if ([7:4] dir_i[ind] > [7:4] Myaddr_i) begin /* send north */
-               		req_port_addr_0[ind] = 5'b00001;
-                        end
-
-              		else begin
-               		req_port_addr_0[ind] = 5'b00010;/* send south */
-                        end
-             end 
+              	if ([7:4] dir_i[ind] > [7:4] Myaddr_i) begin /* send north */
+               		req_port_addr_o[ind] = 5'b00001;
+                end
+              	else begin
+               		req_port_addr_o[ind] = 5'b00010;/* send south */
+                end
+            end 
             else begin
-                	if ([3:0] dir_i[ind] > [3:0] Myaddr_i) begin /* send east */
-               		req_port_addr_0[ind] = 5'b00100;
-                        end
+                if ([3:0] dir_i[ind] > [3:0] Myaddr_i) begin /* send east */
+               		req_port_addr_o[ind] = 5'b00100;
+                end
 
-              		else if ([3:0] dir_i[ind] < [3:0] Myaddr_i) begin /* send west */
-               		req_port_addr_0[ind] = 5'b01000;
-                        end
-
-                	else begin 
-                	req_port_addr_0[ind] = 5'b10000; /* destination reached */
-            	        end
+                else if ([3:0] dir_i[ind] < [3:0] Myaddr_i) begin /* send west */
+               		req_port_addr_o[ind] = 5'b01000;
+                end
+                else begin 
+                	req_port_addr_o[ind] = 5'b10000; /* destination reached */
+            	end
              end
            end
    endfunction
@@ -124,7 +121,7 @@ if (count_n == 0)begin
       en_n = 1;
     end
     else begin
-      northq_o = my_qn.popfront();
+      north_q_o = my_qn.popfront();
       en_n = 0;
       count_n++;
     end
@@ -260,7 +257,7 @@ else begin
       end
     end
 end
-end function
+endfunction
 
 
 endclass
