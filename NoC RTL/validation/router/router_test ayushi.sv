@@ -91,15 +91,35 @@ function void adress_gen (logic [7:0] Myaddr_i);
            end
    endfunction
 
+
+
 function void input_buffer ()
 
-/*handling north queue*/
   if (valid_n_i) begin
      my_qn.push_back(north_i);
   end	
-	                  
-if (count_n = 0)begin
-    if (pop_req_n =0) begin
+if (valid_s_i) begin
+     my_qs.push_back(south_i);
+  end		                  
+ if (valid_e_i) begin
+     my_qe.push_back(east_i);
+  end	
+ if (valid_w_i) begin
+     my_qw.push_back(west_i);
+  end
+if (valid_l_i) begin
+     my_ql.push_back(local_i);
+  end
+
+endfunction
+
+
+
+function void fsm ()
+/*handling north queue*/
+
+if (count_n == 0)begin
+    if (pop_req_n ==0) begin
       count_n =0;
       en_n = 1;
     end
@@ -107,19 +127,18 @@ if (count_n = 0)begin
       northq_o = my_qn.popfront();
       en_n = 0;
       count_n++;
-  
     end
 end
 
 else begin
-   if (pop_req_n =0) begin
+   if (pop_req_n ==0) begin
       en_n = 0;
     end
     else begin
       north_q_o = my_qn.popfront();
       en_n =0;
       count_n++;
-      if (count_n = 5) begin
+      if (count_n == 5) begin
          count_n =0;
       end
     end
@@ -127,12 +146,10 @@ end
 
 
 /*handling south queue*/
-  if (valid_s_i) begin
-     my_qs.push_back(south_i);
-  end	
+  
 	                  
-if (count_s = 0)begin
-    if (pop_req_s =0) begin
+if (count_s == 0)begin
+    if (pop_req_s ==0) begin
       count_s =0;
       en_s = 1;
     end
@@ -140,31 +157,28 @@ if (count_s = 0)begin
       south_q_o = my_qs.popfront();
       en_s = 0;
       count_s++;
-  
     end
 end
 
 else begin
-   if (pop_req_s =0) begin
+   if (pop_req_s ==0) begin
       en_s = 0;
     end
     else begin
       south_q_o = my_qs.popfront();
       en_s =0;
       count_s++;
-      if (count = 5) begin
+      if (count == 5) begin
          count_s=0;
       end
     end
 end
 
 /*handling east queue*/
-  if (valid_e_i) begin
-     my_qe.push_back(east_i);
-  end	
+ 
 	                  
-if (count_e = 0)begin
-    if (pop_req_e =0) begin
+if (count_e == 0)begin
+    if (pop_req_e ==0) begin
       count_e =0;
       en_e = 1;
     end
@@ -172,31 +186,28 @@ if (count_e = 0)begin
       east_q_o = my_qe.popfront();
       en_e = 0;
       count_e++;
-  
     end
 end
 
 else begin
-   if (pop_req_e =0) begin
+   if (pop_req_e ==0) begin
       en_e = 0;
     end
     else begin
       east_q_o = my_qe.popfront();
       en_e =0;
       count_e++;
-      if (count_e = 5) begin
+      if (count_e == 5) begin
          count_e =0;
       end
     end
 end
 
 /*handling west queue*/
-  if (valid_w_i) begin
-     my_qw.push_back(west_i);
-  end	
+  	
 	                  
-if (count_w = 0)begin
-    if (pop_req_w =0) begin
+if (count_w == 0)begin
+    if (pop_req_w ==0) begin
       count_w =0;
       en_w = 1;
     end
@@ -204,31 +215,28 @@ if (count_w = 0)begin
       west_q_o = my_qw.popfront();
       en_w = 0;
       count_w++;
-  
     end
 end
 
 else begin
-   if (pop_req_w =0) begin
+   if (pop_req_w ==0) begin
       en_w = 0;
     end
     else begin
       west_q_o = my_qw.popfront();
       en_w =0;
       count_w++;
-      if (count_w = 5) begin
+      if (count_w == 5) begin
          count_w=0;
       end
     end
 end
 
 /*handling local queue*/
-  if (valid_l_i) begin
-     my_ql.push_back(local_i);
-  end	
+ 	
 	                  
-if (count_l = 0)begin
-    if (pop_req_l =0) begin
+if (count_l == 0)begin
+    if (pop_req_l ==0) begin
       count_l =0;
       en_l = 1;
     end
@@ -236,19 +244,18 @@ if (count_l = 0)begin
       local_q_o = my_ql.popfront();
       en_l = 0;
       count_l++;
-  
     end
 end
 
 else begin
-   if (pop_req_l =0) begin
+   if (pop_req_l ==0) begin
       en_l = 0;
     end
     else begin
       local_q_o = my_ql.popfront();
       en_l = 0;
       count_l++;
-      if (count_l = 5) begin
+      if (count_l == 5) begin
          count_l = 0;
       end
     end
