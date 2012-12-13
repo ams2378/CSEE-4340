@@ -34,29 +34,29 @@ module counter(
 			    	end else 
 					credit_en_o <= 1;
 	
-			s2: 	if (incr_i=1 && C==4) begin
+			s2: 	if (incr_i==1 && C==4) begin
 					credit_en_o <= 1;
 					state <= s1;
-		    	    	end else if (decr_i = 1 && C>1) begin
+		    	    	end else if (decr_i == 1 && C>1) begin
 					credit_en_o <= 1;
-				end else if (decr_i = 1 && C = 1) begin
+				end else if (decr_i == 1 && C == 1) begin
 					credit_en_o <= 0;
 					state <= s3;
-				end else if(incr_i =1 && C<4) begin
+				end else if(incr_i ==1 && C<4) begin
 					credit_en_o <= 1;
 					state <= s4;
 				end
 				
-			s3:	if (incr_i=1) begin 
+			s3:	if (incr_i==1) begin 
 					credit_en_o <= 1;
 					state <= s2;
 				end
 
 
-			s4: 	if (incr_i = 1 && C=4) begin
+			s4: 	if (incr_i == 1 && C==4) begin
 					credit_en_o <= 1;
 					state <= s1;
-				end else if (incr_i = 1 && C<4) begin
+				end else if (incr_i == 1 && C<4) begin
 					credit_en_o = 1;
 				end										
 		endcase

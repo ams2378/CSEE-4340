@@ -14,7 +14,7 @@ parameter north = 3'b000;
 parameter south = 3'b001;
 parameter east = 3'b010;
 parameter west = 3'b011;
-parameter local = 3'b100;
+parameter loc = 3'b100;
 parameter none = 3'b111;
 
 logic data [WIDTH-1:0];
@@ -25,7 +25,7 @@ always_comb begin
 		south:	data = data_s_i;
 		east: 	data = data_e_i;
 		west:	data = data_w_i;
-		local: 	data = data_l_i;
+		loc: 	data = data_l_i;
 		none: 	data = '0;   	
 	endcase
 end

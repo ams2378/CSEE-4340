@@ -15,7 +15,7 @@ module single_arb (
 		input en_w_i,
 		input en_l_i,
 
-		output [2:0] req_port_addr_o;
+		output [2:0] req_port_addr_o
 		);
 
 logic enable;
@@ -61,7 +61,7 @@ DW_arb_rr #(.n(5)) arb(
 	.clk(clk),
 	.rst_n(rst),
 	.enable(enable),
-	.init_n('1'),
+	.init_n('1),
 	.request(requests),
 	.mask(mask),
 	
