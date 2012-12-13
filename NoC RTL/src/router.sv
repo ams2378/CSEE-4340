@@ -21,11 +21,18 @@ ifc_buffer b ();
 
 assign b.clk = d.clk;
 assign b.rst = d.rst;
+
 assign b.north_i = d.north_i;
 assign b.south_i = d.south_i;
 assign b.east_i = d.east_i;
 assign b.west_i = d.west_i;
 assign b.local_i = d.local_i;
+
+assign b.valid_n_i = d.valid_n_i;
+assign b.valid_s_i = d.valid_s_i;
+assign b.valid_e_i = d.valid_e_i;
+assign b.valid_w_i = d.valid_w_i;
+assign b.valid_l_i = d.valid_l_i;
 
 assign b.pop_req_n_i=f.grant_access_north_o;
 assign b.pop_req_s_i=f.grant_access_south_o;
@@ -78,8 +85,6 @@ ifc_FF ff ();
 
 assign ff.clk = d.clk;
 assign ff.rst = d.rst;
-//assign ff.write_en_i=;
-//assign ff.write_data_i=;
 
 
 /*
@@ -102,6 +107,13 @@ assign ar.req_port_addr2_i= a.req_port_addr2_o;
 assign ar.req_port_addr3_i= a.req_port_addr3_o;
 assign ar.req_port_addr4_i= a.req_port_addr4_o;
 assign ar.req_port_addr5_i= a.req_port_addr5_o;
+
+assign ar.en_n_i = b.en_n_o;
+assign ar.en_s_i = b.en_s_o;
+assign ar.en_e_i = b.en_e_o;
+assign ar.en_w_i = b.en_w_o;
+assign ar.en_l_i = b.en_l_o;
+
 /*
  * instantiate the arbiter */
 arbiter arbiter_unit(
@@ -152,11 +164,11 @@ assign c.e_incr_i= d.e_incr_i;
 assign c.w_incr_i= d.w_incr_i;
 assign c.l_incr_i= d.l_incr_i;
 
-assign c.n_decr_i=f.grant_access_north_o;
-assign c.s_decr_i=f.grant_access_south_o;
-assign c.e_decr_i=f.grant_access_east_o;
-assign c.w_decr_i=f.grant_access_west_o;
-assign c.l_decr_i=f.grant_access_local_o;
+assign c.n_decr_i= x.valid_n_o;
+assign c.s_decr_i= x.valid_s_o;
+assign c.e_decr_i= x.valid_e_o;
+assign c.w_decr_i= x.valid_w_o;
+assign c.l_decr_i= x.valid_l_o;
 
 
 	
@@ -175,11 +187,11 @@ fcc fcc_unit(
  */
 ifc_xbar x ();
 
-assign x.grant_access_north_i= f.grant_access_north_o;
-assign x.grant_access_south_i= f.grant_access_south_o;
-assign x.grant_access_east_i= f.grant_access_east_o;
-assign x.grant_access_west_i= f.grant_access_west_o;
-assign x.grant_access_local_i= f.grant_access_local_o;
+assign x.pop_req_n= f.grant_access_north_o;
+assign x.pop_req_s= f.grant_access_south_o;
+assign x.pop_req_e= f.grant_access_east_o;
+assign x.pop_req_w= f.grant_access_west_o;
+assign x.pop_req_l= f.grant_access_local_o;
 
 assign x.address_route_n_i =  ar.req_port_addr1_o;
 assign x.address_route_s_i =  ar.req_port_addr2_o;
@@ -198,6 +210,13 @@ assign x.south_o = d.south_o;
 assign x.east_o = d.east_o;
 assign x.west_o = d.west_o;
 assign x.local_o = d.local_o;
+
+assign x.valid_n_o = d.valid_n_o;
+assign x.valid_s_o = d.valid_s_o;
+assign x.valid_e_o = d.valid_e_o;
+assign x.valid_w_o = d.valid_w_o;
+assign x.valid_l_o = d.valid_l_o;
+
 
 
 /*

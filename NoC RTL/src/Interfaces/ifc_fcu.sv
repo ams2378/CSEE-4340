@@ -3,8 +3,7 @@
  *
  * @brief     		This file defines the interfaces for the testbench and DUT for the FCC
  * @authors   		Ayushi Rajeev		<ar3110@columbia.edu>
- *			Ashwin Ramachandran	<ar2648@columbia.edu>
- *	 
+ *			Ashwin Ramachandran	<ar2648@columbia.edu>	 
  */
 
 interface ifc_fcu ();

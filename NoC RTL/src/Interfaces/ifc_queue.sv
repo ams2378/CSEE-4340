@@ -12,18 +12,23 @@ interface ifc_queue ();
    logic clk;	
 
    logic pop_req_i;
-   logic [15:0] data_i;	
+   logic [15:0] data_i;
+   logic valid_i;	
 
    logic [15:0] data_o;
+   logic en_o;
+
 
    modport dut (
 		input  clk,
 		input  rst,
 		
 		input  pop_req_i,
-		input  data_i, 
+		input  data_i,
+		input  valid_i, 
 
-		output data_o
+		output data_o,
+		output en_o
 		);
 
 endinterface

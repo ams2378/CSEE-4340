@@ -11,7 +11,7 @@
 module one_addr_gen(
 		input [15:0] q_i;
 		input [7:0] myaddr_i;
-		output [2:0] req_port_addr_o;
+		output [4:0] req_port_addr_o;
 	);
 
 	logic gt_y;
@@ -25,6 +25,9 @@ module one_addr_gen(
 	logic [7:0] q_addr_i;
 	logic [7:0] q_header_i;
 	
+	logic valid_x;
+	logic valid_y;
+
 	assign q_addr_i = q_i[7:0];
 
 	
@@ -45,17 +48,35 @@ module one_addr_gen(
 	);
 
 	always_comb begin
+		//check if valid x and y address
+		valid_x = (	q_addr_i[7:4] == 4'b0001 ||
+				q_addr_i[7:4] == 4'b0010 ||
+				q_addr_i[7:4] == 4'b0100 ||
+				q_addr_i[7:4] == 4'b1000)
+
+		valid_y = (	q_addr_i[3:0] == 4'b0001 ||
+				q_addr_i[3:0] == 4'b0010 ||
+				q_addr_i[3:0] == 4'b0100 ||
+				q_addr_i[3:0] == 4'b1000)
+	end
+
+
+	always_comb begin
+		if (!valid_x || !valid_y)
+			//invalid x or y address
+			req_port_addr_o = 5'b00000;
+
 	
 		// QUEUE ADDRESS GENERATION
 		// if destination y_address is less than my y address
-		if (lt_y)
+		else if (lt_y)
 			//pass to south
-			req_port_addr_o = 3'b010;
+			req_port_addr_o = 5'b00010;
 		
 		// if destination y_address is greater than my y address
 		else if (gt_y)
 			//pass to north			
-			req_port_addr_o = 3'b000;
+			req_port_addr_o = 5'b00001;
 		
 		// if matching y-address, check x address
 		else if (eq_y) begin
@@ -63,17 +84,17 @@ module one_addr_gen(
 			// if destination x_address is less than my x address	
 			if (lt_x)
 			//pass to east
-			req_port_addr_o = 3'b011;
+			req_port_addr_o = 5'b00100;
 
 			// if destination x_address is greater than my x address
 			else if (gt_x)
 			//pass to west			
-			req_port_addr_o = 3'b001;
+			req_port_addr_o = 5'b01000;
 
 			// matching address- destination reached!!
 			else if (eq_x)
 			//pass to local
-			req_port_addr_o = 3'b100;
+			req_port_addr_o = 5'b10000;
 		end
 	end
 

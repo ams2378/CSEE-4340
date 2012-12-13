@@ -2,6 +2,7 @@
 * filename  		inputbuffers.sv 
 * brief			instantiating queues to have top level input fifo buffers for each input port     		
 * authors   		Adil sadik <ams2378@columbia.edu>
+			Dechhin Lama <ddl2126@columbia.edu>
 * data creation		11/11/12	
 * 
 * 
@@ -17,11 +18,17 @@ module inputbuffers (
  * instantiate the ifc_queue interfaces and map the inpus and
  * outputs from an inputbuffer interface to a queue interface
  */
-ifc_queue n (d.clk);
-ifc_queue s (d.clk);
-ifc_queue e (d.clk);
-ifc_queue w (d.clk);
-ifc_queue l (d.clk);
+ifc_queue n ();
+ifc_queue s ();
+ifc_queue e ();
+ifc_queue w ();
+ifc_queue l ();
+
+assign n.clk = d.clk;
+assign s.clk = d.clk;
+assign e.clk = d.clk;
+assign w.clk = d.clk;
+assign l.clk = d.clk;
 
 assign n.rst = d.rst;
 assign s.rst = d.rst;
@@ -41,11 +48,24 @@ assign e.data_i = d.east_i;
 assign w.data_i = d.west_i;
 assign l.data_i = d.local_i;
 
+assign n.valid_i = d.valid_n_i;
+assign s.valid_i = d.valid_s_i;
+assign e.valid_i = d.valid_e_i;
+assign w.valid_i = d.valid_w_i;
+assign l.valid_i = d.valid_l_i;
+
 assign n.data_o = d.north_q_o;
 assign s.data_o = d.south_q_o;
 assign e.data_o = d.east_q_o;
 assign w.data_o = d.west_q_o;
 assign l.data_o = d.local_q_o;
+
+assign n.en_o = d.en_n_o;
+assign s.en_o = d.en_s_o;
+assign e.en_o = d.en_e_o;
+assign w.en_o = d.en_w_o;
+assign l.en_o = d.en_l_o;
+
 
 queue n_queue (
 	.d (n.dut)
