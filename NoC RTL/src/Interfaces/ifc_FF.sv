@@ -7,21 +7,15 @@
  *	 
  */
 
-interface ifc_FF #(parameter WIDTH = 1) ();
+interface ifc_FF ();
    logic rst;
    logic clk;
 
-   logic write_en_i;
-   logic [WIDTH-1:0] write_data_i;	
-
-   logic [WIDTH-1:0] read_data_o;
+   logic [7:0] read_data_o;
 
    modport dut (
 		input clk,
 		input rst,
-
-		input write_en_i,
-		input write_data_i,
 	
 		output read_data_o
 		);

@@ -7,26 +7,18 @@ author	    : Dechhin Lama <ddl2126@columbia.edu>
 *///-----------------------------------------------------
 
 
-module FF #(parameter WIDTH = 1) (
+module FF (
 	input clk,
 	input rst,
-
-	input write_en_i,
-	input [WIDTH-1:0] write_data_i,
 	
-	output [WIDTH-1:0] read_data_o
+	output [7:0] read_data_o
 	);
 
-reg [WIDTH-1:0] data;
+reg [7:0] data;
 
-/*
- * the write block
- */
 always_ff @(posedge clk) begin
 	if (rst)
-		data <= '0;
-	else if (write_en_i)
-		data <= write_data_i;
+		data <= 8'b00010001;
 	else
 		data <= data;		// keep writing the data back
 end

@@ -17,11 +17,11 @@ interface ifc_agu ();
 
    logic [7:0] 	myaddr_i;
 
-   logic [2:0] 	req_port_addr1_o;
-   logic [2:0] 	req_port_addr2_o;
-   logic [2:0] 	req_port_addr3_o;
-   logic [2:0] 	req_port_addr4_o;
-   logic [2:0] 	req_port_addr5_o;
+   logic [4:0] 	req_port_addr1_o;
+   logic [4:0] 	req_port_addr2_o;
+   logic [4:0] 	req_port_addr3_o;
+   logic [4:0] 	req_port_addr4_o;
+   logic [4:0] 	req_port_addr5_o;
 
    modport dut (
 		input  north_q_i,
