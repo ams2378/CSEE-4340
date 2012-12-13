@@ -9,9 +9,9 @@
 */
 
 module one_addr_gen(
-		input [15:0] q_i;
-		input [7:0] myaddr_i;
-		output [4:0] req_port_addr_o;
+		input [15:0] q_i,
+		input [7:0] myaddr_i,
+		output [4:0] req_port_addr_o
 	);
 
 	logic gt_y;
@@ -37,8 +37,8 @@ module one_addr_gen(
 	DW_cmp_dx #(.width(8), .p1_width(4)) comparator (
 		.A (q_addr_i),
 		.B (myaddr_i),
-		.tc ('0'),
-		.dplx ('1'),
+		.tc ('0),
+		.dplx ('1),
 		.lt1 (lt_y),
 		.gt1 (gt_y),
 		.eq1 (eq_y),
@@ -49,15 +49,16 @@ module one_addr_gen(
 
 	always_comb begin
 		//check if valid x and y address
-		valid_x = (	q_addr_i[7:4] == 4'b0001 ||
-				q_addr_i[7:4] == 4'b0010 ||
-				q_addr_i[7:4] == 4'b0100 ||
-				q_addr_i[7:4] == 4'b1000)
+		valid_x =( 	q_addr_i[7:4] == 4'b0001 |
+				q_addr_i[7:4] == 4'b0010 |
+				q_addr_i[7:4] == 4'b0100 |
+				q_addr_i[7:4] == 4'b1000);
 
-		valid_y = (	q_addr_i[3:0] == 4'b0001 ||
-				q_addr_i[3:0] == 4'b0010 ||
-				q_addr_i[3:0] == 4'b0100 ||
-				q_addr_i[3:0] == 4'b1000)
+		valid_y = 	(q_addr_i[3:0] == 4'b0001) |
+				(q_addr_i[3:0] == 4'b0010) |
+				(q_addr_i[3:0] == 4'b0100) |
+				(q_addr_i[3:0] == 4'b1000);
+		
 	end
 
 

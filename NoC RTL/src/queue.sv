@@ -16,15 +16,15 @@ module queue (
 
 //instantiate DesignWare Queue
 DW_fifo_s1_sf #(.width(16), .depth(5)) q (
-	.clk(d.clk);
-	.rst_n(d.rst);
+	.clk(d.clk),
+	.rst_n(d.rst),
 
-	.push_req_n(valid_i);
-	.pop_req_n(pop_req_i);
-	.data_in(data_i);
-	.diag_n('1');
+	.push_req_n(d.valid_i),
+	.pop_req_n(d.pop_req_i),
+	.data_in(d.data_i),
+	.diag_n('1),
 	
-	.data_out(data_o);
+	.data_out(d.data_o)
 );
 
 
@@ -38,8 +38,8 @@ parameter s5 = 3'b100;
 reg[2:0] state;
 reg en;
 
-always_ff @(posedge clk) begin
-	if (rst)
+always_ff @(posedge d.clk) begin
+	if (d.rst)
 		state <= s1;
 	else case(state)
 		s1:	if (d.pop_req_i == 0)
@@ -79,6 +79,6 @@ always_ff @(posedge clk) begin
 	endcase
 end
 
-assign en_o = en;
+assign d.en_o = en;
 
 endmodule

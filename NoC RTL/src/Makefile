@@ -1,5 +1,5 @@
 #TOP=router.sv
-INTERFACE=interface/*.sv
+INTERFACE=Interfaces/*.sv
 MODULES=*.sv
 
 .PHONY: help
