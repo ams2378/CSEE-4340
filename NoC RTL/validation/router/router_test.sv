@@ -198,7 +198,8 @@ class router_test;
       			north_q_o = my_qn.popfront();
       			count_n++;
       			if (count_n == 5) begin
-         			count_n = 0;
+         			en_n = 1;
+				count_n = 0;
       			end
     		end
 	end
@@ -221,7 +222,8 @@ class router_test;
       			south_q_o = my_qs.popfront();
      			count_s++;
       			if (count == 5) begin
-         			count_s = 0;
+         			en_s = 1;
+				count_s = 0;
       			end
     		end
 	end
@@ -244,7 +246,8 @@ class router_test;
       			east_q_o = my_qe.popfront();
       			count_e++;
       			if (count_e == 5) begin
-         			count_e = 0;
+         			en_e = 1;
+				count_e = 0;
       			end
     		end
 	end
@@ -267,7 +270,8 @@ class router_test;
       			west_q_o = my_qw.popfront();
       			count_w++;
       			if (count_w == 5) begin
-         			count_w = 0;
+         			en_w = 1;
+				count_w = 0;
       			end
     		end
 	end
@@ -290,7 +294,8 @@ class router_test;
       			local_q_o = my_ql.popfront();
       			count_l++;
       			if (count_l == 5) begin
-         			count_l = 0;
+         			en_l = 1;
+				count_l = 0;
       			end
     		end
 	end
