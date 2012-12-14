@@ -9,9 +9,9 @@
 */
 
 module one_addr_gen(
-		input [15:0] q_i;
-		input [7:0] myaddr_i;
-		output [2:0] req_port_addr_o;
+		input [15:0] q_i,
+		input [7:0] myaddr_i,
+		output [2:0] req_port_addr_o
 	);
 
 	logic gt_y;

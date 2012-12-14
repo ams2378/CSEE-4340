@@ -135,6 +135,9 @@ program tb (ifc.bench ds);
       /*
        *  pass data to golden model
        */
+      $display("Reset_req = %b\n", packet.reset_req);
+      $display("North Valid_i = %b\n", packet.north_req);
+      $display("North Data_i = %b\n", packet.north_flit);
 
       test.rst		<=	packet.reset_req;
 
@@ -182,7 +185,77 @@ program tb (ifc.bench ds);
 
       @(ds.cb);
 
-      test.golden_result();
+      test.input_buffer();
+      test.address_gen();
+
+      test.enable[0] = (!test.req_port_addr_o[0][0] | test.en_n) && (!test.req_port_addr_o[1][0] | test.en_s) &&
+		       (!test.req_port_addr_o[2][0] | test.en_s) && (!test.req_port_addr_o[3][0] | test.en_w) &&
+		       (!test.req_port_addr_o[4][0] | test.en_l);
+      test.enable[1] = (!test.req_port_addr_o[0][1] | test.en_n) && (!test.req_port_addr_o[1][1] | test.en_s) &&
+		       (!test.req_port_addr_o[2][1] | test.en_s) && (!test.req_port_addr_o[3][1] | test.en_w) &&
+		       (!test.req_port_addr_o[4][1] | test.en_l);
+      test.enable[2] = (!test.req_port_addr_o[0][2] | test.en_n) && (!test.req_port_addr_o[1][2] | test.en_s) &&
+		       (!test.req_port_addr_o[2][2] | test.en_s) && (!test.req_port_addr_o[3][2] | test.en_w) &&
+		       (!test.req_port_addr_o[4][2] | test.en_l);
+      test.enable[3] = (!test.req_port_addr_o[0][3] | test.en_n) && (!test.req_port_addr_o[1][3] | test.en_s) &&
+		       (!test.req_port_addr_o[2][3] | test.en_s) && (!test.req_port_addr_o[3][3] | test.en_w) &&
+		       (!test.req_port_addr_o[4][3] | test.en_l);
+      test.enable[4] = (!test.req_port_addr_o[0][4] | test.en_n) && (!test.req_port_addr_o[1][4] | test.en_s) &&
+		       (!test.req_port_addr_o[2][4] | test.en_s) && (!test.req_port_addr_o[3][4] | test.en_w) &&
+		       (!test.req_port_addr_o[4][4] | test.en_l);
+
+      test.mask[0] = !test.en_n;
+      test.mask[1] = !test.en_s;
+      test.mask[2] = !test.en_e;
+      test.mask[3] = !test.en_w;
+      test.mask[4] = !test.en_l;
+
+      if (test.enable[0]) begin
+	test.arbiter_north();
+      end
+      else
+	// push the current value onto tail of queue
+      end
+      if (test.enable[1]) begin
+	test.arbiter_south();
+      end
+      if (test.enable[2]) begin
+	test.arbiter_east();
+      end
+      if (test.enable[3]) begin
+	test.arbiter_west();
+      end
+      if (test.enable[4]) begin
+	test.arbiter_local();
+      end
+
+      test.fcc();
+      test.fcu();
+      test.xbar();
+// do the pop for the address queue here
+      test.pop
+      test.fsm();
+
+      $display ("valid_n_o = %b\n", test.valid_n_o);
+      $display ("north_o = %b\n", test.north_o);
+      $display ("n_incr_o = %b\n", test.n_incr_o);
+     
+      $display ("valid_s_o = %b\n", test.valid_s_o);
+      $display ("south_o = %b\n", test.south_o);
+      $display ("s_incr_o = %b\n", test.s_incr_o);
+
+      $display ("valid_e_o = %b\n", test.valid_e_o);
+      $display ("east_o = %b\n", test.east_o);
+      $display ("s_incr_o = %b\n", test.s_incr_o);
+
+      $display ("valid_w_o = %b\n", test.valid_w_o);
+      $display ("west_o = %b\n", test.west_o);
+      $display ("w_incr_o = %b\n", test.w_incr_o);
+
+      $display ("valid_l_o = %b\n", test.valid_l_o);
+      $display ("local_o = %b\n", test.local_o);
+      $display ("l_incr_o = %b\n", test.l_incr_o);
+ 
    endtask
 
    initial begin

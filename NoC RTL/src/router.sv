@@ -16,10 +16,10 @@ module router (
 /*
  * instantiate ifc_buffer interface and map the inputs and
  * outputs
- */
-ifc_buffer b ();
+ *//*
+ifc_buffer b (d.clk);
 
-assign b.clk = d.clk;
+//assign b.clk = d.clk;
 assign b.rst = d.rst;
 assign b.north_i = d.north_i;
 assign b.south_i = d.south_i;
@@ -32,23 +32,23 @@ assign b.pop_req_s_i=f.grant_access_south_o;
 assign b.pop_req_e_i=f.grant_access_east_o;
 assign b.pop_req_w_i=f.grant_access_west_o;
 assign b.pop_req_l_i=f.grant_access_local_o;
-
+*/
 
 
 
 /*
  * instantiate the inputbuffers 
- */
+ *//*
 inputbuffers inputbuffers_unit(
 	.d (b.dut)
-);
+);*/
 
 
 
 /*
  * instantiate ifc_agu interface and map the inputs and
  * outputs 
- */
+ *//*
 ifc_agu a ();
 
 assign a.north_q_i = b.north_q_o;
@@ -60,33 +60,33 @@ assign a.local_q_i = b.local_q_o;
 assign a.myaddr_i= ff.read_data_o;
 
 
-
+*/
 /*
  * instantiate the address generator */
-address_gen agu(
+/*address_gen agu(
     .d (a.dut)
 );
 
 
-
+*/
 
 /*
  * instantiate ifc_FF interface and map the inputs and
  * outputs 
- */
-ifc_FF ff ();
+ *//*
+ifc_FF ff (d.clk);
 
-assign ff.clk = d.clk;
+//assign ff.clk = d.clk;
 assign ff.rst = d.rst;
 //assign ff.write_en_i=;
 //assign ff.write_data_i=;
 
-
+*/
 /*
  * instantiate the FF */
-FF loc(
+/*FF loc(
     .d (ff.dut)
-);
+);*/
 
 
 
@@ -94,7 +94,7 @@ FF loc(
 /*
  * instantiate ifc_arb interface and map the inputs and
  * outputs 
- */
+ *//*
 ifc_arb ar ();
 
 assign ar.req_port_addr1_i= a.req_port_addr1_o;
@@ -102,11 +102,11 @@ assign ar.req_port_addr2_i= a.req_port_addr2_o;
 assign ar.req_port_addr3_i= a.req_port_addr3_o;
 assign ar.req_port_addr4_i= a.req_port_addr4_o;
 assign ar.req_port_addr5_i= a.req_port_addr5_o;
-/*
+*//*
  * instantiate the arbiter */
-arbiter arbiter_unit(
+/*arbiter arbiter_unit(
 	.d (ar.dut)
-);
+);*/
 
 
 
@@ -114,7 +114,7 @@ arbiter arbiter_unit(
 /*
  * instantiate ifc_fcu interface and map the inputs and
  * outputs
- */
+ *//*
 ifc_fcu f ();
 
 assign f.req_port_addr1_i= ar.req_port_addr1_o;
@@ -128,22 +128,22 @@ assign f.credit_en_south_i = c.credit_en_south_o;
 assign f.credit_en_east_i  = c.credit_en_east_o;
 assign f.credit_en_west_i  = c.credit_en_west_o;
 assign f.credit_en_local_i = c.credit_en_local_o;
-   
+   */
 /*
  * instantiate the fcu */
-fcu fcu_unit(
+/*fcu fcu_unit(
 	.d (f.dut)
 );
-
+*/
 
 
 /*
  * instantiate ifc_fcc interface and map the inputs and
  * outputs
- */
-ifc_fcc c ();
+ *//*
+ifc_fcc c (d.clk);
 
-assign c.clk = d.clk;
+//assign c.clk = d.clk;
 assign c.rst = d.rst;
 
 assign c.n_incr_i= d.n_incr_i;
@@ -158,21 +158,21 @@ assign c.e_decr_i=f.grant_access_east_o;
 assign c.w_decr_i=f.grant_access_west_o;
 assign c.l_decr_i=f.grant_access_local_o;
 
-
+*/
 	
 /*
  * instantiate the fcc 
- */
+ *//*
 fcc fcc_unit(
 	.d (c.dut)
 );
 
 
-
+*/
 /*
  * instantiate ifc_xbar interface and map the inputs and
  * outputs
- */
+ *//*
 ifc_xbar x ();
 
 assign x.grant_access_north_i= f.grant_access_north_o;
@@ -199,14 +199,14 @@ assign x.east_o = d.east_o;
 assign x.west_o = d.west_o;
 assign x.local_o = d.local_o;
 
-
+*/
 /*
  * instantiate the xbar */
-xbar xbar_unit(
+/*xbar xbar_unit(
 	.d (x.dut)
 );
 
 
-
+*/
 endmodule
 

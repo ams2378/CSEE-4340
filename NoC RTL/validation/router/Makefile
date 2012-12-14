@@ -1,8 +1,8 @@
 TOP=top.sv
-SUBINTERFACES=../address_gen/interface.sv ../arbiter/interface.sv ../counter/interface.sv ../fcc/interface.sv ../fcu/interface.sv ../inputbuffers/interface.sv ../queue/interface.sv ../xbar/interface.sv ../FF/interface.sv
+#SUBINTERFACES=../../src/Interfaces/*.sv
 INTERFACE=interface.sv
 BENCH=router_check.sv router_env.sv router_test.sv router_transaction.sv bench.sv
-SUBMODS=../../src/address_gen.sv ../../src/arbiter.sv ../../src/counter.sv ../../src/fcc.sv ../../src/fcu.sv ../../src/queue.sv ../../src/inputbuffers.sv ../../src/xbar.sv ../../src/FF.sv
+#SUBMODS=../../src/address_gen.sv ../../src/arbiter.sv ../../src/counter.sv ../../src/fcc.sv ../../src/fcu.sv ../../src/queue.sv ../../src/inputbuffers.sv ../../src/xbar.sv ../../src/FF.sv ../../src/one_addr_gen.sv ../../src/xbar.sv
 DUT=../../src/router.sv
 
 .PHONY: help

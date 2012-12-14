@@ -56,11 +56,11 @@ class router_test;
    /*
     * input queues
     */
-   integer my_qn[$:5];
-   integer my_qs[$:5];
-   integer my_qe[$:5];  
-   integer my_qw[$:5];
-   integer my_ql[$:5];   
+   bit [15:0] my_qn[$:5];
+   bit [15:0] my_qs[$:5];
+   bit [15:0] my_qe[$:5];  
+   bit [15:0] my_qw[$:5];
+   bit [15:0] my_ql[$:5];   
 
    /*
     * arbiter enable signals
@@ -76,6 +76,15 @@ class router_test;
     */
    bit [4:0] enable;
    bit [4:0] mask;
+
+   /*
+    * the number of requests on each output
+    */
+   int n_north = 0;
+   int n_south = 0;
+   int n_east = 0;
+   int n_west = 0;
+   int n_local = 0;
 
    /*
     * one-hot grant decision of arbiter
@@ -110,6 +119,15 @@ class router_test;
    int count[5] = '{5, 5, 5, 5, 5};
 
    /*
+    * queues for storing the address source
+    */
+   bit [2:0] n_addr[$:3];
+   bit [2:0] s_addr[$:3];
+   bit [2:0] e_addr[$:3];
+   bit [2:0] w_addr[$:3];
+   bit [2:0] l_addr[$:3];
+
+   /*
     * count of how many flits of a message we've sent
     */
    int count_n = 0;
@@ -125,6 +143,15 @@ class router_test;
    logic [15:0] out_data[5];
    bit valid_data[5];
 
+   /*
+    * instantiate the variables to hold popped values
+    */
+   bit [15:0] north_q_o = '0;
+   bit [15:0] south_q_o = '0;
+   bit [15:0] east_q_o = '0;
+   bit [15:0] west_q_o = '0;
+   bit [15:0] local_q_o = '0;
+
    function void reset_router();
 	req_port_addr_o [5] = '{0, 0, 0, 0, 0};
 	dir_i [5] = '{0, 0, 0, 0, 0};
@@ -135,8 +162,34 @@ class router_test;
 	my_qw = {};
 	my_ql = {};
 
+	n_addr = {};
+	n_addr.push_back('1);
+	n_addr.push_back('1);
+
+	s_addr = {};
+	s_addr.push_back('1);
+	s_addr.push_back('1);
+
+	e_addr = {};
+	e_addr.push_back('1);
+	e_addr.push_back('1);
+
+	w_addr = {};
+	w_addr.push_back('1);
+	w_addr.push_back('1);
+	
+	l_addr = {};
+	l_addr.push_back('1);
+	l_addr.push_back('1);
+
 	enable = '1;
 	mask = '0;
+
+        n_north = 0;
+        n_south = 0;
+        n_east = 0;
+        n_west = 0;
+        n_local = 0;
 
 	last_dir = '{0, 0, 0, 0, 0};
 
@@ -187,7 +240,7 @@ class router_test;
       			en_n = 1;
     		end
     		else begin
-      			north_q_o = my_qn.popfront();
+      			north_q_o = my_qn.pop_front();
       			en_n = 0;
       			count_n++;
     		end
@@ -195,23 +248,24 @@ class router_test;
 	else begin
 		en_n = 0;
     		if (grant[0] == 1) begin
-      			north_q_o = my_qn.popfront();
+      			north_q_o = my_qn.pop_front();
       			count_n++;
       			if (count_n == 5) begin
          			en_n = 1;
 				count_n = 0;
+				north_reset();
       			end
     		end
 	end
 
 	/*handling south queue*/	                  
-	if (count_s == 0)begin
+	if (count_s == 0) begin
     		if (grant[1] == 0) begin
       			count_s = 0;
       			en_s = 1;
     		end
     		else begin
-      			south_q_o = my_qs.popfront();
+      			south_q_o = my_qs.pop_front();
       			en_s = 0;
       			count_s++;
     		end
@@ -219,11 +273,12 @@ class router_test;
 	else begin
       		en_s = 0;
     		if (grant[1] == 1) begin
-      			south_q_o = my_qs.popfront();
+      			south_q_o = my_qs.pop_front();
      			count_s++;
-      			if (count == 5) begin
+      			if (count_s == 5) begin
          			en_s = 1;
 				count_s = 0;
+				south_reset();
       			end
     		end
 	end
@@ -235,7 +290,7 @@ class router_test;
       			en_e = 1;
     		end
     		else begin
-      			east_q_o = my_qe.popfront();
+      			east_q_o = my_qe.pop_front();
       			en_e = 0;
       			count_e++;
     		end
@@ -243,11 +298,12 @@ class router_test;
 	else begin
      		en_e = 0;
     		if (grant[2] == 1) begin
-      			east_q_o = my_qe.popfront();
+      			east_q_o = my_qe.pop_front();
       			count_e++;
       			if (count_e == 5) begin
          			en_e = 1;
 				count_e = 0;
+				east_reset();
       			end
     		end
 	end
@@ -259,7 +315,7 @@ class router_test;
       			en_w = 1;
     		end
     		else begin
-      			west_q_o = my_qw.popfront();
+      			west_q_o = my_qw.pop_front();
       			en_w = 0;
       			count_w++;
     		end
@@ -267,11 +323,12 @@ class router_test;
 	else begin
       		en_w = 0;
     		if (grant[3] == 1) begin
-      			west_q_o = my_qw.popfront();
+      			west_q_o = my_qw.pop_front();
       			count_w++;
       			if (count_w == 5) begin
          			en_w = 1;
 				count_w = 0;
+				west_reset();
       			end
     		end
 	end
@@ -283,7 +340,7 @@ class router_test;
       			en_l = 1;
     		end
     		else begin
-      			local_q_o = my_ql.popfront();
+      			local_q_o = my_ql.pop_front();
       			en_l = 0;
       			count_l++;
    		end
@@ -291,17 +348,18 @@ class router_test;
 	else begin
       		en_l = 0;
     		if (grant[4] == 1) begin
-      			local_q_o = my_ql.popfront();
+      			local_q_o = my_ql.pop_front();
       			count_l++;
       			if (count_l == 5) begin
          			en_l = 1;
 				count_l = 0;
+				local_reset();
       			end
     		end
 	end
    endfunction
 
-   function void adress_gen ();
+   function void address_gen ();
 	dir_i[0] = my_qn[0];
 	dir_i[1] = my_qs[0];
 	dir_i[2] = my_qe[0];
@@ -334,94 +392,383 @@ class router_test;
 	end
    endfunction
 
-   /*
-    * inputs: 5 5-bit signals indicating desired output
-    * outputs: 5 3-bit signals indicating the input granted a specific direction
-    * operates in round-robin fashion
-    */
-   function void arbiter();
-	int n_dir[5] = '{0, 0, 0, 0, 0};
+   function void arbiter_north();
+	n_north = 0;
 
-	/*
-	 * mask the bits
-	 */
-	foreach (req_port_addr_o[i]) begin
-		req_port_addr_o[i] = req_port_addr_o[i] ^ mask[i];
+	/* mask the bits */
+	req_port_addr_o[0] = req_port_addr_o[0] ^ mask;
+
+	/* count the number of conflicts in the north output request */
+	if (req_port_addr_o[0] == one_hot_addr[0]) begin
+		n_north++;
+	end
+	if (req_port_addr_o[1] == one_hot_addr[0]) begin
+		n_north++;
+	end
+	if (req_port_addr_o[2] == one_hot_addr[0]) begin
+		n_north++;
+	end
+	if (req_port_addr_o[3] == one_hot_addr[0]) begin
+		n_north++;
+	end
+	if (req_port_addr_o[4] == one_hot_addr[0]) begin
+		n_north++;
 	end
 
-	/* count the number of conflicts in the output request */
-	for (int ind = 0; ind < 5; ind++) begin
-		if (enable[ind] && (req_port_addr_o[ind] == 5'b00001)) begin
-			n_dir[0]++;
-		end
-		else if (enable[ind] && (req_port_addr_o[ind] == 5'b00010)) begin
-			n_dir[1]++;
-		end
-		else if (enable[ind] && (req_port_addr_o[ind] == 5'b00100)) begin
-			n_dir[2]++;
-		end
-		else if (enable[ind] && (req_port_addr_o[ind] == 5'b01000)) begin
-			n_dir[3]++;
-		end
-		else if (enable[ind] && (req_port_addr_o[ind] == 5'b10000)) begin
-			n_dir[4]++;
-		end
-	end
 
-	for (int ind = 0; ind < 5; ind++) begin
+	if (n_north == 0) begin
+		/* 
+		 * if a certain output wasn't requested this cycle, set the
+		 * input granted index to all zeros
+		 * (00000 indicates that no one wants to use this output this cycle)
+		 */
+		last_dir[0] = '0;
+	end
+	else begin
 		bit [4:0] start = '0;
 		bit success = '0;
-		if (enable[ind]) begin
-			if (n_dir[ind] > 1) begin
-				start = last_dir[i] + 1'b1;			
+		if (n_north > 1) begin
+			start = last_dir[0] + 1'b1;			
+		end		
+		while (success == 0) begin
+			if (req_port_addr_o[start] == one_hot_addr[0]) begin
+				success = 1;
+				last_dir[0] = start;
 			end
-			success = 0;			
-			while ((success == 0) && (n_dir[ind] >= 1)) begin
-				if (req_port_addr_o[start] == one_hot_addr[ind]) begin
-					success = 1;
-					last_dir[ind] = start;
-				end
-				start = start + 1'b1;	
-			end
-		end	
-	end
-
-	/* 
-	 * if a certain output wasn't requested this cycle, set the
-	 * input granted index to all zeros
-	 * (00000 indicates that no one wants to use this output this cycle)
-	 */
-	for (int ind = 0; ind < 5; ind++) begin
-		if (enable[ind] && (n_dir[ind] == 0)) begin
-			last_dir[ind] = '0;
+			start = start + 1'b1;	
 		end
 	end
 
 	/*
 	 * encode the one-hot values into 3-bit values
 	 */
-	for (int ind = 0; ind < 5; ind++) begin
-		if (enable[ind]) begin
-			if (last_dir[ind] == 5'b00001) begin
-				grant_arb[ind] = 3'b000;
-			end	
-			else if (last_dir[ind] == 5'b00010) begin
-				grant_arb[ind] = 3'b001;
-			end
-			else if (last_dir[ind] == 5'b00100) begin
-				grant_arb[ind] = 3'b010;
-			end
-			else if (last_dir[ind] == 5'b01000) begin
-				grant_arb[ind] = 3'b011;
-			end
-			else if (last_dir[ind] == 5'b10000) begin
-				grant_arb[ind] = 3'b100;
-			end
-			else begin
-				grant_arb[ind] = '1;
-			end
-		end	
+	if (last_dir[0] == 5'b00001) begin
+		grant_arb[0] = 3'b000;
+	end	
+	else if (last_dir[0] == 5'b00010) begin
+		grant_arb[0] = 3'b001;
 	end
+	else if (last_dir[0] == 5'b00100) begin
+		grant_arb[0] = 3'b010;
+	end
+	else if (last_dir[0] == 5'b01000) begin
+		grant_arb[0] = 3'b011;
+	end
+	else if (last_dir[0] == 5'b10000) begin
+		grant_arb[0] = 3'b100;
+	end
+	else begin
+		grant_arb[0] = '1;
+	end
+   endfunction
+
+   function void arbiter_south();
+	n_south = 0;
+
+	/* mask the bits */
+	req_port_addr_o[1] = req_port_addr_o[1] ^ mask;
+
+	/* count the number of conflicts in the north output request */
+	if (req_port_addr_o[0] == one_hot_addr[1]) begin
+		n_south++;
+	end
+	if (req_port_addr_o[1] == one_hot_addr[1]) begin
+		n_south++;
+	end
+	if (req_port_addr_o[2] == one_hot_addr[1]) begin
+		n_south++;
+	end
+	if (req_port_addr_o[3] == one_hot_addr[1]) begin
+		n_south++;
+	end
+	if (req_port_addr_o[4] == one_hot_addr[1]) begin
+		n_south++;
+	end
+
+
+	if (n_south == 0) begin
+		/* 
+		 * if a certain output wasn't requested this cycle, set the
+		 * input granted index to all zeros
+		 * (00000 indicates that no one wants to use this output this cycle)
+		 */
+		last_dir[1] = '0;
+	end
+	else begin
+		bit [4:0] start = '0;
+		bit success = '0;
+		if (n_south > 1) begin
+			start = last_dir[1] + 1'b1;			
+		end		
+		while (success == 0) begin
+			if (req_port_addr_o[start] == one_hot_addr[1]) begin
+				success = 1;
+				last_dir[1] = start;
+			end
+			start = start + 1'b1;	
+		end
+	end
+
+	/*
+	 * encode the one-hot values into 3-bit values
+	 */
+	if (last_dir[1] == 5'b00001) begin
+		grant_arb[1] = 3'b000;
+	end	
+	else if (last_dir[1] == 5'b00010) begin
+		grant_arb[1] = 3'b001;
+	end
+	else if (last_dir[1] == 5'b00100) begin
+		grant_arb[1] = 3'b010;
+	end
+	else if (last_dir[1] == 5'b01000) begin
+		grant_arb[1] = 3'b011;
+	end
+	else if (last_dir[1] == 5'b10000) begin
+		grant_arb[1] = 3'b100;
+	end
+	else begin
+		grant_arb[1] = '1;
+	end
+   endfunction
+
+   function void arbiter_east();
+	n_east = 0;
+
+	/* mask the bits */
+	req_port_addr_o[2] = req_port_addr_o[2] ^ mask;
+
+	/* count the number of conflicts in the north output request */
+	if (req_port_addr_o[0] == one_hot_addr[2]) begin
+		n_east++;
+	end
+	if (req_port_addr_o[1] == one_hot_addr[2]) begin
+		n_east++;
+	end
+	if (req_port_addr_o[2] == one_hot_addr[2]) begin
+		n_east++;
+	end
+	if (req_port_addr_o[3] == one_hot_addr[2]) begin
+		n_east++;
+	end
+	if (req_port_addr_o[4] == one_hot_addr[2]) begin
+		n_east++;
+	end
+
+	if (n_east == 0) begin
+		/* 
+		 * if a certain output wasn't requested this cycle, set the
+		 * input granted index to all zeros
+		 * (00000 indicates that no one wants to use this output this cycle)
+		 */
+		last_dir[2] = '0;
+	end
+	else begin
+		bit [4:0] start = '0;
+		bit success = '0;
+		if (n_east > 1) begin
+			start = last_dir[2] + 1'b1;			
+		end		
+		while (success == 0) begin
+			if (req_port_addr_o[start] == one_hot_addr[2]) begin
+				success = 1;
+				last_dir[2] = start;
+			end
+			start = start + 1'b1;	
+		end
+	end
+
+	/*
+	 * encode the one-hot values into 3-bit values
+	 */
+	if (last_dir[2] == 5'b00001) begin
+		grant_arb[2] = 3'b000;
+	end	
+	else if (last_dir[2] == 5'b00010) begin
+		grant_arb[2] = 3'b001;
+	end
+	else if (last_dir[2] == 5'b00100) begin
+		grant_arb[2] = 3'b010;
+	end
+	else if (last_dir[2] == 5'b01000) begin
+		grant_arb[2] = 3'b011;
+	end
+	else if (last_dir[2] == 5'b10000) begin
+		grant_arb[2] = 3'b100;
+	end
+	else begin
+		grant_arb[2] = '1;
+	end
+   endfunction
+
+   function void arbiter_west();
+	n_west = 0;
+
+	/* mask the bits */
+	req_port_addr_o[3] = req_port_addr_o[3] ^ mask;
+
+	/* count the number of conflicts in the north output request */
+	if (req_port_addr_o[0] == one_hot_addr[3]) begin
+		n_west++;
+	end
+	if (req_port_addr_o[1] == one_hot_addr[3]) begin
+		n_west++;
+	end
+	if (req_port_addr_o[2] == one_hot_addr[3]) begin
+		n_west++;
+	end
+	if (req_port_addr_o[3] == one_hot_addr[3]) begin
+		n_west++;
+	end
+	if (req_port_addr_o[4] == one_hot_addr[3]) begin
+		n_west++;
+	end
+
+
+	if (n_west == 0) begin
+		/* 
+		 * if a certain output wasn't requested this cycle, set the
+		 * input granted index to all zeros
+		 * (00000 indicates that no one wants to use this output this cycle)
+		 */
+		last_dir[3] = '0;
+	end
+	else begin
+		bit [4:0] start = '0;
+		bit success = '0;
+		if (n_west > 1) begin
+			start = last_dir[3] + 1'b1;			
+		end		
+		while (success == 0) begin
+			if (req_port_addr_o[start] == one_hot_addr[3]) begin
+				success = 1;
+				last_dir[3] = start;
+			end
+			start = start + 1'b1;	
+		end
+	end
+
+	/*
+	 * encode the one-hot values into 3-bit values
+	 */
+	if (last_dir[3] == 5'b00001) begin
+		grant_arb[3] = 3'b000;
+	end	
+	else if (last_dir[3] == 5'b00010) begin
+		grant_arb[3] = 3'b001;
+	end
+	else if (last_dir[3] == 5'b00100) begin
+		grant_arb[3] = 3'b010;
+	end
+	else if (last_dir[3] == 5'b01000) begin
+		grant_arb[3] = 3'b011;
+	end
+	else if (last_dir[3] == 5'b10000) begin
+		grant_arb[3] = 3'b100;
+	end
+	else begin
+		grant_arb[3] = '1;
+	end
+   endfunction
+
+   function void arbiter_local();
+	n_local = 0;
+
+	/* mask the bits */
+	req_port_addr_o[4] = req_port_addr_o[4] ^ mask;
+
+	/* count the number of conflicts in the north output request */
+	if (req_port_addr_o[0] == one_hot_addr[4]) begin
+		n_local++;
+	end
+	if (req_port_addr_o[1] == one_hot_addr[4]) begin
+		n_local++;
+	end
+	if (req_port_addr_o[2] == one_hot_addr[4]) begin
+		n_local++;
+	end
+	if (req_port_addr_o[3] == one_hot_addr[4]) begin
+		n_local++;
+	end
+	if (req_port_addr_o[4] == one_hot_addr[4]) begin
+		n_local++;
+	end
+
+
+	if (n_local == 0) begin
+		/* 
+		 * if a certain output wasn't requested this cycle, set the
+		 * input granted index to all zeros
+		 * (00000 indicates that no one wants to use this output this cycle)
+		 */
+		last_dir[4] = '0;
+	end
+	else begin
+		bit [4:0] start = '0;
+		bit success = '0;
+		if (n_local > 1) begin
+			start = last_dir[4] + 1'b1;			
+		end		
+		while (success == 0) begin
+			if (req_port_addr_o[start] == one_hot_addr[4]) begin
+				success = 1;
+				last_dir[4] = start;
+			end
+			start = start + 1'b1;	
+		end
+	end
+
+	/*
+	 * encode the one-hot values into 3-bit values
+	 */
+	if (last_dir[4] == 5'b00001) begin
+		grant_arb[4] = 3'b000;
+	end	
+	else if (last_dir[4] == 5'b00010) begin
+		grant_arb[4] = 3'b001;
+	end
+	else if (last_dir[4] == 5'b00100) begin
+		grant_arb[4] = 3'b010;
+	end
+	else if (last_dir[4] == 5'b01000) begin
+		grant_arb[4] = 3'b011;
+	end
+	else if (last_dir[4] == 5'b10000) begin
+		grant_arb[4] = 3'b100;
+	end
+	else begin
+		grant_arb[4] = '1;
+	end
+   endfunction
+
+   function void north_reset();
+	n_addr = {};
+	n_addr.push_back('1);
+	n_addr.push_back('1);
+   endfunction
+
+   function void south_reset();
+	s_addr = {};
+	s_addr.push_back('1);
+	s_addr.push_back('1);
+   endfunction
+
+   function void east_reset();
+	e_addr = {};
+	e_addr.push_back('1);	
+	e_addr.push_back('1);
+   endfunction
+
+   function void west_reset();
+	w_addr = {};
+	w_addr.push_back('1);	
+	w_addr.push_back('1);
+   endfunction
+
+   function void local_reset();
+	l_addr = {};
+	l_addr.push_back('1);	
+	l_addr.push_back('1);
    endfunction
 
    function void fcc();
