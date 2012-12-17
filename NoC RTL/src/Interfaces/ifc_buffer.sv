@@ -70,11 +70,11 @@ interface ifc_buffer ();
 		input valid_w_i,
 		input valid_l_i,
 
-		input req_port_addr1_i;
-		input req_port_addr2_i;
-		input req_port_addr3_i;
-		input req_port_addr4_i;
-		input req_port_addr5_i;
+		input req_port_addr1_i,
+		input req_port_addr2_i,
+		input req_port_addr3_i,
+		input req_port_addr4_i,
+		input req_port_addr5_i,
 
 		output north_q_o, 
 		output south_q_o, 

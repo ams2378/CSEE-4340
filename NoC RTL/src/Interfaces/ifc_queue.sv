@@ -33,11 +33,11 @@ interface ifc_queue ();
 		input  data_i,
 		input  valid_i, 
 
-		input req_port_addr1_i;
-		input req_port_addr2_i;
-		input req_port_addr3_i;
-		input req_port_addr4_i;
-		input req_port_addr5_i;
+		input req_port_addr1_i,
+		input req_port_addr2_i,
+		input req_port_addr3_i,
+		input req_port_addr4_i,
+		input req_port_addr5_i,
 
 
 		output data_o,

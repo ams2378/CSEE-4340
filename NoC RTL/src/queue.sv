@@ -53,10 +53,11 @@ always_ff @(posedge d.clk) begin
 		state <= s1;
 	else case(state)
 		s1:  	if (req_port_addr == '0)
-				en<= 1;
-			else if (req_port_addr != '0)
-				en<= 0;
+				en <= 1;
+			else if (req_port_addr != '0) begin
+				en <= 0;
 				state <= s2;
+			end
 		
 		s2:	if (d.pop_req_i == 0)
 				en <= 0;
