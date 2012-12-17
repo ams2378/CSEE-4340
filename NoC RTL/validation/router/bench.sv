@@ -288,7 +288,7 @@ program tb (ifc.bench ds);
 
       repeat (env.max_transactions) begin
 	 do_cycle();
-	 //checker.check_results();
+	 checker.check_results();
 	 $display("Cycle number: %d\n", cycle);
 	 /* code for if the test was a success */
       end

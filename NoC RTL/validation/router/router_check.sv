@@ -8,7 +8,7 @@
  *  	 
  */
 
-  class CAM_checker; //checker class
+  class router_check; //checker class
     
     bit pass; 
     function bit check_result (bit dut_valid_n_o, bit dut_valid_s_o, 
