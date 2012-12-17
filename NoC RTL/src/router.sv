@@ -8,7 +8,7 @@ author	    : Dechhin Lama <ddl2126@columbia.edu>
 
 
 module router (
-	ifc_router.dut d
+	ifc.dut d
 	);
 
 

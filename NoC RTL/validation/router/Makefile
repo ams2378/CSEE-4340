@@ -1,7 +1,7 @@
 TOP=top.sv
-INTERFACE=interface.sv
+INTERFACE=ifc.sv
 SUBINTS=../../src/Interfaces/*.sv
-BENCH=router_check.sv router_env.sv router_test.sv router_transaction.sv bench.sv
+BENCH=router_env.sv router_test.sv router_transaction.sv router_check.sv bench.sv
 DUT=../../src/*.sv
 
 .PHONY: help
@@ -22,13 +22,13 @@ indent:
 	rm *~
 
 dut:  
-	vcs -full64 -PP -sverilog +define+SV +define+VPD +lint=all,noVCDE -notice $(INTERFACE) $(DUT) $(SUBINTS)
+	vcs -full64 -PP -sverilog $(SYNOPSYS)/dw/sim_ver +libext+.v+ +define+SV +define+VPD +lint=all,noVCDE -notice $(INTERFACE) $(DUT) $(SUBINTS)
 
 test: 
 	vcs -PP -sverilog +define+SV +define+VPD $(INTERFACE) $(BENCH)
 
 bench: 
-	vcs -full64 -PP -sverilog +define+SV +define+VPD $(TOP) $(SUBINTS) $(INTERFACE) $(DUT) $(BENCH) -o testbench.exe
+	vcs -full64 -PP -sverilog -y $(SYNOPSYS)/dw/sim_ver +libext+.v+ +define+SV +define+VPD $(TOP) $(INTERFACE) $(DUT) $(SUBINTS) $(BENCH) -o testbench.exe
         
 wave:
 	vcs -vpd2vcd vcdplus.vpd waveform.vcd

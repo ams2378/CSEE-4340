@@ -1,4 +1,4 @@
-interface ifc_router (input bit clk);
+interface ifc (input bit clk);
 	logic rst;
 	
 	logic [15:0] north_i;

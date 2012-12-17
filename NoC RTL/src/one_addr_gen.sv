@@ -35,8 +35,8 @@ module one_addr_gen(
 	
 	//comparator	
 	DW_cmp_dx #(.width(8), .p1_width(4)) comparator (
-		.A (q_addr_i),
-		.B (myaddr_i),
+		.a (q_addr_i),
+		.b (myaddr_i),
 		.tc ('0),
 		.dplx ('1),
 		.lt1 (lt_y),

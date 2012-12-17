@@ -8,21 +8,19 @@ author	    : Dechhin Lama <ddl2126@columbia.edu>
 
 
 module FF (
-	input clk,
-	input rst,
+	ifc_FF.dut d
 	
-	output [7:0] read_data_o
 	);
 
 reg [7:0] data;
 
-always_ff @(posedge clk) begin
-	if (rst)
+always_ff @(posedge d.clk) begin
+	if (d.rst)
 		data <= 8'b00010001;
 	else
 		data <= data;		// keep writing the data back
 end
 
-assign read_data_o = data;
+assign d.read_data_o = data;
 
 endmodule

@@ -13,12 +13,28 @@
     bit pass; 
     function bit check_result (bit dut_valid_n_o, bit dut_valid_s_o, 
 			       bit dut_valid_e_o, bit dut_valid_w_o, 
-			       bit dut_valid_l_o, bit bench_valid_n_o, bit bench_valid_s_o, 
-			       bit bench_valid_e_o, bit bench_valid_w_o, 
-			       bit bench_valid_l_o,int dut_north_o, 
-			       int dut_south_o, int dut_east_o, int dut_west_o, int dut_local_o, int bench_north_o, int bench_south_o, int bench_east_o, int bench_west_o, int bench_local_o, bit dut_n_incr_o, bit dut_s_incr_i, bit dut_e_incr_i, bit dut_w_incr_i, bit dut_l_incr_i, bit bench_incr_n_o, bit bench_incr_s_o, bit bench_incr_e_o, bit bench_incr_w_o, bit bench_incr_l_o, bit verbose);
+			       bit dut_valid_l_o, 
 
-         	     
+			       bit bench_valid_n_o, bit bench_valid_s_o, 
+			       bit bench_valid_e_o, bit bench_valid_w_o, 
+			       bit bench_valid_l_o,
+			       
+			       int dut_north_o, 
+			       int dut_south_o, int dut_east_o,
+			       int dut_west_o, int dut_local_o,
+
+			       int bench_north_o, int bench_south_o,
+			       int bench_east_o, int bench_west_o, 
+			       int bench_local_o,
+
+			       bit dut_incr_n_o, 
+			       bit dut_incr_s_o, bit dut_incr_e_o, 
+			       bit dut_incr_w_o, bit dut_incr_l_o,
+
+			       bit bench_incr_n_o, bit bench_incr_s_o,
+			       bit bench_incr_e_o, bit bench_incr_w_o,
+			       bit bench_incr_l_o, bit verbose);
+
 	bit valid_n_passed = (dut_valid_n_o == bench_valid_n_o); 
 	bit valid_s_passed = (dut_valid_s_o == bench_valid_s_o);
 	bit valid_e_passed = (dut_valid_e_o == bench_valid_e_o);                     
@@ -129,3 +145,4 @@
 	end
         return passed;
     endfunction
+endclass

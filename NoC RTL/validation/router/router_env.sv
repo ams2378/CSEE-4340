@@ -92,7 +92,7 @@ class router_env;
 	 else if("W_INCR_DENSITY" == param) begin
 	    w_incr_density = value;
 	 end
-	 else if("L_INCRA_DENSITY" == param) begin
+	 else if("L_INCR_DENSITY" == param) begin
 	    l_incr_density = value;
 	 end
 	 else begin

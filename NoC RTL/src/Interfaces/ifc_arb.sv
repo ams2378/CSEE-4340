@@ -9,6 +9,9 @@
  */
 
 interface ifc_arb ();
+   logic clk;
+   logic rst;	
+
    logic [4:0] req_port_addr1_i;
    logic [4:0] req_port_addr2_i;	
    logic [4:0] req_port_addr3_i;
@@ -28,6 +31,9 @@ interface ifc_arb ();
    logic [2:0] req_port_addr5_o;
 
    modport dut (
+		input clk,
+		input rst,
+
 		input  req_port_addr1_i,
 		input  req_port_addr2_i, 
 		input  req_port_addr3_i,

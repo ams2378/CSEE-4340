@@ -135,9 +135,6 @@ program tb (ifc.bench ds);
       /*
        *  pass data to golden model
        */
-      $display("Reset_req = %b\n", packet.reset_req);
-      $display("North Valid_i = %b\n", packet.north_req);
-      $display("North Data_i = %b\n", packet.north_flit);
 
       test.rst		<=	packet.reset_req;
 
@@ -246,28 +243,7 @@ program tb (ifc.bench ds);
       test.xbar();
 // do the pop for the address queue here
       test.pop_queues();
-      test.fsm();
-
-      $display ("valid_n_o = %b\n", test.valid_n_o);
-      $display ("north_o = %b\n", test.north_o);
-      $display ("n_incr_o = %b\n", test.n_incr_o);
-     
-      $display ("valid_s_o = %b\n", test.valid_s_o);
-      $display ("south_o = %b\n", test.south_o);
-      $display ("s_incr_o = %b\n", test.s_incr_o);
-
-      $display ("valid_e_o = %b\n", test.valid_e_o);
-      $display ("east_o = %b\n", test.east_o);
-      $display ("s_incr_o = %b\n", test.s_incr_o);
-
-      $display ("valid_w_o = %b\n", test.valid_w_o);
-      $display ("west_o = %b\n", test.west_o);
-      $display ("w_incr_o = %b\n", test.w_incr_o);
-
-      $display ("valid_l_o = %b\n", test.valid_l_o);
-      $display ("local_o = %b\n", test.local_o);
-      $display ("l_incr_o = %b\n", test.l_incr_o);
- 
+      test.fsm(); 
    endtask
 
    initial begin
@@ -288,7 +264,7 @@ program tb (ifc.bench ds);
 
       repeat (env.max_transactions) begin
 	 do_cycle();
-	 checker.check_results();
+	 //checker.check_results();
 	 $display("Cycle number: %d\n", cycle);
 	 /* code for if the test was a success */
       end
