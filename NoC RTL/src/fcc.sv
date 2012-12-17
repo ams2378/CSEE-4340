@@ -8,7 +8,7 @@
 */
 
 module fcc(
-	ifc_fcc.dut d;	
+	ifc_fcc.dut d	
 );
 
 
