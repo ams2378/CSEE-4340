@@ -1,6 +1,5 @@
-interface ifc_router ();
-	logic clk;
-	logic rsk;
+interface ifc_router (input bit clk);
+	logic rst;
 	
 	logic [15:0] north_i;
 	logic [15:0] south_i;
@@ -38,9 +37,51 @@ interface ifc_router ();
         logic w_incr_o;
         logic l_incr_o;
 
+	 clocking cb @(posedge clk);
+      			default output #1;
+
+      			output 	rst;
+
+      			output 	north_i;
+      			output 	south_i;
+      			output 	east_i;
+      			output 	west_i;
+      			output 	local_i;
+
+			output valid_n_i;
+			output valid_s_i;
+			output valid_e_i;
+			output valid_w_i;
+			output valid_l_i;
+
+      			output 	n_incr_i;
+      			output 	s_incr_i;
+     			output 	e_incr_i;
+      			output 	w_incr_i;
+     			output 	l_incr_i;
+
+     	 		input 	north_o;
+     			input 	south_o;
+     			input 	east_o;
+     			input 	west_o;
+     			input 	local_o;
+
+			input valid_n_o;
+			input valid_s_o;
+			input valid_e_o;
+			input valid_w_o;
+			input valid_l_o;
+
+      			input 	n_incr_o;
+     			input 	s_incr_o;
+      			input 	e_incr_o;
+      			input 	w_incr_o;
+      			input 	l_incr_o;
+   	endclocking
+	
 	modport dut (
 			input clk,
-        		input rsk,
+        		input rst,
 
        			input north_i,
         		input south_i,
@@ -79,5 +120,6 @@ interface ifc_router ();
                         output l_incr_o
 		);
 
+	modport bench(clocking cb);
 endinterface
 
