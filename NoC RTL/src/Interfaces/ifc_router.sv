@@ -1,6 +1,5 @@
-interface ifc_router ();
-	logic clk;
-	logic rsk;
+interface ifc_router (input bit clk);
+	logic rst;
 	
 	logic [15:0] north_i;
 	logic [15:0] south_i;
@@ -82,7 +81,7 @@ interface ifc_router ();
 	
 	modport dut (
 			input clk,
-        		input rsk,
+        		input rst,
 
        			input north_i,
         		input south_i,
