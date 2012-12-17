@@ -1,8 +1,6 @@
-TOP=top.sv
-INTERFACE=interface.sv
-SUBINTS=../../src/Interfaces/*.sv
-BENCH=router_check.sv router_env.sv router_test.sv router_transaction.sv bench.sv
-DUT=../../src/*.sv
+#TOP=router.sv
+INTERFACE=Interfaces/*.sv
+MODULES=*.sv
 
 .PHONY: help
 
@@ -22,13 +20,13 @@ indent:
 	rm *~
 
 dut:  
-	vcs -full64 -PP -sverilog +define+SV +define+VPD +lint=all,noVCDE -notice $(INTERFACE) $(DUT) $(SUBINTS)
+	vcs -full64 -PP -sverilog +define+SV +define+VPD +lint=all,noVCDE -notice $(INTERFACE) $(MODULES)  
 
-test: 
-	vcs -PP -sverilog +define+SV +define+VPD $(INTERFACE) $(BENCH)
+#test: 
+#	vcs -PP -sverilog +define+SV +define+VPD $(INTERFACE) $(BENCH)
 
-bench: 
-	vcs -full64 -PP -sverilog +define+SV +define+VPD $(TOP) $(SUBINTS) $(INTERFACE) $(DUT) $(BENCH) -o testbench.exe
+#bench: 
+#	vcs -full64 -PP -sverilog +define+SV +define+VPD $(TOP) $(INTERFACE) $(DUT) $(MODULES) $(BENCH) -o testbench.exe
         
 wave:
 	vcs -vpd2vcd vcdplus.vpd waveform.vcd
