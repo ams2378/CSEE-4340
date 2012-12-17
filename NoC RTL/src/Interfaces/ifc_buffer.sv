@@ -27,7 +27,13 @@ interface ifc_buffer ();
    logic valid_s_i;
    logic valid_e_i;
    logic valid_w_i;
-   logic valid_l_i;		
+   logic valid_l_i;
+
+   logic [4:0] req_port_addr1_i;		
+   logic [4:0] req_port_addr2_i;
+   logic [4:0] req_port_addr3_i;
+   logic [4:0] req_port_addr4_i;
+   logic [4:0] req_port_addr5_i;
 
    logic [15:0] north_q_o;			
    logic [15:0] south_q_o;	
@@ -63,6 +69,12 @@ interface ifc_buffer ();
 		input valid_e_i,
 		input valid_w_i,
 		input valid_l_i,
+
+		input req_port_addr1_i;
+		input req_port_addr2_i;
+		input req_port_addr3_i;
+		input req_port_addr4_i;
+		input req_port_addr5_i;
 
 		output north_q_o, 
 		output south_q_o, 

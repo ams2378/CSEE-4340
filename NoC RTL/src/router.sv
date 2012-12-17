@@ -40,6 +40,12 @@ assign b.pop_req_e_i=f.grant_access_east_o;
 assign b.pop_req_w_i=f.grant_access_west_o;
 assign b.pop_req_l_i=f.grant_access_local_o;
 
+assign b.req_port_addr1_i= a.req_port_addr1_o;
+assign b.req_port_addr2_i= a.req_port_addr2_o;
+assign b.req_port_addr3_i= a.req_port_addr3_o;
+assign b.req_port_addr4_i= a.req_port_addr4_o;
+assign b.req_port_addr5_i= a.req_port_addr5_o;
+
 
 
 

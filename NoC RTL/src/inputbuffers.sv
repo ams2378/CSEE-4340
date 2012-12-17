@@ -66,6 +66,36 @@ assign e.en_o = d.en_e_o;
 assign w.en_o = d.en_w_o;
 assign l.en_o = d.en_l_o;
 
+assign n.req_port_addr1_i = d.req_port_addr1_i[0];
+assign n.req_port_addr2_i = d.req_port_addr2_i[0];
+assign n.req_port_addr3_i = d.req_port_addr3_i[0];
+assign n.req_port_addr4_i = d.req_port_addr4_i[0];
+assign n.req_port_addr5_i = d.req_port_addr5_i[0];
+
+assign s.req_port_addr1_i = d.req_port_addr1_i[1];
+assign s.req_port_addr2_i = d.req_port_addr2_i[1];
+assign s.req_port_addr3_i = d.req_port_addr3_i[1];
+assign s.req_port_addr4_i = d.req_port_addr4_i[1];
+assign s.req_port_addr5_i = d.req_port_addr5_i[1];
+
+assign e.req_port_addr1_i = d.req_port_addr1_i[2];
+assign e.req_port_addr2_i = d.req_port_addr2_i[2];
+assign e.req_port_addr3_i = d.req_port_addr3_i[2];
+assign e.req_port_addr4_i = d.req_port_addr4_i[2];
+assign e.req_port_addr5_i = d.req_port_addr5_i[2];
+
+assign w.req_port_addr1_i = d.req_port_addr1_i[3];
+assign w.req_port_addr2_i = d.req_port_addr2_i[3];
+assign w.req_port_addr3_i = d.req_port_addr3_i[3];
+assign w.req_port_addr4_i = d.req_port_addr4_i[3];
+assign w.req_port_addr5_i = d.req_port_addr5_i[3];
+
+assign l.req_port_addr1_i = d.req_port_addr1_i[4];
+assign l.req_port_addr2_i = d.req_port_addr2_i[4];
+assign l.req_port_addr3_i = d.req_port_addr3_i[4];
+assign l.req_port_addr4_i = d.req_port_addr4_i[4];
+assign l.req_port_addr5_i = d.req_port_addr5_i[4];
+
 
 queue n_queue (
 	.d (n.dut)
