@@ -121,11 +121,20 @@ class router_test;
    /*
     * queues for storing the address source
     */
-   bit [2:0] n_addr[$:3];
-   bit [2:0] s_addr[$:3];
-   bit [2:0] e_addr[$:3];
-   bit [2:0] w_addr[$:3];
-   bit [2:0] l_addr[$:3];
+   bit [2:0] n_addr[$:2];
+   bit [2:0] s_addr[$:2];
+   bit [2:0] e_addr[$:2];
+   bit [2:0] w_addr[$:2];
+   bit [2:0] l_addr[$:2];
+
+   /*
+    * queues for storing the AGU output/Arbiter input
+    */
+   bit [4:0] n_agu[$:2];
+   bit [4:0] s_agu[$:2];
+   bit [4:0] e_agu[$:2];
+   bit [4:0] w_agu[$:2];
+   bit [4:0] l_agu[$:2];
 
    /*
     * count of how many flits of a message we've sent
@@ -153,8 +162,8 @@ class router_test;
    bit [15:0] local_q_o = '0;
 
    function void reset_router();
-	req_port_addr_o [5] = '{0, 0, 0, 0, 0};
-	dir_i [5] = '{0, 0, 0, 0, 0};
+	req_port_addr_o = '{0, 0, 0, 0, 0};
+	dir_i = '{0, 0, 0, 0, 0};
 
 	my_qn = {};
 	my_qs = {};
@@ -162,25 +171,17 @@ class router_test;
 	my_qw = {};
 	my_ql = {};
 
-	n_addr = {};
-	n_addr.push_back('1);
-	n_addr.push_back('1);
+	n_agu_reset();
+	s_agu_reset();
+	e_agu_reset();
+	w_agu_reset();
+	l_agu_reset();
 
-	s_addr = {};
-	s_addr.push_back('1);
-	s_addr.push_back('1);
-
-	e_addr = {};
-	e_addr.push_back('1);
-	e_addr.push_back('1);
-
-	w_addr = {};
-	w_addr.push_back('1);
-	w_addr.push_back('1);
-	
-	l_addr = {};
-	l_addr.push_back('1);
-	l_addr.push_back('1);
+	north_reset();
+	south_reset();
+	east_reset();
+	west_reset();
+	local_reset();
 
 	enable = '1;
 	mask = '0;
@@ -234,125 +235,171 @@ class router_test;
 
    function void fsm ();
    	/*handling north queue*/
-   	if (count_n == 0)begin
-		if (grant[0] == 0) begin
+	bit [4:0] req_n;
+	bit [4:0] req_s;
+	bit [4:0] req_e;
+	bit [4:0] req_w;
+	bit [4:0] req_l;
+
+	req_n = {l_agu[0][0], w_agu[0][0], e_agu[0][0], s_agu[0][0], n_agu[0][0]};
+   	if (count_n == 0) begin
+		if (req_n == '0) begin
       			count_n = 0;
       			en_n = 1;
     		end
     		else begin
-      			north_q_o = my_qn.pop_front();
       			en_n = 0;
       			count_n++;
     		end
    	end
+	else if (count_n == 1) begin
+		if (grant[0] == 1) begin
+			north_q_o = my_qn.pop_front();
+			en_n = 0;
+			count_n++;
+		end
+	end
 	else begin
 		en_n = 0;
     		if (grant[0] == 1) begin
       			north_q_o = my_qn.pop_front();
       			count_n++;
-      			if (count_n == 5) begin
+      			if (count_n == 6) begin
          			en_n = 1;
 				count_n = 0;
+				n_agu_reset();
 				north_reset();
       			end
     		end
 	end
 
-	/*handling south queue*/	                  
-	if (count_s == 0) begin
-    		if (grant[1] == 0) begin
+	/*handling south queue*/
+	req_s = {l_agu[0][1], w_agu[0][1], e_agu[0][1], s_agu[0][1], n_agu[0][1]};
+   	if (count_s == 0) begin
+		if (req_s == '0) begin
       			count_s = 0;
       			en_s = 1;
     		end
     		else begin
-      			south_q_o = my_qs.pop_front();
       			en_s = 0;
       			count_s++;
     		end
+   	end
+	else if (count_s == 1) begin
+		if (grant[1] == 1) begin
+			south_q_o = my_qs.pop_front();
+			en_s = 0;
+			count_s++;
+		end
 	end
 	else begin
       		en_s = 0;
     		if (grant[1] == 1) begin
       			south_q_o = my_qs.pop_front();
      			count_s++;
-      			if (count_s == 5) begin
+      			if (count_s == 6) begin
          			en_s = 1;
 				count_s = 0;
+				s_agu_reset();
 				south_reset();
       			end
     		end
 	end
 
 	/*handling east queue*/      
-	if (count_e == 0) begin
-    		if (grant[2] == 0) begin
+	req_e = {l_agu[0][2], w_agu[0][2], e_agu[0][2], s_agu[0][2], n_agu[0][2]};
+   	if (count_e == 0) begin
+		if (req_e == '0) begin
       			count_e = 0;
       			en_e = 1;
     		end
     		else begin
-      			east_q_o = my_qe.pop_front();
       			en_e = 0;
       			count_e++;
     		end
+   	end
+	else if (count_e == 1) begin
+		if (grant[2] == 1) begin
+			east_q_o = my_qe.pop_front();
+			en_e = 0;
+			count_e++;
+		end
 	end
 	else begin
      		en_e = 0;
     		if (grant[2] == 1) begin
       			east_q_o = my_qe.pop_front();
       			count_e++;
-      			if (count_e == 5) begin
+      			if (count_e == 6) begin
          			en_e = 1;
 				count_e = 0;
+				e_agu_reset();
 				east_reset();
       			end
     		end
 	end
 
 	/*handling west queue*/
-	if (count_w == 0)begin
-    		if (grant[3] == 0) begin
+	req_w = {l_agu[0][3], w_agu[0][3], e_agu[0][3], s_agu[0][3], n_agu[0][3]};
+   	if (count_w == 0) begin
+		if (req_w == '0) begin
       			count_w = 0;
       			en_w = 1;
     		end
     		else begin
-      			west_q_o = my_qw.pop_front();
       			en_w = 0;
       			count_w++;
     		end
+   	end
+	else if (count_w == 1) begin
+		if (grant[3] == 1) begin
+			west_q_o = my_qw.pop_front();
+			en_w = 0;
+			count_w++;
+		end
 	end
 	else begin
       		en_w = 0;
     		if (grant[3] == 1) begin
       			west_q_o = my_qw.pop_front();
       			count_w++;
-      			if (count_w == 5) begin
+      			if (count_w == 6) begin
          			en_w = 1;
 				count_w = 0;
+				w_agu_reset();
 				west_reset();
       			end
     		end
 	end
 
 	/*handling local queue*/	                  
-	if (count_l == 0)begin
-    		if (grant[4] == 0) begin
+	req_l = {l_agu[0][4], w_agu[0][4], e_agu[0][4], s_agu[0][4], n_agu[0][4]};
+   	if (count_l == 0) begin
+		if (req_l == '0) begin
       			count_l = 0;
       			en_l = 1;
     		end
     		else begin
-      			local_q_o = my_ql.pop_front();
       			en_l = 0;
       			count_l++;
-   		end
+    		end
+   	end
+	else if (count_l == 1) begin
+		if (grant[4] == 1) begin
+			local_q_o = my_ql.pop_front();
+			en_l = 0;
+			count_l++;
+		end
 	end
 	else begin
       		en_l = 0;
     		if (grant[4] == 1) begin
       			local_q_o = my_ql.pop_front();
       			count_l++;
-      			if (count_l == 5) begin
+      			if (count_l == 6) begin
          			en_l = 1;
 				count_l = 0;
+				l_agu_reset();
 				local_reset();
       			end
     		end
@@ -369,49 +416,135 @@ class router_test;
 	for (int ind = 0; ind<5; ind++) begin
             if (dir_i[ind][7:4] != Myaddr_i[7:4]) begin
               	if (dir_i[ind][7:4] > Myaddr_i[7:4]) begin /* send north */
-               		req_port_addr_o[ind] = 5'b00001;
+			if (ind == 0) begin
+				n_agu.push_back(5'b00001);
+			end
+			else if (ind == 1) begin
+				s_agu.push_back(5'b00001);
+			end
+			else if (ind == 2) begin
+				e_agu.push_back(5'b00001);
+			end
+			else if (ind == 3) begin
+				w_agu.push_back(5'b00001);
+			end
+			else if (ind == 4) begin
+				l_agu.push_back(5'b00001);
+			end
                 end
               	else begin
-               		req_port_addr_o[ind] = 5'b00010;/* send south */
+			if (ind == 0) begin
+				n_agu.push_back(5'b00010);
+			end
+			else if (ind == 1) begin
+				s_agu.push_back(5'b00010);
+			end
+			else if (ind == 2) begin
+				e_agu.push_back(5'b00010);
+			end
+			else if (ind == 3) begin
+				w_agu.push_back(5'b00010);
+			end
+			else if (ind == 4) begin
+				l_agu.push_back(5'b00010);
+			end
                 end
             end 
             else begin
                 if (dir_i[ind][3:0] > Myaddr_i[3:0]) begin /* send east */
-               		req_port_addr_o[ind] = 5'b00100;
+			if (ind == 0) begin
+				n_agu.push_back(5'b00100);
+			end
+			else if (ind == 1) begin
+				s_agu.push_back(5'b00100);
+			end
+			else if (ind == 2) begin
+				e_agu.push_back(5'b00100);
+			end
+			else if (ind == 3) begin
+				w_agu.push_back(5'b00100);
+			end
+			else if (ind == 4) begin
+				l_agu.push_back(5'b00100);
+			end
                 end
                 else if (dir_i[ind][3:0] < Myaddr_i[3:0]) begin /* send west */
-               		req_port_addr_o[ind] = 5'b01000;
+			if (ind == 0) begin
+				n_agu.push_back(5'b01000);
+			end
+			else if (ind == 1) begin
+				s_agu.push_back(5'b01000);
+			end
+			else if (ind == 2) begin
+				e_agu.push_back(5'b01000);
+			end
+			else if (ind == 3) begin
+				w_agu.push_back(5'b01000);
+			end
+			else if (ind == 4) begin
+				l_agu.push_back(5'b01000);
+			end
                 end
-                else if (dir_i[ind] == Myaddr_i) begin 
-                	req_port_addr_o[ind] = 5'b10000; /* destination reached */
+                else if (dir_i[ind] == Myaddr_i) begin
+			/* destination reached */
+			if (ind == 0) begin
+				n_agu.push_back(5'b10000);
+			end
+			else if (ind == 1) begin
+				s_agu.push_back(5'b10000);
+			end
+			else if (ind == 2) begin
+				e_agu.push_back(5'b10000);
+			end
+			else if (ind == 3) begin
+				w_agu.push_back(5'b10000);
+			end
+			else if (ind == 4) begin
+				l_agu.push_back(5'b10000);
+			end
             	end
 		else begin
-			req_port_addr_o[ind] = 5'b00000;
+			if (ind == 0) begin
+				n_agu.push_back(5'b00000);
+			end
+			else if (ind == 1) begin
+				s_agu.push_back(5'b00000);
+			end
+			else if (ind == 2) begin
+				e_agu.push_back(5'b00000);
+			end
+			else if (ind == 3) begin
+				w_agu.push_back(5'b00000);
+			end
+			else if (ind == 4) begin
+				l_agu.push_back(5'b00000);
+			end
 		end
             end
 	end
    endfunction
 
    function void arbiter_north();
-	n_north = 0;
+	bit [4:0] request_vec = {l_agu[0][0], w_agu[0][0], e_agu[0][0], s_agu[0][0], n_agu[0][0]};
 
 	/* mask the bits */
-	req_port_addr_o[0] = req_port_addr_o[0] ^ mask;
+	request_vec = request_vec ^ mask;
 
+	n_north = 0;
 	/* count the number of conflicts in the north output request */
-	if (req_port_addr_o[0] == one_hot_addr[0]) begin
+	if (request_vec[0] == 1) begin
 		n_north++;
 	end
-	if (req_port_addr_o[1] == one_hot_addr[0]) begin
+	if (request_vec[1] == 1) begin
 		n_north++;
 	end
-	if (req_port_addr_o[2] == one_hot_addr[0]) begin
+	if (request_vec[2] == 1) begin
 		n_north++;
 	end
-	if (req_port_addr_o[3] == one_hot_addr[0]) begin
+	if (request_vec[3] == 1) begin
 		n_north++;
 	end
-	if (req_port_addr_o[4] == one_hot_addr[0]) begin
+	if (request_vec[4] == 1) begin
 		n_north++;
 	end
 
@@ -431,7 +564,7 @@ class router_test;
 			start = last_dir[0] + 1'b1;			
 		end		
 		while (success == 0) begin
-			if (req_port_addr_o[start] == one_hot_addr[0]) begin
+			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[0] = start;
 			end
@@ -443,45 +576,46 @@ class router_test;
 	 * encode the one-hot values into 3-bit values
 	 */
 	if (last_dir[0] == 5'b00001) begin
-		grant_arb[0] = 3'b000;
+		n_addr.push_back(3'b000);
 	end	
 	else if (last_dir[0] == 5'b00010) begin
-		grant_arb[0] = 3'b001;
+		n_addr.push_back(3'b001);
 	end
 	else if (last_dir[0] == 5'b00100) begin
-		grant_arb[0] = 3'b010;
+		n_addr.push_back(3'b010);
 	end
 	else if (last_dir[0] == 5'b01000) begin
-		grant_arb[0] = 3'b011;
+		n_addr.push_back(3'b011);
 	end
 	else if (last_dir[0] == 5'b10000) begin
-		grant_arb[0] = 3'b100;
+		n_addr.push_back(3'b100);
 	end
 	else begin
-		grant_arb[0] = '1;
+		n_addr.push_back('1);
 	end
    endfunction
 
    function void arbiter_south();
-	n_south = 0;
+	bit [4:0] request_vec = {l_agu[0][1], w_agu[0][1], e_agu[0][1], s_agu[0][1], n_agu[0][1]};
 
 	/* mask the bits */
-	req_port_addr_o[1] = req_port_addr_o[1] ^ mask;
+	request_vec = request_vec ^ mask;
 
+	n_south = 0;
 	/* count the number of conflicts in the north output request */
-	if (req_port_addr_o[0] == one_hot_addr[1]) begin
+	if (request_vec[0] == 1) begin
 		n_south++;
 	end
-	if (req_port_addr_o[1] == one_hot_addr[1]) begin
+	if (request_vec[1] == 1) begin
 		n_south++;
 	end
-	if (req_port_addr_o[2] == one_hot_addr[1]) begin
+	if (request_vec[2] == 1) begin
 		n_south++;
 	end
-	if (req_port_addr_o[3] == one_hot_addr[1]) begin
+	if (request_vec[3] == 1) begin
 		n_south++;
 	end
-	if (req_port_addr_o[4] == one_hot_addr[1]) begin
+	if (request_vec[4] == 1) begin
 		n_south++;
 	end
 
@@ -501,7 +635,7 @@ class router_test;
 			start = last_dir[1] + 1'b1;			
 		end		
 		while (success == 0) begin
-			if (req_port_addr_o[start] == one_hot_addr[1]) begin
+			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[1] = start;
 			end
@@ -513,45 +647,46 @@ class router_test;
 	 * encode the one-hot values into 3-bit values
 	 */
 	if (last_dir[1] == 5'b00001) begin
-		grant_arb[1] = 3'b000;
+		s_addr.push_back(3'b000);
 	end	
 	else if (last_dir[1] == 5'b00010) begin
-		grant_arb[1] = 3'b001;
+		s_addr.push_back(3'b001);
 	end
 	else if (last_dir[1] == 5'b00100) begin
-		grant_arb[1] = 3'b010;
+		s_addr.push_back(3'b010);
 	end
 	else if (last_dir[1] == 5'b01000) begin
-		grant_arb[1] = 3'b011;
+		s_addr.push_back(3'b011);
 	end
 	else if (last_dir[1] == 5'b10000) begin
-		grant_arb[1] = 3'b100;
+		s_addr.push_back(3'b100);
 	end
 	else begin
-		grant_arb[1] = '1;
+		s_addr.push_back('1);
 	end
    endfunction
 
    function void arbiter_east();
-	n_east = 0;
+	bit [4:0] request_vec = {l_agu[0][2], w_agu[0][2], e_agu[0][2], s_agu[0][2], n_agu[0][2]};
 
 	/* mask the bits */
-	req_port_addr_o[2] = req_port_addr_o[2] ^ mask;
+	request_vec = request_vec ^ mask;
 
+	n_east = 0;
 	/* count the number of conflicts in the north output request */
-	if (req_port_addr_o[0] == one_hot_addr[2]) begin
+	if (request_vec[0] == 1) begin
 		n_east++;
 	end
-	if (req_port_addr_o[1] == one_hot_addr[2]) begin
+	if (request_vec[1] == 1) begin
 		n_east++;
 	end
-	if (req_port_addr_o[2] == one_hot_addr[2]) begin
+	if (request_vec[2] == 1) begin
 		n_east++;
 	end
-	if (req_port_addr_o[3] == one_hot_addr[2]) begin
+	if (request_vec[3] == 1) begin
 		n_east++;
 	end
-	if (req_port_addr_o[4] == one_hot_addr[2]) begin
+	if (request_vec[4] == 1) begin
 		n_east++;
 	end
 
@@ -570,7 +705,7 @@ class router_test;
 			start = last_dir[2] + 1'b1;			
 		end		
 		while (success == 0) begin
-			if (req_port_addr_o[start] == one_hot_addr[2]) begin
+			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[2] = start;
 			end
@@ -582,45 +717,46 @@ class router_test;
 	 * encode the one-hot values into 3-bit values
 	 */
 	if (last_dir[2] == 5'b00001) begin
-		grant_arb[2] = 3'b000;
+		e_addr.push_back(3'b000);
 	end	
 	else if (last_dir[2] == 5'b00010) begin
-		grant_arb[2] = 3'b001;
+		e_addr.push_back(3'b001);
 	end
 	else if (last_dir[2] == 5'b00100) begin
-		grant_arb[2] = 3'b010;
+		e_addr.push_back(3'b010);
 	end
 	else if (last_dir[2] == 5'b01000) begin
-		grant_arb[2] = 3'b011;
+		e_addr.push_back(3'b011);
 	end
 	else if (last_dir[2] == 5'b10000) begin
-		grant_arb[2] = 3'b100;
+		e_addr.push_back(3'b100);
 	end
 	else begin
-		grant_arb[2] = '1;
+		e_addr.push_back('1);
 	end
    endfunction
 
    function void arbiter_west();
-	n_west = 0;
+	bit [4:0] request_vec = {l_agu[0][3], w_agu[0][3], e_agu[0][3], s_agu[0][3], n_agu[0][3]};
 
 	/* mask the bits */
-	req_port_addr_o[3] = req_port_addr_o[3] ^ mask;
+	request_vec = request_vec ^ mask;
 
+	n_west = 0;
 	/* count the number of conflicts in the north output request */
-	if (req_port_addr_o[0] == one_hot_addr[3]) begin
+	if (request_vec[0] == 1) begin
 		n_west++;
 	end
-	if (req_port_addr_o[1] == one_hot_addr[3]) begin
+	if (request_vec[1] == 1) begin
 		n_west++;
 	end
-	if (req_port_addr_o[2] == one_hot_addr[3]) begin
+	if (request_vec[2] == 1) begin
 		n_west++;
 	end
-	if (req_port_addr_o[3] == one_hot_addr[3]) begin
+	if (request_vec[3] == 1) begin
 		n_west++;
 	end
-	if (req_port_addr_o[4] == one_hot_addr[3]) begin
+	if (request_vec[4] == 1) begin
 		n_west++;
 	end
 
@@ -640,7 +776,7 @@ class router_test;
 			start = last_dir[3] + 1'b1;			
 		end		
 		while (success == 0) begin
-			if (req_port_addr_o[start] == one_hot_addr[3]) begin
+			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[3] = start;
 			end
@@ -652,45 +788,47 @@ class router_test;
 	 * encode the one-hot values into 3-bit values
 	 */
 	if (last_dir[3] == 5'b00001) begin
-		grant_arb[3] = 3'b000;
+		w_addr.push_back(3'b000);
 	end	
 	else if (last_dir[3] == 5'b00010) begin
-		grant_arb[3] = 3'b001;
+		w_addr.push_back(3'b001);
 	end
 	else if (last_dir[3] == 5'b00100) begin
-		grant_arb[3] = 3'b010;
+		w_addr.push_back(3'b010);
 	end
 	else if (last_dir[3] == 5'b01000) begin
-		grant_arb[3] = 3'b011;
+		w_addr.push_back(3'b011);
 	end
 	else if (last_dir[3] == 5'b10000) begin
-		grant_arb[3] = 3'b100;
+		w_addr.push_back(3'b100);
 	end
 	else begin
-		grant_arb[3] = '1;
+		w_addr.push_back('1);
 	end
    endfunction
 
    function void arbiter_local();
-	n_local = 0;
+
+	bit [4:0] request_vec = {l_agu[0][4], w_agu[0][4], e_agu[0][4], s_agu[0][4], n_agu[0][4]};
 
 	/* mask the bits */
-	req_port_addr_o[4] = req_port_addr_o[4] ^ mask;
+	request_vec = request_vec ^ mask;
 
+	n_local = 0;
 	/* count the number of conflicts in the north output request */
-	if (req_port_addr_o[0] == one_hot_addr[4]) begin
+	if (request_vec[0] == 1) begin
 		n_local++;
 	end
-	if (req_port_addr_o[1] == one_hot_addr[4]) begin
+	if (request_vec[1] == 1) begin
 		n_local++;
 	end
-	if (req_port_addr_o[2] == one_hot_addr[4]) begin
+	if (request_vec[2] == 1) begin
 		n_local++;
 	end
-	if (req_port_addr_o[3] == one_hot_addr[4]) begin
+	if (request_vec[3] == 1) begin
 		n_local++;
 	end
-	if (req_port_addr_o[4] == one_hot_addr[4]) begin
+	if (request_vec[4] == 1) begin
 		n_local++;
 	end
 
@@ -710,7 +848,7 @@ class router_test;
 			start = last_dir[4] + 1'b1;			
 		end		
 		while (success == 0) begin
-			if (req_port_addr_o[start] == one_hot_addr[4]) begin
+			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[4] = start;
 			end
@@ -722,53 +860,87 @@ class router_test;
 	 * encode the one-hot values into 3-bit values
 	 */
 	if (last_dir[4] == 5'b00001) begin
-		grant_arb[4] = 3'b000;
+		l_addr.push_back(3'b000);
 	end	
 	else if (last_dir[4] == 5'b00010) begin
-		grant_arb[4] = 3'b001;
+		l_addr.push_back(3'b001);
 	end
 	else if (last_dir[4] == 5'b00100) begin
-		grant_arb[4] = 3'b010;
+		l_addr.push_back(3'b010);
 	end
 	else if (last_dir[4] == 5'b01000) begin
-		grant_arb[4] = 3'b011;
+		l_addr.push_back(3'b011);
 	end
 	else if (last_dir[4] == 5'b10000) begin
-		grant_arb[4] = 3'b100;
+		l_addr.push_back(3'b100);
 	end
 	else begin
-		grant_arb[4] = '1;
+		l_addr.push_back('1);
 	end
+   endfunction
+
+   function void n_agu_reset();
+	n_agu = {};
+	n_agu.push_back('0);
+   endfunction
+
+   function void s_agu_reset();
+	s_agu = {};
+	s_agu.push_back('0);
+   endfunction
+
+   function void e_agu_reset();
+	e_agu = {};
+	e_agu.push_back('0);
+   endfunction
+
+   function void w_agu_reset();
+	w_agu = {};
+	w_agu.push_back('0);
+   endfunction
+
+   function void l_agu_reset();
+	l_agu = {};
+	l_agu.push_back('0);
    endfunction
 
    function void north_reset();
 	n_addr = {};
-	n_addr.push_back('1);
 	n_addr.push_back('1);
    endfunction
 
    function void south_reset();
 	s_addr = {};
 	s_addr.push_back('1);
-	s_addr.push_back('1);
    endfunction
 
    function void east_reset();
 	e_addr = {};
-	e_addr.push_back('1);	
 	e_addr.push_back('1);
    endfunction
 
    function void west_reset();
 	w_addr = {};
-	w_addr.push_back('1);	
 	w_addr.push_back('1);
    endfunction
 
    function void local_reset();
 	l_addr = {};
-	l_addr.push_back('1);	
 	l_addr.push_back('1);
+   endfunction
+
+   function void pop_queues();
+	n_agu.pop_front();
+	s_agu.pop_front();
+	e_agu.pop_front();
+	w_agu.pop_front();
+	l_agu.pop_front();
+
+	n_addr.pop_front();
+	s_addr.pop_front();
+	e_addr.pop_front();
+	w_addr.pop_front();
+	l_addr.pop_front();
    endfunction
 
    function void fcc();
@@ -795,7 +967,13 @@ class router_test;
 	end
    endfunction
 
-   function void fcu();	
+   function void fcu();
+	grant_arb[0] = n_addr[0];
+	grant_arb[1] = s_addr[0];
+	grant_arb[2] = e_addr[0];
+	grant_arb[3] = w_addr[0];
+	grant_arb[4] = l_addr[0];
+
 	for (int ind = 0; ind < 5; ind++) begin
 		if ((grant_arb[ind] != '1) && count_en[ind]) begin
 			grant[ind] = 1;

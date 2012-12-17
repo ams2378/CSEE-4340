@@ -213,27 +213,39 @@ program tb (ifc.bench ds);
       if (test.enable[0]) begin
 	test.arbiter_north();
       end
-      else
-	// push the current value onto tail of queue
+      else begin
+	test.n_addr.push_back(test.n_addr[0]);
       end
       if (test.enable[1]) begin
 	test.arbiter_south();
       end
+      else begin
+	test.s_addr.push_back(test.s_addr[0]);
+      end
       if (test.enable[2]) begin
 	test.arbiter_east();
+      end
+      else begin
+	test.e_addr.push_back(test.e_addr[0]);
       end
       if (test.enable[3]) begin
 	test.arbiter_west();
       end
+      else begin
+	test.w_addr.push_back(test.w_addr[0]);
+      end
       if (test.enable[4]) begin
 	test.arbiter_local();
+      end
+      else begin
+	test.l_addr.push_back(test.l_addr[0]);
       end
 
       test.fcc();
       test.fcu();
       test.xbar();
 // do the pop for the address queue here
-      test.pop
+      test.pop_queues();
       test.fsm();
 
       $display ("valid_n_o = %b\n", test.valid_n_o);
