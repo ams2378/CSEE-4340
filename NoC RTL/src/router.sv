@@ -120,6 +120,9 @@ assign ar.en_e_i = b.en_e_o;
 assign ar.en_w_i = b.en_w_o;
 assign ar.en_l_i = b.en_l_o;
 
+assign ar.clk = d.clk;
+assign ar.rst = d.rst;
+
 /*
  * instantiate the arbiter */
 arbiter arbiter_unit(
@@ -222,7 +225,6 @@ assign d.valid_s_o = x.valid_s_o;
 assign d.valid_e_o = x.valid_e_o;
 assign d.valid_w_o = x.valid_w_o;
 assign d.valid_l_o = x.valid_l_o;
-
 
 
 /*
