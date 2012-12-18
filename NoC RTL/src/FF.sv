@@ -16,7 +16,7 @@ reg [7:0] data;
 
 always_ff @(posedge d.clk) begin
 	if (d.rst)
-		data <= 8'b00010001;
+		data <= 8'b00100010;
 	else
 		data <= data;		// keep writing the data back
 end

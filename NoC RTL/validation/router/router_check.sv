@@ -84,7 +84,7 @@
             		$display("bench value: %d", bench_valid_w_o);
 		end		
 		if ( !valid_l_passed & verbose ) begin
-		        $display("%t : error in valid_localth \n", $realtime);
+		        $display("%t : error in valid_local \n", $realtime);
             		$display("dut value: %d", dut_valid_l_o);
             		$display("bench value: %d", bench_valid_l_o);
 		end

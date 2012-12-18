@@ -145,6 +145,7 @@ program tb (ifc.bench ds);
       test.valid_l_i	<=	packet.local_req;
 
       test.north_i	<=	packet.north_flit;
+      $display ("North_i = %d\n", test.north_i);
       test.south_i	<=	packet.south_flit;
       test.east_i	<=	packet.east_flit;
       test.west_i	<=	packet.west_flit;
@@ -268,6 +269,7 @@ program tb (ifc.bench ds);
 
       repeat (env.max_transactions) begin
 	 do_cycle();
+	 $display("Cycle number: %d\n", cycle);
 	 checker.check_result(ds.cb.valid_n_o, ds.cb.valid_s_o, ds.cb.valid_e_o, ds.cb.valid_w_o,
 			      ds.cb.valid_l_o,
 
@@ -286,7 +288,6 @@ program tb (ifc.bench ds);
 			      test.l_incr_o,
 				
 			      env.verbose);
-	 $display("Cycle number: %d\n", cycle);
 	 /* code for if the test was a success */
       end
    end

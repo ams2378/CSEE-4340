@@ -48,7 +48,7 @@ class router_test;
    bit 	w_incr_o;
    bit 	l_incr_o;
 
-   logic [7:0] Myaddr_i = 8'b01001000;
+   logic [7:0] Myaddr_i = 8'b00100010;
    
    bit [4:0] req_port_addr_o [5];
    logic [15:0] dir_i [5];
