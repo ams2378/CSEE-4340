@@ -31,6 +31,7 @@ logic en_l;
 logic [4:0] requests;
 
 logic [2:0] req_port_addr;
+logic [2:0] req_port_addr_o_temp;
 
 always_comb begin
 	en_n = ~req_port_addr1_i | en_n_i;
@@ -56,7 +57,6 @@ always_comb begin
 end
 
 
-
 DW_arb_rr #(.n(5)) arb(
 	.clk(clk),
 	.rst_n(rst),
@@ -69,14 +69,15 @@ DW_arb_rr #(.n(5)) arb(
 );
 
 always_comb begin
-	if (!req_port_addr1_i && !req_port_addr2_i  && !req_port_addr3_i  && !req_port_addr4_i  && !req_port_addr5_i )
-		req_port_addr_o = 3'b111;
-	else 
-		req_port_addr_o = req_port_addr;
-
+	if (!req_port_addr1_i && !req_port_addr2_i  && !req_port_addr3_i  && !req_port_addr4_i  && !req_port_addr5_i) begin
+		req_port_addr_o_temp = 3'b111;
+	end else begin
+		req_port_addr_o_temp = req_port_addr;
+	end
+	
 end
 
-
+assign req_port_addr_o = req_port_addr_o_temp;
 
 endmodule
 

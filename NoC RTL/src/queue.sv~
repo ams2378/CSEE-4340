@@ -31,15 +31,15 @@ module queue (
 
 //instantiate DesignWare Queue
 DW_fifo_s1_sf #(.width(16), .depth(5)) q (
-	.clk(clk),
-	.rst_n(rst),
+	.clk(d.clk),
+	.rst_n(d.rst),
 
-	.push_req_n(valid_i),
-	.pop_req_n(pop_req_i),
-	.data_in(data_i),
+	.push_req_n(d.valid_i),
+	.pop_req_n(d.pop_req_i),
+	.data_in(d.data_i),
 	.diag_n('1),
 	
-	.data_out(data_o)
+	.data_out(d.data_o)
 );
 
 
@@ -56,15 +56,15 @@ reg[2:0] state;
 reg en;
 
 wire [4:0] req_port_addr;
-assign req_port_addr[0] = req_port_addr1_i;
-assign req_port_addr[1] = req_port_addr2_i;
-assign req_port_addr[2] = req_port_addr3_i;
-assign req_port_addr[3] = req_port_addr4_i;
-assign req_port_addr[4] = req_port_addr5_i;
+assign req_port_addr[0] = d.req_port_addr1_i;
+assign req_port_addr[1] = d.req_port_addr2_i;
+assign req_port_addr[2] = d.req_port_addr3_i;
+assign req_port_addr[3] = d.req_port_addr4_i;
+assign req_port_addr[4] = d.req_port_addr5_i;
 
 
-always_ff @(posedge clk) begin
-	if (rst)
+always_ff @(posedge d.clk) begin
+	if (d.rst)
 		state <= s1;
 	else case(state)
 		s1:  	if (req_port_addr == '0)
@@ -74,43 +74,43 @@ always_ff @(posedge clk) begin
 				state <= s2;
 			end
 		
-		s2:	if (pop_req_i == 0)
+		s2:	if (d.pop_req_i == 0)
 				en <= 0;
-			else if (pop_req_i == 1) begin 
+			else if (d.pop_req_i == 1) begin 
 				en <= 0;
 				state <= s3;
 			end
 		
-		s3:	if (pop_req_i == 0)
+		s3:	if (d.pop_req_i == 0)
 				en <= 0;
-			else if (pop_req_i == 1) begin 
+			else if (d.pop_req_i == 1) begin 
 				en <= 0;
 				state <= s4;
 			end
 
-		s4:	if (pop_req_i == 0)
+		s4:	if (d.pop_req_i == 0)
 				en <= 0;
-			else if (pop_req_i == 1) begin 
+			else if (d.pop_req_i == 1) begin 
 				en <= 0;
 				state <= s5;
 			end
 
-		s5: 	if (pop_req_i == 0)
+		s5: 	if (d.pop_req_i == 0)
 				en <= 0;
-			else if (pop_req_i == 1) begin 
+			else if (d.pop_req_i == 1) begin 
 				en <= 0;
 				state <= s6;
 			end
 
-		s6:	if (pop_req_i == 0)
+		s6:	if (d.pop_req_i == 0)
 				en <= 0;
-			else if (pop_req_i == 1) begin 
+			else if (d.pop_req_i == 1) begin 
 				en <= 1;
 				state <= s1;
 			end
 	endcase
 end
 
-assign en_o = en;
+assign d.en_o = en;
 
 endmodule

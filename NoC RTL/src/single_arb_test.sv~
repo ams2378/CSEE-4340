@@ -1,0 +1,38 @@
+module single_arb_test();
+
+
+    reg clk;
+    reg rst;		
+
+	reg req_port_addr1_i;
+	reg req_port_addr2_i;
+	reg req_port_addr3_i;
+	reg req_port_addr4_i;
+	reg req_port_addr5_i;
+
+	reg en_n_i;
+	reg en_s_i;
+	reg en_e_i;
+	reg en_w_i;
+	reg en_l_i;
+
+	reg[2:0]	req_port_addr_o;
+
+    bit error;
+
+    single_arb arb_dut (.clk, .rst, .req_port_addr1_i, .reg req_port_addr2_i, .req_port_addr3_i,
+                 .req_port_addr4_i, .req_port_addr5_i, .en_n_i, .en_s_i,
+                 .en_e_i, .en_w_i, .en_l_i, .req_port_addr_o);	
+	
+    initial begin
+        // Beginning of time.  Reset is on.
+	$vcdpluson;
+        clk = 0;
+        rst = 1;
+
+
+    end
+endmodule
+
+
+
