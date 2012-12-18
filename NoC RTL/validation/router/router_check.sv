@@ -19,13 +19,13 @@
 			       bit bench_valid_e_o, bit bench_valid_w_o, 
 			       bit bench_valid_l_o,
 			       
-			       int dut_north_o, 
-			       int dut_south_o, int dut_east_o,
-			       int dut_west_o, int dut_local_o,
+			       bit [15:0] dut_north_o, 
+			       bit [15:0] dut_south_o, bit [15:0] dut_east_o,
+			       bit [15:0] dut_west_o, bit [15:0] dut_local_o,
 
-			       int bench_north_o, int bench_south_o,
-			       int bench_east_o, int bench_west_o, 
-			       int bench_local_o,
+			       bit [15:0] bench_north_o, bit [15:0] bench_south_o,
+			       bit [15:0] bench_east_o, bit [15:0] bench_west_o, 
+			       bit [15:0] bench_local_o,
 
 			       bit dut_incr_n_o, 
 			       bit dut_incr_s_o, bit dut_incr_e_o, 

@@ -161,6 +161,12 @@ class router_test;
    bit [15:0] west_q_o = '0;
    bit [15:0] local_q_o = '0;
 
+   function void check_reset();
+	if (rst == 1) begin
+		reset_router();
+	end
+   endfunction
+
    function void reset_router();
 	req_port_addr_o = '{0, 0, 0, 0, 0};
 	dir_i = '{0, 0, 0, 0, 0};

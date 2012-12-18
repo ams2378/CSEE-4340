@@ -181,7 +181,7 @@ program tb (ifc.bench ds);
       ds.cb.l_incr_i	<=	packet.l_incr_req;
 
       @(ds.cb);
-
+      test.check_reset();
       test.input_buffer();
       test.address_gen();
 
@@ -254,7 +254,7 @@ program tb (ifc.bench ds);
       env = new();
       env.configure("config.txt");
       
-      packet = new(env.reset_density, env.north_density, env.south_density, env.east_density,
+      packet = new(100, env.north_density, env.south_density, env.east_density,
 		   env.west_density, env.local_density, env.n_incr_density, env.s_incr_density,
 		   env.e_incr_density, env.w_incr_density, env.l_incr_density);
       
@@ -262,9 +262,30 @@ program tb (ifc.bench ds);
 	 do_cycle();
       end
 
+      packet = new(env.reset_density, env.north_density, env.south_density, env.east_density,
+		   env.west_density, env.local_density, env.n_incr_density, env.s_incr_density,
+		   env.e_incr_density, env.w_incr_density, env.l_incr_density);
+
       repeat (env.max_transactions) begin
 	 do_cycle();
-	 //checker.check_results();
+	 checker.check_result(ds.cb.valid_n_o, ds.cb.valid_s_o, ds.cb.valid_e_o, ds.cb.valid_w_o,
+			      ds.cb.valid_l_o,
+
+			      test.valid_n_o, test.valid_s_o, test.valid_e_o, test.valid_w_o,
+			      test.valid_l_o,
+
+			      ds.cb.north_o, ds.cb.south_o, ds.cb.east_o, ds.cb.west_o,
+			      ds.cb.local_o,
+
+			      test.north_o, test.south_o, test.east_o, test.west_o, test.local_o,
+
+			      ds.cb.n_incr_o, ds.cb.s_incr_o, ds.cb.e_incr_o, ds.cb.w_incr_o,
+			      ds.cb.l_incr_o,
+
+			      test.n_incr_o, test.s_incr_o, test.e_incr_o, test.w_incr_o,
+			      test.l_incr_o,
+				
+			      env.verbose);
 	 $display("Cycle number: %d\n", cycle);
 	 /* code for if the test was a success */
       end
