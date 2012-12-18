@@ -137,6 +137,7 @@ program tb (ifc.bench ds);
        */
 
       test.rst		<=	packet.reset_req;
+      $display ("reset_req = %d\n", packet.reset_req);
 
       test.valid_n_i	<=	packet.north_req;
       test.valid_s_i	<=	packet.south_req;
@@ -182,69 +183,72 @@ program tb (ifc.bench ds);
       ds.cb.l_incr_i	<=	packet.l_incr_req;
 
       @(ds.cb);
-      test.check_reset();
-      test.input_buffer();
-      test.address_gen();
+      if (test.rst) begin
+	test.reset_router();
+      end
+      else begin
+	      test.pop_queues();
+	      test.fsm();
+	      test.input_buffer();
+	      test.address_gen();
 
-      test.enable[0] = (!test.req_port_addr_o[0][0] | test.en_n) && (!test.req_port_addr_o[1][0] | test.en_s) &&
-		       (!test.req_port_addr_o[2][0] | test.en_s) && (!test.req_port_addr_o[3][0] | test.en_w) &&
-		       (!test.req_port_addr_o[4][0] | test.en_l);
-      test.enable[1] = (!test.req_port_addr_o[0][1] | test.en_n) && (!test.req_port_addr_o[1][1] | test.en_s) &&
-		       (!test.req_port_addr_o[2][1] | test.en_s) && (!test.req_port_addr_o[3][1] | test.en_w) &&
-		       (!test.req_port_addr_o[4][1] | test.en_l);
-      test.enable[2] = (!test.req_port_addr_o[0][2] | test.en_n) && (!test.req_port_addr_o[1][2] | test.en_s) &&
-		       (!test.req_port_addr_o[2][2] | test.en_s) && (!test.req_port_addr_o[3][2] | test.en_w) &&
-		       (!test.req_port_addr_o[4][2] | test.en_l);
-      test.enable[3] = (!test.req_port_addr_o[0][3] | test.en_n) && (!test.req_port_addr_o[1][3] | test.en_s) &&
-		       (!test.req_port_addr_o[2][3] | test.en_s) && (!test.req_port_addr_o[3][3] | test.en_w) &&
-		       (!test.req_port_addr_o[4][3] | test.en_l);
-      test.enable[4] = (!test.req_port_addr_o[0][4] | test.en_n) && (!test.req_port_addr_o[1][4] | test.en_s) &&
-		       (!test.req_port_addr_o[2][4] | test.en_s) && (!test.req_port_addr_o[3][4] | test.en_w) &&
-		       (!test.req_port_addr_o[4][4] | test.en_l);
+	      test.enable[0] = (!test.req_port_addr_o[0][0] | test.en_n) && (!test.req_port_addr_o[1][0] | test.en_s) &&
+			       (!test.req_port_addr_o[2][0] | test.en_s) && (!test.req_port_addr_o[3][0] | test.en_w) &&
+			       (!test.req_port_addr_o[4][0] | test.en_l);
+	      test.enable[1] = (!test.req_port_addr_o[0][1] | test.en_n) && (!test.req_port_addr_o[1][1] | test.en_s) &&
+			       (!test.req_port_addr_o[2][1] | test.en_s) && (!test.req_port_addr_o[3][1] | test.en_w) &&
+			       (!test.req_port_addr_o[4][1] | test.en_l);
+	      test.enable[2] = (!test.req_port_addr_o[0][2] | test.en_n) && (!test.req_port_addr_o[1][2] | test.en_s) &&
+			       (!test.req_port_addr_o[2][2] | test.en_s) && (!test.req_port_addr_o[3][2] | test.en_w) &&
+			       (!test.req_port_addr_o[4][2] | test.en_l);
+	      test.enable[3] = (!test.req_port_addr_o[0][3] | test.en_n) && (!test.req_port_addr_o[1][3] | test.en_s) &&
+			       (!test.req_port_addr_o[2][3] | test.en_s) && (!test.req_port_addr_o[3][3] | test.en_w) &&
+			       (!test.req_port_addr_o[4][3] | test.en_l);
+	      test.enable[4] = (!test.req_port_addr_o[0][4] | test.en_n) && (!test.req_port_addr_o[1][4] | test.en_s) &&
+			       (!test.req_port_addr_o[2][4] | test.en_s) && (!test.req_port_addr_o[3][4] | test.en_w) &&
+			       (!test.req_port_addr_o[4][4] | test.en_l);
 
-      test.mask[0] = !test.en_n;
-      test.mask[1] = !test.en_s;
-      test.mask[2] = !test.en_e;
-      test.mask[3] = !test.en_w;
-      test.mask[4] = !test.en_l;
+	      test.mask[0] = !test.en_n;
+	      test.mask[1] = !test.en_s;
+	      test.mask[2] = !test.en_e;
+	      test.mask[3] = !test.en_w;
+	      test.mask[4] = !test.en_l;
 
-      if (test.enable[0]) begin
-	test.arbiter_north();
-      end
-      else begin
-	test.n_addr.push_back(test.n_addr[0]);
-      end
-      if (test.enable[1]) begin
-	test.arbiter_south();
-      end
-      else begin
-	test.s_addr.push_back(test.s_addr[0]);
-      end
-      if (test.enable[2]) begin
-	test.arbiter_east();
-      end
-      else begin
-	test.e_addr.push_back(test.e_addr[0]);
-      end
-      if (test.enable[3]) begin
-	test.arbiter_west();
-      end
-      else begin
-	test.w_addr.push_back(test.w_addr[0]);
-      end
-      if (test.enable[4]) begin
-	test.arbiter_local();
-      end
-      else begin
-	test.l_addr.push_back(test.l_addr[0]);
-      end
+	      if (test.enable[0]) begin
+		test.arbiter_north();
+	      end
+	      else begin
+		test.n_addr.push_back(test.n_addr[0]);
+	      end
+	      if (test.enable[1]) begin
+		test.arbiter_south();
+	      end
+	      else begin
+		test.s_addr.push_back(test.s_addr[0]);
+	      end
+	      if (test.enable[2]) begin
+		test.arbiter_east();
+	      end
+	      else begin
+		test.e_addr.push_back(test.e_addr[0]);
+	      end
+	      if (test.enable[3]) begin
+		test.arbiter_west();
+	      end
+	      else begin
+		test.w_addr.push_back(test.w_addr[0]);
+	      end
+	      if (test.enable[4]) begin
+		test.arbiter_local();
+	      end
+	      else begin
+		test.l_addr.push_back(test.l_addr[0]);
+	      end
 
-      test.fcc();
-      test.fcu();
-      test.xbar();
-// do the pop for the address queue here
-      test.pop_queues();
-      test.fsm(); 
+	      test.fcc();
+	      test.fcu();
+	      test.xbar();
+      end
    endtask
 
    initial begin

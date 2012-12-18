@@ -90,13 +90,13 @@ class router_test;
     * one-hot grant decision of arbiter
     * where 00000 means nothing is selected
     */
-   bit [4:0] last_dir [5] = '{0, 0, 0, 0, 0};
+   bit [4:0] last_dir [5] = '{'0, '0, '0, '0, '0};
 
    /*
     * encoded grant decision of arbiter
     * where 111 means nothing is selected
     */
-   bit [2:0] grant_arb [5] = '{1, 1, 1, 1, 1};
+   bit [2:0] grant_arb [5] = '{'1, '1, '1, '1, '1};
 
    /*
     * array of the different one-hot addresses
@@ -106,12 +106,12 @@ class router_test;
    /*
     * grant for the xbar to output valid data
     */
-   bit grant[5] = '{0, 0, 0, 0, 0};
+   bit grant[5] = '{'0, '0, '0, '0, '0};
 
    /*
     * count enable signal from FCC
     */
-   bit count_en[5] = '{1, 1, 1, 1, 1};
+   bit count_en[5] = '{'1, '1, '1, '1, '1};
 
    /*
     * the current counts for each neighboring queue
@@ -161,15 +161,8 @@ class router_test;
    bit [15:0] west_q_o = '0;
    bit [15:0] local_q_o = '0;
 
-   function void check_reset();
-	if (rst == 1) begin
-		reset_router();
-	end
-   endfunction
-
    function void reset_router();
-	req_port_addr_o = '{0, 0, 0, 0, 0};
-	dir_i = '{0, 0, 0, 0, 0};
+	dir_i = '{'0, '0, '0, '0, '0};
 
 	my_qn = {};
 	my_qs = {};
@@ -198,13 +191,13 @@ class router_test;
         n_west = 0;
         n_local = 0;
 
-	last_dir = '{0, 0, 0, 0, 0};
+	last_dir = '{'0, '0, '0, '0, '0};
 
-	grant_arb = '{1, 1, 1, 1, 1};
+	grant_arb = '{'1, '1, '1, '1, '1};
 
-	grant = '{0, 0, 0, 0, 0};
+	grant = '{'0, '0, '0, '0, '0};
 
-	count_en = '{1, 1, 1, 1, 1};
+	count_en = '{'1, '1, '1, '1, '1};
 
 	count = '{5, 5, 5, 5, 5};
 
@@ -214,8 +207,8 @@ class router_test;
 	count_w = 0;
 	count_l = 0;
 
-	out_data = '{0, 0, 0, 0, 0};
-	valid_data = '{0, 0, 0, 0, 0};
+	out_data = '{'0, '0, '0, '0, '0};
+	valid_data = '{'0, '0, '0, '0, '0};
    endfunction
 
    /*
@@ -982,7 +975,7 @@ class router_test;
 
 	for (int ind = 0; ind < 5; ind++) begin
 		if ((grant_arb[ind] != '1) && count_en[ind]) begin
-			grant[ind] = 1;
+			grant[ind] = '1;
 		end
 	end
    endfunction
@@ -1013,6 +1006,7 @@ class router_test;
 			valid_data[ind] = 0;
 			out_data[ind] = '0;
 		end
+		$display("grant_arb[%d] = %b\n", ind, grant_arb[ind]);
 	end
 
 	north_o = out_data[0];
