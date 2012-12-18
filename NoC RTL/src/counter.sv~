@@ -60,7 +60,7 @@ module counter(
 					state <= s1;
 				end //else if (incr_i == 1 && C<4) begin
 					//credit_en_o = 1;
-														
+				end										
 		endcase
 	
 	end

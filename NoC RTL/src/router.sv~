@@ -217,11 +217,11 @@ assign d.east_o = x.east_o;
 assign d.west_o = x.west_o;
 assign d.local_o = x.local_o;
 
-assign d.valid_n_o = x.valid_n_o;
-assign d.valid_s_o = x.valid_s_o;
-assign d.valid_e_o = x.valid_e_o;
-assign d.valid_w_o = x.valid_w_o;
-assign d.valid_l_o = x.valid_l_o;
+assign x.valid_n_o = d.valid_n_o;
+assign x.valid_s_o = d.valid_s_o;
+assign x.valid_e_o = d.valid_e_o;
+assign x.valid_w_o = d.valid_w_o;
+assign x.valid_l_o = d.valid_l_o;
 
 
 
