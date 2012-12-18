@@ -32,10 +32,10 @@ module queue (
 //instantiate DesignWare Queue
 DW_fifo_s1_sf #(.width(16), .depth(5)) q (
 	.clk(clk),
-	.rst_n(rst),
+	.rst_n(~rst),
 
-	.push_req_n(valid_i),
-	.pop_req_n(pop_req_i),
+	.push_req_n(~valid_i),
+	.pop_req_n(~pop_req_i),
 	.data_in(data_i),
 	.diag_n('1),
 	
