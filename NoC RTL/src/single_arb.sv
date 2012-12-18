@@ -1,4 +1,3 @@
-
 module single_arb (
 		input clk,
 		input rst,
@@ -59,7 +58,7 @@ end
 
 DW_arb_rr #(.n(5)) arb(
 	.clk(clk),
-	.rst_n(rst),
+	.rst_n(~rst),
 	.enable(enable),
 	.init_n('1),
 	.request(requests),
