@@ -22,11 +22,13 @@ single_arb arb1 (
 	.req_port_addr4_i(d.req_port_addr4_i[0]),
 	.req_port_addr5_i(d.req_port_addr5_i[0]),
 
-	.en_n_i(d.en_n_i),
-	.en_s_i(d.en_s_i),
-	.en_e_i(d.en_e_i),
-	.en_w_i(d.en_w_i),
-	.en_l_i(d.en_l_i),
+	.valid(d.valid_n_i),
+
+	.mask_1(d.mask_1),
+	.mask_2(d.mask_2),	
+	.mask_3(d.mask_3),	
+	.mask_4(d.mask_4),	
+	.mask_5(d.mask_5),		
 
 	.req_port_addr_o(d.req_port_addr1_o)
 );
@@ -41,12 +43,14 @@ single_arb arb2 (
 	.req_port_addr4_i(d.req_port_addr4_i[1]),
 	.req_port_addr5_i(d.req_port_addr5_i[1]),
 
-	.en_n_i(d.en_n_i),
-	.en_s_i(d.en_s_i),
-	.en_e_i(d.en_e_i),
-	.en_w_i(d.en_w_i),
-	.en_l_i(d.en_l_i),
+	.valid(d.valid_s_i),
 
+	.mask_1(d.mask_1),
+	.mask_2(d.mask_2),	
+	.mask_3(d.mask_3),	
+	.mask_4(d.mask_4),	
+	.mask_5(d.mask_5),
+		
 	.req_port_addr_o(d.req_port_addr2_o)
 );
 
@@ -60,11 +64,13 @@ single_arb arb3 (
 	.req_port_addr4_i(d.req_port_addr4_i[2]),
 	.req_port_addr5_i(d.req_port_addr5_i[2]),
 
-	.en_n_i(d.en_n_i),
-	.en_s_i(d.en_s_i),
-	.en_e_i(d.en_e_i),
-	.en_w_i(d.en_w_i),
-	.en_l_i(d.en_l_i),
+	.valid(d.valid_e_i),
+
+	.mask_1(d.mask_1),
+	.mask_2(d.mask_2),	
+	.mask_3(d.mask_3),	
+	.mask_4(d.mask_4),	
+	.mask_5(d.mask_5),		
 
 	.req_port_addr_o(d.req_port_addr3_o)
 );
@@ -79,12 +85,14 @@ single_arb arb4 (
 	.req_port_addr4_i(d.req_port_addr4_i[3]),
 	.req_port_addr5_i(d.req_port_addr5_i[3]),
 
-	.en_n_i(d.en_n_i),
-	.en_s_i(d.en_s_i),
-	.en_e_i(d.en_e_i),
-	.en_w_i(d.en_w_i),
-	.en_l_i(d.en_l_i),
+	.valid(d.valid_w_i),
 
+	.mask_1(d.mask_1),
+	.mask_2(d.mask_2),	
+	.mask_3(d.mask_3),	
+	.mask_4(d.mask_4),	
+	.mask_5(d.mask_5),
+		
 	.req_port_addr_o(d.req_port_addr4_o)
 );
 
@@ -97,12 +105,14 @@ single_arb arb5 (
 	.req_port_addr3_i(d.req_port_addr3_i[4]),
 	.req_port_addr4_i(d.req_port_addr4_i[4]),
 	.req_port_addr5_i(d.req_port_addr5_i[4]),
+	
+	.valid(d.valid_l_i),
 
-	.en_n_i(d.en_n_i),
-	.en_s_i(d.en_s_i),
-	.en_e_i(d.en_e_i),
-	.en_w_i(d.en_w_i),
-	.en_l_i(d.en_l_i),
+	.mask_1(d.mask_1),
+	.mask_2(d.mask_2),	
+	.mask_3(d.mask_3),	
+	.mask_4(d.mask_4),	
+	.mask_5(d.mask_5),		
 
 	.req_port_addr_o(d.req_port_addr5_o)
 );

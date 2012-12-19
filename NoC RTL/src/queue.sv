@@ -17,15 +17,9 @@ module queue (
 	input  [15:0] data_i,
 	input  valid_i, 
 
-	input req_port_addr1_i,
-	input req_port_addr2_i,
-	input req_port_addr3_i,
-	input req_port_addr4_i,
-	input req_port_addr5_i,
-
 
 	output [15:0] data_o,
-	output en_o
+	output mask_o
 
 );
 
@@ -49,68 +43,53 @@ parameter s2 = 3'b001;
 parameter s3 = 3'b010;
 parameter s4 = 3'b011;
 parameter s5 = 3'b100;
-parameter s6 = 3'b101;
 
 
 reg[2:0] state;
-reg en;
-
-wire [4:0] req_port_addr;
-assign req_port_addr[0] = req_port_addr1_i;
-assign req_port_addr[1] = req_port_addr2_i;
-assign req_port_addr[2] = req_port_addr3_i;
-assign req_port_addr[3] = req_port_addr4_i;
-assign req_port_addr[4] = req_port_addr5_i;
+reg mask;
 
 
 always_ff @(posedge clk) begin
 	if (rst)
 		state <= s1;
-	else case(state)
-		s1:  	if (req_port_addr == '0)
-				en <= 1;
-			else if (req_port_addr != '0) begin
-				en <= 0;
+	else case(state)		
+		s1:	if (pop_req_i == 0)
+				mask <= 0;
+			else if (pop_req_i == 1) begin 
+				mask <= 1;
 				state <= s2;
 			end
 		
 		s2:	if (pop_req_i == 0)
-				en <= 0;
+				mask <= 1;
 			else if (pop_req_i == 1) begin 
-				en <= 0;
+				mask <= 1;
 				state <= s3;
 			end
-		
+
 		s3:	if (pop_req_i == 0)
-				en <= 0;
+				mask <= 1;
 			else if (pop_req_i == 1) begin 
-				en <= 0;
+				mask <= 1;
 				state <= s4;
 			end
 
-		s4:	if (pop_req_i == 0)
-				en <= 0;
+		s4: 	if (pop_req_i == 0)
+				mask <= 1;
 			else if (pop_req_i == 1) begin 
-				en <= 0;
+				mask <= 1;
 				state <= s5;
 			end
 
-		s5: 	if (pop_req_i == 0)
-				en <= 0;
+		s5:	if (pop_req_i == 0)
+				mask <= 1;
 			else if (pop_req_i == 1) begin 
-				en <= 0;
-				state <= s6;
-			end
-
-		s6:	if (pop_req_i == 0)
-				en <= 0;
-			else if (pop_req_i == 1) begin 
-				en <= 1;
+				mask <= 0;
 				state <= s1;
 			end
 	endcase
 end
 
-assign en_o = en;
+assign mask_o = mask;
 
 endmodule

@@ -29,23 +29,17 @@ interface ifc_buffer ();
    logic valid_w_i;
    logic valid_l_i;
 
-   logic [4:0] req_port_addr1_i;		
-   logic [4:0] req_port_addr2_i;
-   logic [4:0] req_port_addr3_i;
-   logic [4:0] req_port_addr4_i;
-   logic [4:0] req_port_addr5_i;
-
    logic [15:0] north_q_o;			
    logic [15:0] south_q_o;	
    logic [15:0] east_q_o;	
    logic [15:0] west_q_o;	
    logic [15:0] local_q_o;
 
-   logic en_n_o;
-   logic en_s_o;
-   logic en_e_o;
-   logic en_w_o;
-   logic en_l_o;
+   logic mask_1;
+   logic mask_2;
+   logic mask_3;
+   logic mask_4;
+   logic mask_5;
 
 
    modport dut (
@@ -70,23 +64,17 @@ interface ifc_buffer ();
 		input valid_w_i,
 		input valid_l_i,
 
-		input req_port_addr1_i,
-		input req_port_addr2_i,
-		input req_port_addr3_i,
-		input req_port_addr4_i,
-		input req_port_addr5_i,
-
 		output north_q_o, 
 		output south_q_o, 
 		output east_q_o, 
 		output west_q_o, 
 		output local_q_o,
 
-		output en_n_o, 
-		output en_s_o,
-		output en_e_o,
-		output en_w_o,
-		output en_l_o	
+		output mask_1, 
+		output mask_2,
+		output mask_3,
+		output mask_4,
+		output mask_5	
 		);
 
 endinterface
