@@ -72,7 +72,7 @@ DW_arb_rr #(.n(5)) arb(
 	.enable(enable),
 	.init_n('1),
 	.request(requests),
-	.mask(mask),
+	.mask(masks),
 	
 	.grant_index(req_port_addr)
 );
