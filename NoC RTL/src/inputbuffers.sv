@@ -27,14 +27,8 @@ queue n_queue (
 	.data_i(d.north_i),
 	.valid_i(d.valid_n_i), 
 
-	.req_port_addr1_i(d.req_port_addr1_i[0]),
-	.req_port_addr2_i(d.req_port_addr2_i[0]),
-	.req_port_addr3_i(d.req_port_addr3_i[0]),
-	.req_port_addr4_i(d.req_port_addr4_i[0]),
-	.req_port_addr5_i(d.req_port_addr5_i[0]),
-
 	.data_o(d.north_q_o),
-	.en_o(d.en_n_o)
+	.mask_o(d.mask_1)
 
 );
 
@@ -46,14 +40,8 @@ queue s_queue (
 	.data_i(d.south_i),
 	.valid_i(d.valid_s_i), 
 
-	.req_port_addr1_i(d.req_port_addr1_i[1]),
-	.req_port_addr2_i(d.req_port_addr2_i[1]),
-	.req_port_addr3_i(d.req_port_addr3_i[1]),
-	.req_port_addr4_i(d.req_port_addr4_i[1]),
-	.req_port_addr5_i(d.req_port_addr5_i[1]),
-
 	.data_o(d.south_q_o),
-	.en_o(d.en_s_o)	
+	.mask_o(d.mask_2)	
 );
 
 queue e_queue (
@@ -64,14 +52,8 @@ queue e_queue (
 	.data_i(d.east_i),
 	.valid_i(d.valid_e_i), 
 
-	.req_port_addr1_i(d.req_port_addr1_i[2]),
-	.req_port_addr2_i(d.req_port_addr2_i[2]),
-	.req_port_addr3_i(d.req_port_addr3_i[2]),
-	.req_port_addr4_i(d.req_port_addr4_i[2]),
-	.req_port_addr5_i(d.req_port_addr5_i[2]),
-
 	.data_o(d.east_q_o),
-	.en_o(d.en_e_o)	
+	.mask_o(d.mask_3)	
 );
 
 queue w_queue (
@@ -82,14 +64,8 @@ queue w_queue (
 	.data_i(d.west_i),
 	.valid_i(d.valid_w_i), 
 
-	.req_port_addr1_i(d.req_port_addr1_i[3]),
-	.req_port_addr2_i(d.req_port_addr2_i[3]),
-	.req_port_addr3_i(d.req_port_addr3_i[3]),
-	.req_port_addr4_i(d.req_port_addr4_i[3]),
-	.req_port_addr5_i(d.req_port_addr5_i[3]),
-
 	.data_o(d.west_q_o),
-	.en_o(d.en_w_o)
+	.mask_o(d.mask_4)
 );
 
 queue l_queue (
@@ -100,14 +76,8 @@ queue l_queue (
 	.data_i(d.local_i),
 	.valid_i(d.valid_l_i), 
 
-	.req_port_addr1_i(d.req_port_addr1_i[4]),
-	.req_port_addr2_i(d.req_port_addr2_i[4]),
-	.req_port_addr3_i(d.req_port_addr3_i[4]),
-	.req_port_addr4_i(d.req_port_addr4_i[4]),
-	.req_port_addr5_i(d.req_port_addr5_i[4]),
-
 	.data_o(d.local_q_o),
-	.en_o(d.en_l_o)	
+	.mask_o(d.mask_5)	
 );
 
 

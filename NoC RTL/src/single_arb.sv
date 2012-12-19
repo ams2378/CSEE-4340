@@ -7,32 +7,23 @@ module single_arb (
 		input req_port_addr3_i,
 		input req_port_addr4_i,
 		input req_port_addr5_i,
-/*
-		input en_n_i,
-		input en_s_i,
-		input en_e_i,
-		input en_w_i,
-		input en_l_i,
-*/
-		input valid;
+
+		input valid,
+
+		input mask_1,
+		input mask_2,
+		input mask_3,
+		input mask_4,
+		input mask_5,
 
 		output [2:0] req_port_addr_o
 		);
 
 logic enable;
 
-//logic [4:0] mask;
-
-/*
-logic en_n;
-logic en_s;
-logic en_e;
-logic en_w;
-logic en_l;
-
-logic [4:0] requests;
-*/
 reg [2:0] state;
+logic [4:0] requests;
+logic [4:0] masks;
 
 logic [2:0] req_port_addr;
 logic [2:0] req_port_addr_o_temp;
@@ -45,8 +36,9 @@ parameter s5 =  3'b100;
 parameter s6 =  3'b101;
 
 
-/*
 always_comb begin
+/*
+
 	en_n = ~req_port_addr1_i | en_n_i;
  	en_s = ~req_port_addr2_i | en_s_i;
 	en_e = ~req_port_addr3_i | en_e_i;
@@ -54,12 +46,13 @@ always_comb begin
 	en_l = ~req_port_addr5_i | en_l_i;
 	
 	enable = en_n & en_s & en_e & en_w & en_l;
+*/
 
-	mask[0] = ~en_n_i;
-	mask[1] = ~en_s_i;
-	mask[2] = ~en_e_i;
-	mask[3] = ~en_w_i;
-	mask[4] = ~en_l_i;
+	mask[0] = mask_1;
+	mask[1] = mask_2;
+	mask[2] = mask_3;
+	mask[3] = mask_4;
+	mask[4] = mask_5;
 
 	requests[0] = req_port_addr1_i;
 	requests[1] = req_port_addr2_i;
@@ -67,8 +60,10 @@ always_comb begin
 	requests[3] = req_port_addr4_i;
 	requests[4] = req_port_addr5_i;
 
+
+
 end
-*/
+
 
 
 DW_arb_rr #(.n(5)) arb(

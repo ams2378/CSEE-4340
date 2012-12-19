@@ -40,13 +40,6 @@ assign b.pop_req_e_i=f.grant_access_east_o;
 assign b.pop_req_w_i=f.grant_access_west_o;
 assign b.pop_req_l_i=f.grant_access_local_o;
 
-assign b.req_port_addr1_i= a.req_port_addr1_o;
-assign b.req_port_addr2_i= a.req_port_addr2_o;
-assign b.req_port_addr3_i= a.req_port_addr3_o;
-assign b.req_port_addr4_i= a.req_port_addr4_o;
-assign b.req_port_addr5_i= a.req_port_addr5_o;
-
-
 
 
 /*
@@ -108,17 +101,23 @@ FF loc(
  */
 ifc_arb ar ();
 
+assign ar.mask_1 = b.mask_1;
+assign ar.mask_2 = b.mask_2;
+assign ar.mask_3 = b.mask_3;
+assign ar.mask_4 = b.mask_4;
+assign ar.mask_5 = b.mask_5;
+
+assign ar.valid_n_i = x.valid_n_o;
+assign ar.valid_s_i = x.valid_s_o;
+assign ar.valid_e_i = x.valid_e_o;
+assign ar.valid_w_i = x.valid_w_o;
+assign ar.valid_l_i = x.valid_l_o;
+
 assign ar.req_port_addr1_i= a.req_port_addr1_o;
 assign ar.req_port_addr2_i= a.req_port_addr2_o;
 assign ar.req_port_addr3_i= a.req_port_addr3_o;
 assign ar.req_port_addr4_i= a.req_port_addr4_o;
 assign ar.req_port_addr5_i= a.req_port_addr5_o;
-
-assign ar.en_n_i = b.en_n_o;
-assign ar.en_s_i = b.en_s_o;
-assign ar.en_e_i = b.en_e_o;
-assign ar.en_w_i = b.en_w_o;
-assign ar.en_l_i = b.en_l_o;
 
 assign ar.clk = d.clk;
 assign ar.rst = d.rst;
