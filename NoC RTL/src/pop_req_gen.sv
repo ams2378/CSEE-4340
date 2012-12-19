@@ -16,7 +16,7 @@ module pop_req_gen (
 	output pop_req_o	
 );
 
-logic pop_req_n;
+logic pop_req;
 
 always_comb begin
 	if (address_route_n == q_address && valid_n)
