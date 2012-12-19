@@ -48,11 +48,11 @@ always_comb begin
 	enable = en_n & en_s & en_e & en_w & en_l;
 */
 
-	mask[0] = mask_1;
-	mask[1] = mask_2;
-	mask[2] = mask_3;
-	mask[3] = mask_4;
-	mask[4] = mask_5;
+	masks[0] = mask_1;
+	masks[1] = mask_2;
+	masks[2] = mask_3;
+	masks[3] = mask_4;
+	masks[4] = mask_5;
 
 	requests[0] = req_port_addr1_i;
 	requests[1] = req_port_addr2_i;
@@ -92,10 +92,10 @@ always_ff @(posedge clk) begin
 	if (rst)
 		state <= s1;
 	else case(state)
-		s1:  	if (req_port_addr1_i ||  req_port_addr2_i ||  req_port_addr3_i ||  req_port_addr4_i ||  req_port_addr5_i)
+		s1:  	if (req_port_addr1_i ||  req_port_addr2_i ||  req_port_addr3_i ||  req_port_addr4_i ||  req_port_addr5_i) begin
 				enable <= 1;
 				state <= s2;
-			else begin
+			end else begin
 				enable <= 1;
 				state <= s1;
 			end
