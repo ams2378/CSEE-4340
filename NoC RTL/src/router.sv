@@ -35,7 +35,7 @@ assign b.valid_w_i = d.valid_w_i;
 assign b.valid_l_i = d.valid_l_i;
 
 assign b.pop_req_n_i=x.pop_req_n; 
-assign b.pop_req_s_i=x.pop_req_s;; 
+assign b.pop_req_s_i=x.pop_req_s; 
 assign b.pop_req_e_i=x.pop_req_e; 
 assign b.pop_req_w_i=x.pop_req_w; 
 assign b.pop_req_l_i=x.pop_req_l; 
