@@ -56,11 +56,11 @@ class router_test;
    /*
     * input queues
     */
-   bit [15:0] my_qn[$:5];
-   bit [15:0] my_qs[$:5];
-   bit [15:0] my_qe[$:5];  
-   bit [15:0] my_qw[$:5];
-   bit [15:0] my_ql[$:5];   
+   bit [15:0] my_qn[$:4];
+   bit [15:0] my_qs[$:4];
+   bit [15:0] my_qe[$:4];  
+   bit [15:0] my_qw[$:4];
+   bit [15:0] my_ql[$:4];   
 
    /*
     * arbiter enable signals
@@ -121,20 +121,20 @@ class router_test;
    /*
     * queues for storing the address source
     */
-   bit [2:0] n_addr[$:2];
-   bit [2:0] s_addr[$:2];
-   bit [2:0] e_addr[$:2];
-   bit [2:0] w_addr[$:2];
-   bit [2:0] l_addr[$:2];
+   bit [2:0] n_addr[$:1];
+   bit [2:0] s_addr[$:1];
+   bit [2:0] e_addr[$:1];
+   bit [2:0] w_addr[$:1];
+   bit [2:0] l_addr[$:1];
 
    /*
     * queues for storing the AGU output/Arbiter input
     */
-   bit [4:0] n_agu[$:2];
-   bit [4:0] s_agu[$:2];
-   bit [4:0] e_agu[$:2];
-   bit [4:0] w_agu[$:2];
-   bit [4:0] l_agu[$:2];
+   bit [4:0] n_agu[$:1];
+   bit [4:0] s_agu[$:1];
+   bit [4:0] e_agu[$:1];
+   bit [4:0] w_agu[$:1];
+   bit [4:0] l_agu[$:1];
 
    /*
     * count of how many flits of a message we've sent
@@ -144,6 +144,15 @@ class router_test;
    int count_e = 0;
    int count_w = 0;
    int count_l = 0;
+
+   /*
+    * count for the mask bits
+    */
+   int count_mask_n = 0;
+   int count_mask_s = 0;
+   int count_mask_e = 0;
+   int count_mask_w = 0;
+   int count_mask_l = 0;
 
    /*
     * temporary variables to hold output data and valid
@@ -206,6 +215,12 @@ class router_test;
 	count_e = 0;
 	count_w = 0;
 	count_l = 0;
+
+	count_mask_n = 0;
+	count_mask_s = 0;
+	count_mask_e = 0;
+	count_mask_w = 0;
+	count_mask_l = 0;
 
 	out_data = '{'0, '0, '0, '0, '0};
 	valid_data = '{'0, '0, '0, '0, '0};
@@ -371,37 +386,18 @@ class router_test;
     		end
 	end
 
-	/*handling local queue*/	                  
-	req_l = {l_agu[0][4], w_agu[0][4], e_agu[0][4], s_agu[0][4], n_agu[0][4]};
-   	if (count_l == 0) begin
-		if (req_l == '0) begin
-      			count_l = 0;
-      			en_l = 1;
-    		end
-    		else begin
-      			en_l = 0;
-      			count_l++;
-    		end
-   	end
-	else if (count_l == 1) begin
-		if (grant[4] == 1) begin
-			local_q_o = my_ql.pop_front();
-			en_l = 0;
-			count_l++;
-		end
+	/* north masking/popping */
+	if (count_mask_n == 0) begin
+		
+		mask[0] = 0;
 	end
-	else begin
-      		en_l = 0;
-    		if (grant[4] == 1) begin
-      			local_q_o = my_ql.pop_front();
-      			count_l++;
-      			if (count_l == 6) begin
-         			en_l = 1;
-				count_l = 0;
-				l_agu_reset();
-				local_reset();
-      			end
-    		end
+
+	if ((grant[3] == 1) && (count_l != 0)) begin
+		
+	end
+
+	if ((grant[4] == 1) && (count_l != 0)) begin
+		local_q_o = my_ql.pop_front();
 	end
    endfunction
 
@@ -523,6 +519,129 @@ class router_test;
 	end
    endfunction
 
+   function void make_enables();
+	bit [4:0] req_n;
+	bit [4:0] req_s;
+	bit [4:0] req_e;
+	bit [4:0] req_w;
+	bit [4:0] req_l;
+
+	req_n = {l_agu[0][0], w_agu[0][0], e_agu[0][0], s_agu[0][0], n_agu[0][0]};
+	if (count_n == 0) begin
+		if (req_n == '0) begin
+			count_n++;
+			en_n = 0;
+		end
+		else begin
+			en_n = 1;
+		end
+	end
+	else begin
+		en_n = 0;
+		if (valid_n_o) begin
+			count_n++;
+			if (count_n == 6) begin
+				count_n = 0;
+				en_n = 1;
+				n_agu_reset();
+				north_reset();
+			end
+		end
+	end
+
+	req_s = {l_agu[0][1], w_agu[0][1], e_agu[0][1], s_agu[0][1], n_agu[0][1]};
+	if (count_s == 0) begin
+		if (req_s == '0) begin
+			count_s++;
+			en_s = 0;
+		end
+		else begin
+			en_s = 1;
+		end
+	end
+	else begin
+		en_s = 0;
+		if (valid_s_o) begin
+			count_s++;
+			if (count_s == 6) begin
+				count_s = 0;
+				en_s = 1;
+				s_agu_reset();
+				south_reset();
+			end
+		end
+	end
+
+	req_e = {l_agu[0][2], w_agu[0][2], e_agu[0][2], s_agu[0][2], n_agu[0][2]};
+	if (count_e == 0) begin
+		if (req_e == '0) begin
+			count_e++;
+			en_e = 0;
+		end
+		else begin
+			en_e = 1;
+		end
+	end
+	else begin
+		en_e = 0;
+		if (valid_e_o) begin
+			count_e++;
+			if (count_e == 6) begin
+				count_e = 0;
+				en_e = 1;
+				e_agu_reset();
+				east_reset();
+			end
+		end
+	end
+
+	req_w = {l_agu[0][3], w_agu[0][3], e_agu[0][3], s_agu[0][3], n_agu[0][3]};
+	if (count_w == 0) begin
+		if (req_w == '0) begin
+			count_w++;
+			en_w = 0;
+		end
+		else begin
+			en_w = 1;
+		end
+	end
+	else begin
+		en_w = 0;
+		if (valid_w_o) begin
+			count_w++;
+			if (count_w == 6) begin
+				count_w = 0;
+				en_w = 1;
+				w_agu_reset();
+				west_reset();
+			end
+		end
+	end
+
+	req_l = {l_agu[0][4], w_agu[0][4], e_agu[0][4], s_agu[0][4], n_agu[0][4]};
+	if (count_l == 0) begin
+		if (req_l == '0) begin
+			count_l++;
+			en_l = 0;
+		end
+		else begin
+			en_l = 1;
+		end
+	end
+	else begin
+		en_l = 0;
+		if (valid_l_o) begin
+			count_l++;
+			if (count_l == 6) begin
+				count_l = 0;
+				en_l = 1;
+				l_agu_reset();
+				local_reset();
+			end
+		end
+	end
+   endfunction
+
    function void arbiter_north();
 	bit [4:0] request_vec = {l_agu[0][0], w_agu[0][0], e_agu[0][0], s_agu[0][0], n_agu[0][0]};
 
@@ -571,6 +690,7 @@ class router_test;
 		end
 	end
 
+	$display("last_dir[0] = %b\n", last_dir[0]);
 	/*
 	 * encode the one-hot values into 3-bit values
 	 */
@@ -642,6 +762,7 @@ class router_test;
 		end
 	end
 
+	$display("last_dir[1] = %b\n", last_dir[1]);
 	/*
 	 * encode the one-hot values into 3-bit values
 	 */
@@ -712,6 +833,7 @@ class router_test;
 		end
 	end
 
+	$display("last_dir[2] = %b\n", last_dir[2]);
 	/*
 	 * encode the one-hot values into 3-bit values
 	 */
@@ -783,6 +905,7 @@ class router_test;
 		end
 	end
 
+	$display("last_dir[3] = %b\n", last_dir[3]);
 	/*
 	 * encode the one-hot values into 3-bit values
 	 */
@@ -807,7 +930,6 @@ class router_test;
    endfunction
 
    function void arbiter_local();
-
 	bit [4:0] request_vec = {l_agu[0][4], w_agu[0][4], e_agu[0][4], s_agu[0][4], n_agu[0][4]};
 
 	/* mask the bits */
@@ -855,6 +977,7 @@ class router_test;
 		end
 	end
 
+	$display("last_dir[4] = %b\n", last_dir[4]);
 	/*
 	 * encode the one-hot values into 3-bit values
 	 */
@@ -946,14 +1069,6 @@ class router_test;
 	bit incr_i[5] = {n_incr_i, s_incr_i, e_incr_i, w_incr_i, l_incr_i};
 
 	for (int ind = 0; ind < 5; ind++) begin
-		/* control the enable signal */
-		if (count[ind] == 0) begin
-			count_en[ind] = 0;	
-		end
-		else begin
-			count_en[ind] = 1;
-		end
-
 		/* control the increase input */
 		if (incr_i[ind] && (count[ind] < 5)) begin
 			count[ind]++;
@@ -962,6 +1077,14 @@ class router_test;
 		/* control the decrease input */
 		if (valid_data[ind] && (count[ind] > 0)) begin
 			count[ind]--;
+		end
+
+		/* control the enable signal */
+		if (count[ind] == 0) begin
+			count_en[ind] = 0;	
+		end
+		else begin
+			count_en[ind] = 1;
 		end
 	end
    endfunction
@@ -974,6 +1097,7 @@ class router_test;
 	grant_arb[4] = l_addr[0];
 
 	for (int ind = 0; ind < 5; ind++) begin
+		$display("grant_arb[%d] = %b\n", ind, grant_arb[ind]);
 		if ((grant_arb[ind] != '1) && count_en[ind]) begin
 			grant[ind] = '1;
 		end
@@ -1006,7 +1130,6 @@ class router_test;
 			valid_data[ind] = 0;
 			out_data[ind] = '0;
 		end
-		$display("grant_arb[%d] = %b\n", ind, grant_arb[ind]);
 	end
 
 	north_o = out_data[0];

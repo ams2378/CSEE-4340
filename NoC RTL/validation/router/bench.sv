@@ -191,28 +191,29 @@ program tb (ifc.bench ds);
 	      test.fsm();
 	      test.input_buffer();
 	      test.address_gen();
-
-	      test.enable[0] = (!test.req_port_addr_o[0][0] | test.en_n) && (!test.req_port_addr_o[1][0] | test.en_s) &&
-			       (!test.req_port_addr_o[2][0] | test.en_s) && (!test.req_port_addr_o[3][0] | test.en_w) &&
+	      test.make_enables();
+/*
+	      test.enable[0] = (!test.n_agu[0][0] | test.en_n) && (!test.s_agu[0][0] | test.en_s) &&
+			       (!test.e_agu[0][0] | test.en_e) && (!test.w_agu[0][1] | test.en_w) &&
 			       (!test.req_port_addr_o[4][0] | test.en_l);
-	      test.enable[1] = (!test.req_port_addr_o[0][1] | test.en_n) && (!test.req_port_addr_o[1][1] | test.en_s) &&
-			       (!test.req_port_addr_o[2][1] | test.en_s) && (!test.req_port_addr_o[3][1] | test.en_w) &&
+	      test.enable[1] = (!test.n_agu[0][1] | test.en_n) && (!test.s_agu[0][1] | test.en_s) &&
+			       (!test.e_agu[0][1] | test.en_e) && (!test.w_agu[0][1] | test.en_w) &&
 			       (!test.req_port_addr_o[4][1] | test.en_l);
-	      test.enable[2] = (!test.req_port_addr_o[0][2] | test.en_n) && (!test.req_port_addr_o[1][2] | test.en_s) &&
-			       (!test.req_port_addr_o[2][2] | test.en_s) && (!test.req_port_addr_o[3][2] | test.en_w) &&
+	      test.enable[2] = (!test.n_agu[0][2] | test.en_n) && (!test.s_agu[0][2] | test.en_s) &&
+			       (!test.e_agu[0][2] | test.en_e) && (!test.req_port_addr_o[3][2] | test.en_w) &&
 			       (!test.req_port_addr_o[4][2] | test.en_l);
-	      test.enable[3] = (!test.req_port_addr_o[0][3] | test.en_n) && (!test.req_port_addr_o[1][3] | test.en_s) &&
-			       (!test.req_port_addr_o[2][3] | test.en_s) && (!test.req_port_addr_o[3][3] | test.en_w) &&
+	      test.enable[3] = (!test.n_agu[0][3] | test.en_n) && (!test.s_agu[0][3] | test.en_s) &&
+			       (!test.e_agu[0][3] | test.en_e) && (!test.req_port_addr_o[3][3] | test.en_w) &&
 			       (!test.req_port_addr_o[4][3] | test.en_l);
-	      test.enable[4] = (!test.req_port_addr_o[0][4] | test.en_n) && (!test.req_port_addr_o[1][4] | test.en_s) &&
-			       (!test.req_port_addr_o[2][4] | test.en_s) && (!test.req_port_addr_o[3][4] | test.en_w) &&
+	      test.enable[4] = (!test.n_agu[0][4] | test.en_n) && (!test.s_agu[0][4] | test.en_s) &&
+			       (!test.e_agu[0][4] | test.en_e) && (!test.req_port_addr_o[3][4] | test.en_w) &&
 			       (!test.req_port_addr_o[4][4] | test.en_l);
 
 	      test.mask[0] = !test.en_n;
 	      test.mask[1] = !test.en_s;
 	      test.mask[2] = !test.en_e;
 	      test.mask[3] = !test.en_w;
-	      test.mask[4] = !test.en_l;
+	      test.mask[4] = !test.en_l; */
 
 	      if (test.enable[0]) begin
 		test.arbiter_north();
