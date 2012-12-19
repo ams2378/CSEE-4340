@@ -141,7 +141,7 @@
             		$display("bench value: %d", bench_incr_l_o);
 		end
 
-//		$exit();
+		$exit();
 	end
         return passed;
     endfunction

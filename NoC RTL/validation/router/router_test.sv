@@ -72,9 +72,8 @@ class router_test;
    bit en_l;
 
    /*
-    * the enable signals and masks for the 5 arbiters
+    * the masks for the 5 arbiters
     */
-   bit [4:0] enable;
    bit [4:0] mask;
 
    /*
@@ -191,7 +190,12 @@ class router_test;
 	west_reset();
 	local_reset();
 
-	enable = '1;
+	en_n = 1;
+	en_s = 1;
+	en_e = 1;
+	en_w = 1;
+	en_l = 1;
+
 	mask = '0;
 
         n_north = 0;
@@ -320,7 +324,7 @@ class router_test;
 	/* west masking/popping */
 	if (count_mask_w == 0) begin
 		if (grant[3] == 1) begin
-			north_w_o = my_qw.pop_front();
+			west_q_o = my_qw.pop_front();
 			mask[3] = 1;
 			count_mask_w++;		
 		end
@@ -341,7 +345,7 @@ class router_test;
 	end
 
 	/* local masking/popping */
-	if (local_mask_n == 0) begin
+	if (count_mask_l == 0) begin
 		if (grant[4] == 1) begin
 			local_q_o = my_ql.pop_front();
 			mask[4] = 1;
@@ -665,8 +669,6 @@ class router_test;
 			end
 		end
 	end
-
-	$display("last_dir[0] = %b\n", last_dir[0]);
    endfunction
 
    function void arbiter_south();
@@ -729,8 +731,6 @@ class router_test;
 			end
 		end
 	end
-
-	$display("last_dir[1] = %b\n", last_dir[1]);
    endfunction
 
    function void arbiter_east();
@@ -792,8 +792,6 @@ class router_test;
 			end
 		end
 	end
-
-	$display("last_dir[2] = %b\n", last_dir[2]);
    endfunction
 
    function void arbiter_west();
@@ -824,7 +822,7 @@ class router_test;
 	if (n_west == 0) begin
 		/* 
 		 * if a certain output wasn't requested this cycle, set the
-		 * input granted index to all ones
+		 * input granted indenorth_w_o' has not beenx to all ones
 		 * (111 indicates that no one wants to use this output this cycle)
 		 */
 		w_addr.push_back('1);
@@ -856,8 +854,6 @@ class router_test;
 			end
 		end
 	end
-
-	$display("last_dir[3] = %b\n", last_dir[3]);
    endfunction
 
    function void arbiter_local();
@@ -919,8 +915,6 @@ class router_test;
 			end
 		end
 	end
-
-	$display("last_dir[4] = %b\n", last_dir[4]);
    endfunction
 
    function void n_agu_reset();
@@ -950,27 +944,32 @@ class router_test;
 
    function void north_reset();
 	n_addr = {};
-	n_addr.push_back('1);
+	n_addr.push_back(3'b111);
+	n_addr.push_back(3'b111);
    endfunction
 
    function void south_reset();
 	s_addr = {};
-	s_addr.push_back('1);
+	s_addr.push_back(3'b111);
+	s_addr.push_back(3'b111);
    endfunction
 
    function void east_reset();
 	e_addr = {};
-	e_addr.push_back('1);
+	e_addr.push_back(3'b111);
+	e_addr.push_back(3'b111);
    endfunction
 
    function void west_reset();
 	w_addr = {};
-	w_addr.push_back('1);
+	w_addr.push_back(3'b111);
+	w_addr.push_back(3'b111);
    endfunction
 
    function void local_reset();
 	l_addr = {};
-	l_addr.push_back('1);
+	l_addr.push_back(3'b111);
+	l_addr.push_back(3'b111);
    endfunction
 
    function void pop_queues();
@@ -1019,7 +1018,7 @@ class router_test;
 	grant_arb[4] = l_addr[0];
 
 	for (int ind = 0; ind < 5; ind++) begin
-		$display("grant_arb[%d] = %b\n", ind, grant_arb[ind]);
+		//$display("grant_arb[%d] = %b\n", ind, grant_arb[ind]);
 		if ((grant_arb[ind] != '1) && count_en[ind]) begin
 			grant[ind] = '1;
 		end

@@ -137,7 +137,6 @@ program tb (ifc.bench ds);
        */
 
       test.rst		<=	packet.reset_req;
-      $display ("reset_req = %d\n", packet.reset_req);
 
       test.valid_n_i	<=	packet.north_req;
       test.valid_s_i	<=	packet.south_req;
@@ -146,7 +145,6 @@ program tb (ifc.bench ds);
       test.valid_l_i	<=	packet.local_req;
 
       test.north_i	<=	packet.north_flit;
-      $display ("North_i = %d\n", test.north_i);
       test.south_i	<=	packet.south_flit;
       test.east_i	<=	packet.east_flit;
       test.west_i	<=	packet.west_flit;
@@ -193,31 +191,31 @@ program tb (ifc.bench ds);
 	      test.input_buffer();
 	      test.address_gen();
 
-	      if (test.enable[0]) begin
+	      if (test.en_n) begin
 		test.arbiter_north();
 	      end
 	      else begin
 		test.n_addr.push_back(test.n_addr[0]);
 	      end
-	      if (test.enable[1]) begin
+	      if (test.en_s) begin
 		test.arbiter_south();
 	      end
 	      else begin
 		test.s_addr.push_back(test.s_addr[0]);
 	      end
-	      if (test.enable[2]) begin
+	      if (test.en_e) begin
 		test.arbiter_east();
 	      end
 	      else begin
 		test.e_addr.push_back(test.e_addr[0]);
 	      end
-	      if (test.enable[3]) begin
+	      if (test.en_w) begin
 		test.arbiter_west();
 	      end
 	      else begin
 		test.w_addr.push_back(test.w_addr[0]);
 	      end
-	      if (test.enable[4]) begin
+	      if (test.en_l) begin
 		test.arbiter_local();
 	      end
 	      else begin
