@@ -32,19 +32,19 @@ interface ifc_xbar ();
    logic [15:0] west_o;
    logic [15:0] local_o;
 
-   logic valid_n_o;
-   logic valid_s_o;
-   logic valid_e_o;
-   logic valid_w_o;
-   logic valid_l_o;
+   logic valid_n_i;
+   logic valid_s_i;
+   logic valid_e_i;
+   logic valid_w_i;
+   logic valid_l_i;
 
 
    modport dut (
-		input  pop_req_n,
-		input  pop_req_s,
-		input  pop_req_e,
-		input  pop_req_w,
-		input  pop_req_l,
+		output  pop_req_n,
+		output  pop_req_s,
+		output  pop_req_e,
+		output  pop_req_w,
+		output  pop_req_l,
 
    		input  address_route_n_i,
    		input  address_route_s_i,
@@ -64,11 +64,11 @@ interface ifc_xbar ();
 		output west_o,
 		output local_o,
 
-		output valid_n_o,
-		output valid_s_o,
-		output valid_e_o,
-		output valid_w_o,
-		output valid_l_o
+		input valid_n_i,
+		input valid_s_i,
+		input valid_e_i,
+		input valid_w_i,
+		input valid_l_i
 		);
 
 endinterface
