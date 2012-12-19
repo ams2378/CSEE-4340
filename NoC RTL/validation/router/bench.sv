@@ -118,18 +118,67 @@ program tb (ifc.bench ds);
        */
       if (env.n_q_free > 0) begin
 	make_north(packet, env);
+	if (packet.reset_req == 0) begin
+		env.n_q_free--;
+		if (env.n_q_free < 0) begin
+			env.n_q_free = 0;
+		end
+	end
       end
+      else begin
+	packet.north_req = 0;
+      end
+
       if (env.s_q_free > 0) begin
 	make_south(packet, env);
+	if (packet.reset_req == 0) begin
+		env.s_q_free--; 
+		if (env.s_q_free < 0) begin
+			env.s_q_free = 0;
+		end   
+	end 
       end
+      else begin
+	packet.south_req = 0;
+      end
+
       if (env.e_q_free > 0) begin
 	make_east(packet, env);
+	if (packet.reset_req == 0) begin
+		env.e_q_free--; 
+		if (env.e_q_free < 0) begin
+			env.e_q_free = 0;
+		end
+	end
       end
+      else begin
+	packet.east_req = 0;
+      end
+
       if (env.w_q_free > 0) begin
 	make_west(packet, env);
+	if (packet.reset_req == 0) begin
+		env.w_q_free--; 
+		if (env.w_q_free < 0) begin
+			env.w_q_free = 0;
+		end
+	end
       end
+      else begin
+	packet.west_req = 0;
+      end
+
       if (env.l_q_free > 0) begin
 	make_local(packet, env);
+	if (packet.reset_req == 0) begin
+		env.l_q_free--; 
+		if (env.l_q_free < 0) begin
+			env.l_q_free = 0;
+		end
+	end
+      end
+      else begin
+	packet.local_req = 0;
       end
 
       /*
@@ -225,6 +274,41 @@ program tb (ifc.bench ds);
 	      test.fcc();
 	      test.fcu();
 	      test.xbar();
+
+              if(test.n_incr_o == 1) begin
+	      	env.n_q_free++;
+		if (env.n_q_free > 5) begin
+			env.n_q_free = 5;
+		end
+	      end
+
+              if(test.s_incr_o == 1) begin
+	      	env.s_q_free++;
+		if (env.s_q_free > 5) begin
+			env.s_q_free = 5;
+		end
+	      end
+
+              if(test.e_incr_o == 1) begin
+	      	env.e_q_free++;
+		if (env.e_q_free > 5) begin
+			env.e_q_free = 5;
+		end
+	      end
+
+              if(test.w_incr_o == 1) begin
+	      	env.w_q_free++;
+		if (env.w_q_free > 5) begin
+			env.w_q_free = 5;
+		end
+	      end
+
+              if(test.l_incr_o == 1) begin
+	      	env.l_q_free++;
+		if (env.l_q_free > 5) begin
+			env.l_q_free = 5;
+		end
+	      end
       end
    endtask
 
@@ -269,7 +353,6 @@ program tb (ifc.bench ds);
 			      test.l_incr_o,
 				
 			      env.verbose);
-	 /* code for if the test was a success */
       end
    end
 endprogram

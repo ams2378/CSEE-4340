@@ -38,7 +38,8 @@ interface ifc (input bit clk);
         logic l_incr_o;
 
 	 clocking cb @(posedge clk);
-      			default output #1;
+			//default input #0;
+    			default output #1;
 
       			output 	rst;
 

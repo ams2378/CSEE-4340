@@ -120,20 +120,20 @@ class router_test;
    /*
     * queues for storing the address source
     */
-   bit [2:0] n_addr[$:1];
-   bit [2:0] s_addr[$:1];
-   bit [2:0] e_addr[$:1];
-   bit [2:0] w_addr[$:1];
-   bit [2:0] l_addr[$:1];
+   bit [2:0] n_addr[$:2];
+   bit [2:0] s_addr[$:2];
+   bit [2:0] e_addr[$:2];
+   bit [2:0] w_addr[$:2];
+   bit [2:0] l_addr[$:2];
 
    /*
     * queues for storing the AGU output/Arbiter input
     */
-   bit [4:0] n_agu[$:1];
-   bit [4:0] s_agu[$:1];
-   bit [4:0] e_agu[$:1];
-   bit [4:0] w_agu[$:1];
-   bit [4:0] l_agu[$:1];
+   bit [4:0] n_agu[$:2];
+   bit [4:0] s_agu[$:2];
+   bit [4:0] e_agu[$:2];
+   bit [4:0] w_agu[$:2];
+   bit [4:0] l_agu[$:2];
 
    /*
     * count of how many flits of a message we've sent
@@ -154,7 +154,7 @@ class router_test;
    int count_mask_l = 0;
 
    /*
-    * temporary variables to hold output data and valid
+    * temporary variables to hold output data and incr
     * signals
     */
    logic [15:0] out_data[5];
@@ -228,6 +228,24 @@ class router_test;
 
 	out_data = '{'0, '0, '0, '0, '0};
 	valid_data = '{'0, '0, '0, '0, '0};
+
+	valid_n_o = '0;
+	valid_s_o = '0;
+	valid_e_o = '0;
+	valid_w_o = '0;
+	valid_l_o = '0;
+
+	north_o = '0;
+	south_o = '0;
+	east_o = '0;
+	west_o = '0;
+	local_o = '0;
+
+	n_incr_o = 1'b0;
+	s_incr_o = 1'b0;
+	e_incr_o = 1'b0;
+	w_incr_o = 1'b0;
+	l_incr_o = 1'b0;
    endfunction
 
    /*
@@ -1017,38 +1035,64 @@ class router_test;
 	grant_arb[3] = w_addr[0];
 	grant_arb[4] = l_addr[0];
 
+	grant = '{'0, '0, '0, '0, '0};
+	n_incr_o = '0;
+	s_incr_o = '0;
+	e_incr_o = '0;
+	w_incr_o = '0;
+	l_incr_o = '0;
+
 	for (int ind = 0; ind < 5; ind++) begin
-		//$display("grant_arb[%d] = %b\n", ind, grant_arb[ind]);
-		if ((grant_arb[ind] != '1) && count_en[ind]) begin
-			grant[ind] = '1;
+		if ((grant_arb[ind] != 3'b111) && count_en[ind]) begin
+			valid_data[ind] = '1;
+			if (grant_arb[ind] == 3'b000) begin
+				grant[0] = '1;
+				n_incr_o = '1;
+			end
+			else if (grant_arb[ind] == 3'b001) begin
+				grant[1] = '1;
+				s_incr_o = '1;
+			end
+			else if (grant_arb[ind] == 3'b010) begin
+				grant[2] = '1;
+				e_incr_o = '1;
+			end
+			else if (grant_arb[ind] == 3'b011) begin
+				grant[3] = '1;
+				w_incr_o = '1;
+			end
+			else if (grant_arb[ind] == 3'b100) begin
+				grant[4] = '1;
+				l_incr_o = '1;
+			end
 		end
 	end
+
+	valid_n_o = valid_data[0];
+	valid_s_o = valid_data[1];
+	valid_e_o = valid_data[2];
+	valid_w_o = valid_data[3];
+	valid_l_o = valid_data[4];
    endfunction
 
    function void xbar();
 	for (int ind = 0; ind < 5; ind++) begin
 		if (grant_arb[ind] == 3'b000) begin
-			valid_data[ind] = grant[ind];
 			out_data[ind] = north_q_o;
 		end
 		else if (grant_arb[ind] == 3'b001) begin
-			valid_data[ind] = grant[ind];
 			out_data[ind] = south_q_o;
 		end
 		else if (grant_arb[ind] == 3'b010) begin
-			valid_data[ind] = grant[ind];
 			out_data[ind] = east_q_o;
 		end
 		else if (grant_arb[ind] == 3'b011) begin
-			valid_data[ind] = grant[ind];
 			out_data[ind] = west_q_o;
 		end
 		else if (grant_arb[ind] == 3'b100) begin
-			valid_data[ind] = grant[ind];
 			out_data[ind] = local_q_o;
 		end
 		else begin
-			valid_data[ind] = 0;
 			out_data[ind] = '0;
 		end
 	end
@@ -1058,12 +1102,6 @@ class router_test;
 	east_o  = out_data[2];
 	west_o  = out_data[3];
 	local_o = out_data[4];
-
-	valid_n_o = valid_data[0];
-	valid_s_o = valid_data[1];
-	valid_e_o = valid_data[2];
-	valid_w_o = valid_data[3];
-	valid_l_o = valid_data[4];
    endfunction
 
 endclass
