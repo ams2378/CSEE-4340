@@ -1104,4 +1104,51 @@ class router_test;
 	local_o = out_data[4];
    endfunction
 
+   function golden_model();
+      if (rst) begin
+	reset_router();
+      end
+      else begin
+	      pop_queues();
+	      fsm();
+	      make_enables();
+	      input_buffer();
+	      address_gen();
+
+	      if (en_n) begin
+		arbiter_north();
+	      end
+	      else begin
+		n_addr.push_back(n_addr[0]);
+	      end
+	      if (en_s) begin
+		arbiter_south();
+	      end
+	      else begin
+		s_addr.push_back(s_addr[0]);
+	      end
+	      if (en_e) begin
+		arbiter_east();
+	      end
+	      else begin
+		e_addr.push_back(e_addr[0]);
+	      end
+	      if (en_w) begin
+		arbiter_west();
+	      end
+	      else begin
+		w_addr.push_back(w_addr[0]);
+	      end
+	      if (en_l) begin
+		arbiter_local();
+	      end
+	      else begin
+		l_addr.push_back(l_addr[0]);
+	      end
+
+	      fcc();
+	      fcu();
+	      xbar();
+      end
+   endfunction
 endclass

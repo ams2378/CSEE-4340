@@ -229,87 +229,44 @@ program tb (ifc.bench ds);
       ds.cb.w_incr_i	<=	packet.w_incr_req;
       ds.cb.l_incr_i	<=	packet.l_incr_req;
 
+      test.golden_model();
+
+      if(test.n_incr_o == 1) begin
+      	env.n_q_free++;
+	if (env.n_q_free > 5) begin
+		env.n_q_free = 5;
+	end
+      end
+
+      if(test.s_incr_o == 1) begin
+      	env.s_q_free++;
+	if (env.s_q_free > 5) begin
+		env.s_q_free = 5;
+	end
+      end
+
+      if(test.e_incr_o == 1) begin
+      	env.e_q_free++;
+	if (env.e_q_free > 5) begin
+		env.e_q_free = 5;
+	end
+      end
+
+      if(test.w_incr_o == 1) begin
+      	env.w_q_free++;
+	if (env.w_q_free > 5) begin
+		env.w_q_free = 5;
+	end
+      end
+
+      if(test.l_incr_o == 1) begin
+      	env.l_q_free++;
+	if (env.l_q_free > 5) begin
+		env.l_q_free = 5;
+	end
+      end
+
       @(ds.cb);
-      if (test.rst) begin
-	test.reset_router();
-      end
-      else begin
-	      test.pop_queues();
-	      test.fsm();
-	      test.make_enables();
-	      test.input_buffer();
-	      test.address_gen();
-
-	      if (test.en_n) begin
-		test.arbiter_north();
-	      end
-	      else begin
-		test.n_addr.push_back(test.n_addr[0]);
-	      end
-	      if (test.en_s) begin
-		test.arbiter_south();
-	      end
-	      else begin
-		test.s_addr.push_back(test.s_addr[0]);
-	      end
-	      if (test.en_e) begin
-		test.arbiter_east();
-	      end
-	      else begin
-		test.e_addr.push_back(test.e_addr[0]);
-	      end
-	      if (test.en_w) begin
-		test.arbiter_west();
-	      end
-	      else begin
-		test.w_addr.push_back(test.w_addr[0]);
-	      end
-	      if (test.en_l) begin
-		test.arbiter_local();
-	      end
-	      else begin
-		test.l_addr.push_back(test.l_addr[0]);
-	      end
-
-	      test.fcc();
-	      test.fcu();
-	      test.xbar();
-
-              if(test.n_incr_o == 1) begin
-	      	env.n_q_free++;
-		if (env.n_q_free > 5) begin
-			env.n_q_free = 5;
-		end
-	      end
-
-              if(test.s_incr_o == 1) begin
-	      	env.s_q_free++;
-		if (env.s_q_free > 5) begin
-			env.s_q_free = 5;
-		end
-	      end
-
-              if(test.e_incr_o == 1) begin
-	      	env.e_q_free++;
-		if (env.e_q_free > 5) begin
-			env.e_q_free = 5;
-		end
-	      end
-
-              if(test.w_incr_o == 1) begin
-	      	env.w_q_free++;
-		if (env.w_q_free > 5) begin
-			env.w_q_free = 5;
-		end
-	      end
-
-              if(test.l_incr_o == 1) begin
-	      	env.l_q_free++;
-		if (env.l_q_free > 5) begin
-			env.l_q_free = 5;
-		end
-	      end
-      end
    endtask
 
    initial begin
