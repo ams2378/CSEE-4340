@@ -90,7 +90,7 @@ class router_test;
     * one-hot grant decision of arbiter
     * where 00000 means nothing is selected
     */
-   bit [4:0] last_dir [5] = '{'0, '0, '0, '0, '0};
+   bit [3:0] last_dir [5] = '{'1, '1, '1, '1, '1};
 
    /*
     * encoded grant decision of arbiter
@@ -200,7 +200,7 @@ class router_test;
         n_west = 0;
         n_local = 0;
 
-	last_dir = '{'0, '0, '0, '0, '0};
+	last_dir = '{'1, '1, '1, '1, '1};
 
 	grant_arb = '{'1, '1, '1, '1, '1};
 
@@ -248,156 +248,119 @@ class router_test;
    endfunction
 
    function void fsm ();
-   	/*handling north queue*/
-	bit [4:0] req_n;
-	bit [4:0] req_s;
-	bit [4:0] req_e;
-	bit [4:0] req_w;
-	bit [4:0] req_l;
-
-	req_n = {l_agu[0][0], w_agu[0][0], e_agu[0][0], s_agu[0][0], n_agu[0][0]};
-   	if (count_n == 0) begin
-		if (req_n == '0) begin
-      			count_n = 0;
-      			en_n = 1;
-    		end
-    		else begin
-      			en_n = 0;
-      			count_n++;
-    		end
-   	end
-	else if (count_n == 1) begin
-		if (grant[0] == 1) begin
-			north_q_o = my_qn.pop_front();
-			en_n = 0;
-			count_n++;
-		end
-	end
-	else begin
-		en_n = 0;
-    		if (grant[0] == 1) begin
-      			north_q_o = my_qn.pop_front();
-      			count_n++;
-      			if (count_n == 6) begin
-         			en_n = 1;
-				count_n = 0;
-				n_agu_reset();
-				north_reset();
-      			end
-    		end
-	end
-
-	/*handling south queue*/
-	req_s = {l_agu[0][1], w_agu[0][1], e_agu[0][1], s_agu[0][1], n_agu[0][1]};
-   	if (count_s == 0) begin
-		if (req_s == '0) begin
-      			count_s = 0;
-      			en_s = 1;
-    		end
-    		else begin
-      			en_s = 0;
-      			count_s++;
-    		end
-   	end
-	else if (count_s == 1) begin
-		if (grant[1] == 1) begin
-			south_q_o = my_qs.pop_front();
-			en_s = 0;
-			count_s++;
-		end
-	end
-	else begin
-      		en_s = 0;
-    		if (grant[1] == 1) begin
-      			south_q_o = my_qs.pop_front();
-     			count_s++;
-      			if (count_s == 6) begin
-         			en_s = 1;
-				count_s = 0;
-				s_agu_reset();
-				south_reset();
-      			end
-    		end
-	end
-
-	/*handling east queue*/      
-	req_e = {l_agu[0][2], w_agu[0][2], e_agu[0][2], s_agu[0][2], n_agu[0][2]};
-   	if (count_e == 0) begin
-		if (req_e == '0) begin
-      			count_e = 0;
-      			en_e = 1;
-    		end
-    		else begin
-      			en_e = 0;
-      			count_e++;
-    		end
-   	end
-	else if (count_e == 1) begin
-		if (grant[2] == 1) begin
-			east_q_o = my_qe.pop_front();
-			en_e = 0;
-			count_e++;
-		end
-	end
-	else begin
-     		en_e = 0;
-    		if (grant[2] == 1) begin
-      			east_q_o = my_qe.pop_front();
-      			count_e++;
-      			if (count_e == 6) begin
-         			en_e = 1;
-				count_e = 0;
-				e_agu_reset();
-				east_reset();
-      			end
-    		end
-	end
-
-	/*handling west queue*/
-	req_w = {l_agu[0][3], w_agu[0][3], e_agu[0][3], s_agu[0][3], n_agu[0][3]};
-   	if (count_w == 0) begin
-		if (req_w == '0) begin
-      			count_w = 0;
-      			en_w = 1;
-    		end
-    		else begin
-      			en_w = 0;
-      			count_w++;
-    		end
-   	end
-	else if (count_w == 1) begin
-		if (grant[3] == 1) begin
-			west_q_o = my_qw.pop_front();
-			en_w = 0;
-			count_w++;
-		end
-	end
-	else begin
-      		en_w = 0;
-    		if (grant[3] == 1) begin
-      			west_q_o = my_qw.pop_front();
-      			count_w++;
-      			if (count_w == 6) begin
-         			en_w = 1;
-				count_w = 0;
-				w_agu_reset();
-				west_reset();
-      			end
-    		end
-	end
-
 	/* north masking/popping */
 	if (count_mask_n == 0) begin
-		
-		mask[0] = 0;
+		if (grant[0] == 1) begin
+			north_q_o = my_qn.pop_front();
+			mask[0] = 1;
+			count_mask_n++;		
+		end
+		else begin
+			mask[0] = 0;
+		end	
+	end
+	else begin
+		mask[0] = 1;
+		if (grant[0] == 1) begin
+			north_q_o = my_qn.pop_front();			
+			count_mask_n++;
+			if (count_mask_n == 5) begin
+				mask[0] = 0;
+				count_mask_n = 0;			
+			end	
+		end	
 	end
 
-	if ((grant[3] == 1) && (count_l != 0)) begin
-		
+	/* south masking/popping */
+	if (count_mask_s == 0) begin
+		if (grant[1] == 1) begin
+			south_q_o = my_qs.pop_front();
+			mask[1] = 1;
+			count_mask_s++;		
+		end
+		else begin
+			mask[1] = 0;
+		end	
+	end
+	else begin
+		mask[1] = 1;
+		if (grant[1] == 1) begin
+			south_q_o = my_qs.pop_front();			
+			count_mask_s++;
+			if (count_mask_s == 5) begin
+				mask[1] = 0;
+				count_mask_s = 0;			
+			end	
+		end	
 	end
 
-	if ((grant[4] == 1) && (count_l != 0)) begin
-		local_q_o = my_ql.pop_front();
+	/* east masking/popping */
+	if (count_mask_e == 0) begin
+		if (grant[2] == 1) begin
+			east_q_o = my_qe.pop_front();
+			mask[2] = 1;
+			count_mask_e++;		
+		end
+		else begin
+			mask[2] = 0;
+		end	
+	end
+	else begin
+		mask[2] = 1;
+		if (grant[2] == 1) begin
+			east_q_o = my_qe.pop_front();			
+			count_mask_e++;
+			if (count_mask_e == 5) begin
+				mask[2] = 0;
+				count_mask_e = 0;			
+			end	
+		end	
+	end
+
+	/* west masking/popping */
+	if (count_mask_w == 0) begin
+		if (grant[3] == 1) begin
+			north_w_o = my_qw.pop_front();
+			mask[3] = 1;
+			count_mask_w++;		
+		end
+		else begin
+			mask[3] = 0;
+		end	
+	end
+	else begin
+		mask[3] = 1;
+		if (grant[3] == 1) begin
+			west_q_o = my_qw.pop_front();			
+			count_mask_w++;
+			if (count_mask_w == 5) begin
+				mask[3] = 0;
+				count_mask_w = 0;			
+			end	
+		end	
+	end
+
+	/* local masking/popping */
+	if (local_mask_n == 0) begin
+		if (grant[4] == 1) begin
+			local_q_o = my_ql.pop_front();
+			mask[4] = 1;
+			count_mask_l++;		
+		end
+		else begin
+			mask[4] = 0;
+		end	
+	end
+	else begin
+		mask[4] = 1;
+		if (grant[4] == 1) begin
+			local_q_o = my_ql.pop_front();			
+			count_mask_l++;
+			if (count_mask_l == 5) begin
+				mask[4] = 0;
+				count_mask_l = 0;			
+			end	
+		end	
 	end
    endfunction
 
@@ -670,48 +633,40 @@ class router_test;
 	if (n_north == 0) begin
 		/* 
 		 * if a certain output wasn't requested this cycle, set the
-		 * input granted index to all zeros
-		 * (00000 indicates that no one wants to use this output this cycle)
+		 * input granted index to all ones
+		 * (111 indicates that no one wants to use this output this cycle)
 		 */
-		last_dir[0] = '0;
+		n_addr.push_back('1);
 	end
 	else begin
-		bit [4:0] start = '0;
+		bit [2:0] start = '0;
 		bit success = '0;
 		if (n_north > 1) begin
-			start = last_dir[0] + 1'b1;			
+			if ((last_dir[0] == 3'b111) || (last_dir[0] == 3'b100)) begin
+				start = '0;
+			end
+			else begin
+				start = last_dir[0] + 1'b1;
+			end
 		end		
 		while (success == 0) begin
 			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[0] = start;
+				n_addr.push_back(start);
 			end
-			start = start + 1'b1;	
+
+			/* cover the rollover properly */
+			if (start == 3'b100) begin
+				start = '0;
+			end
+			else begin
+				start = start + 1'b1;
+			end
 		end
 	end
 
 	$display("last_dir[0] = %b\n", last_dir[0]);
-	/*
-	 * encode the one-hot values into 3-bit values
-	 */
-	if (last_dir[0] == 5'b00001) begin
-		n_addr.push_back(3'b000);
-	end	
-	else if (last_dir[0] == 5'b00010) begin
-		n_addr.push_back(3'b001);
-	end
-	else if (last_dir[0] == 5'b00100) begin
-		n_addr.push_back(3'b010);
-	end
-	else if (last_dir[0] == 5'b01000) begin
-		n_addr.push_back(3'b011);
-	end
-	else if (last_dir[0] == 5'b10000) begin
-		n_addr.push_back(3'b100);
-	end
-	else begin
-		n_addr.push_back('1);
-	end
    endfunction
 
    function void arbiter_south();
@@ -742,48 +697,40 @@ class router_test;
 	if (n_south == 0) begin
 		/* 
 		 * if a certain output wasn't requested this cycle, set the
-		 * input granted index to all zeros
-		 * (00000 indicates that no one wants to use this output this cycle)
+		 * input granted index to all ones
+		 * (111 indicates that no one wants to use this output this cycle)
 		 */
-		last_dir[1] = '0;
+		s_addr.push_back('1);
 	end
 	else begin
-		bit [4:0] start = '0;
+		bit [2:0] start = '0;
 		bit success = '0;
 		if (n_south > 1) begin
-			start = last_dir[1] + 1'b1;			
+			if ((last_dir[1] == 3'b111) || (last_dir[1] == 3'b100)) begin
+				start = '0;
+			end
+			else begin
+				start = last_dir[1] + 1'b1;
+			end
 		end		
 		while (success == 0) begin
 			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[1] = start;
+				s_addr.push_back(start);
 			end
-			start = start + 1'b1;	
+
+			/* cover the rollover properly */
+			if (start == 3'b100) begin
+				start = '0;
+			end
+			else begin
+				start = start + 1'b1;
+			end
 		end
 	end
 
 	$display("last_dir[1] = %b\n", last_dir[1]);
-	/*
-	 * encode the one-hot values into 3-bit values
-	 */
-	if (last_dir[1] == 5'b00001) begin
-		s_addr.push_back(3'b000);
-	end	
-	else if (last_dir[1] == 5'b00010) begin
-		s_addr.push_back(3'b001);
-	end
-	else if (last_dir[1] == 5'b00100) begin
-		s_addr.push_back(3'b010);
-	end
-	else if (last_dir[1] == 5'b01000) begin
-		s_addr.push_back(3'b011);
-	end
-	else if (last_dir[1] == 5'b10000) begin
-		s_addr.push_back(3'b100);
-	end
-	else begin
-		s_addr.push_back('1);
-	end
    endfunction
 
    function void arbiter_east();
@@ -813,48 +760,40 @@ class router_test;
 	if (n_east == 0) begin
 		/* 
 		 * if a certain output wasn't requested this cycle, set the
-		 * input granted index to all zeros
-		 * (00000 indicates that no one wants to use this output this cycle)
+		 * input granted index to all ones
+		 * (111 indicates that no one wants to use this output this cycle)
 		 */
-		last_dir[2] = '0;
+		e_addr.push_back('1);
 	end
 	else begin
-		bit [4:0] start = '0;
+		bit [2:0] start = '0;
 		bit success = '0;
 		if (n_east > 1) begin
-			start = last_dir[2] + 1'b1;			
+			if ((last_dir[2] == 3'b111) || (last_dir[2] == 3'b100)) begin
+				start = '0;
+			end
+			else begin
+				start = last_dir[2] + 1'b1;
+			end
 		end		
 		while (success == 0) begin
 			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[2] = start;
+				e_addr.push_back(start);
 			end
-			start = start + 1'b1;	
+
+			/* cover the rollover properly */
+			if (start == 3'b100) begin
+				start = '0;
+			end
+			else begin
+				start = start + 1'b1;
+			end
 		end
 	end
 
 	$display("last_dir[2] = %b\n", last_dir[2]);
-	/*
-	 * encode the one-hot values into 3-bit values
-	 */
-	if (last_dir[2] == 5'b00001) begin
-		e_addr.push_back(3'b000);
-	end	
-	else if (last_dir[2] == 5'b00010) begin
-		e_addr.push_back(3'b001);
-	end
-	else if (last_dir[2] == 5'b00100) begin
-		e_addr.push_back(3'b010);
-	end
-	else if (last_dir[2] == 5'b01000) begin
-		e_addr.push_back(3'b011);
-	end
-	else if (last_dir[2] == 5'b10000) begin
-		e_addr.push_back(3'b100);
-	end
-	else begin
-		e_addr.push_back('1);
-	end
    endfunction
 
    function void arbiter_west();
@@ -885,48 +824,40 @@ class router_test;
 	if (n_west == 0) begin
 		/* 
 		 * if a certain output wasn't requested this cycle, set the
-		 * input granted index to all zeros
-		 * (00000 indicates that no one wants to use this output this cycle)
+		 * input granted index to all ones
+		 * (111 indicates that no one wants to use this output this cycle)
 		 */
-		last_dir[3] = '0;
+		w_addr.push_back('1);
 	end
 	else begin
-		bit [4:0] start = '0;
+		bit [2:0] start = '0;
 		bit success = '0;
 		if (n_west > 1) begin
-			start = last_dir[3] + 1'b1;			
+			if ((last_dir[3] == 3'b111) || (last_dir[3] == 3'b100)) begin
+				start = '0;
+			end
+			else begin
+				start = last_dir[3] + 1'b1;
+			end
 		end		
 		while (success == 0) begin
 			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[3] = start;
+				w_addr.push_back(start);
 			end
-			start = start + 1'b1;	
+
+			/* cover the rollover properly */
+			if (start == 3'b100) begin
+				start = '0;
+			end
+			else begin
+				start = start + 1'b1;
+			end
 		end
 	end
 
 	$display("last_dir[3] = %b\n", last_dir[3]);
-	/*
-	 * encode the one-hot values into 3-bit values
-	 */
-	if (last_dir[3] == 5'b00001) begin
-		w_addr.push_back(3'b000);
-	end	
-	else if (last_dir[3] == 5'b00010) begin
-		w_addr.push_back(3'b001);
-	end
-	else if (last_dir[3] == 5'b00100) begin
-		w_addr.push_back(3'b010);
-	end
-	else if (last_dir[3] == 5'b01000) begin
-		w_addr.push_back(3'b011);
-	end
-	else if (last_dir[3] == 5'b10000) begin
-		w_addr.push_back(3'b100);
-	end
-	else begin
-		w_addr.push_back('1);
-	end
    endfunction
 
    function void arbiter_local();
@@ -953,52 +884,43 @@ class router_test;
 		n_local++;
 	end
 
-
 	if (n_local == 0) begin
 		/* 
 		 * if a certain output wasn't requested this cycle, set the
-		 * input granted index to all zeros
-		 * (00000 indicates that no one wants to use this output this cycle)
+		 * input granted index to all ones
+		 * (111 indicates that no one wants to use this output this cycle)
 		 */
-		last_dir[4] = '0;
+		l_addr.push_back('1);
 	end
 	else begin
-		bit [4:0] start = '0;
+		bit [2:0] start = '0;
 		bit success = '0;
 		if (n_local > 1) begin
-			start = last_dir[4] + 1'b1;			
+			if ((last_dir[4] == 3'b111) || (last_dir[4] == 3'b100)) begin
+				start = '0;
+			end
+			else begin
+				start = last_dir[4] + 1'b1;
+			end
 		end		
 		while (success == 0) begin
 			if (request_vec[start] == 1) begin
 				success = 1;
 				last_dir[4] = start;
+				l_addr.push_back(start);
 			end
-			start = start + 1'b1;	
+
+			/* cover the rollover properly */
+			if (start == 3'b100) begin
+				start = '0;
+			end
+			else begin
+				start = start + 1'b1;
+			end
 		end
 	end
 
 	$display("last_dir[4] = %b\n", last_dir[4]);
-	/*
-	 * encode the one-hot values into 3-bit values
-	 */
-	if (last_dir[4] == 5'b00001) begin
-		l_addr.push_back(3'b000);
-	end	
-	else if (last_dir[4] == 5'b00010) begin
-		l_addr.push_back(3'b001);
-	end
-	else if (last_dir[4] == 5'b00100) begin
-		l_addr.push_back(3'b010);
-	end
-	else if (last_dir[4] == 5'b01000) begin
-		l_addr.push_back(3'b011);
-	end
-	else if (last_dir[4] == 5'b10000) begin
-		l_addr.push_back(3'b100);
-	end
-	else begin
-		l_addr.push_back('1);
-	end
    endfunction
 
    function void n_agu_reset();
