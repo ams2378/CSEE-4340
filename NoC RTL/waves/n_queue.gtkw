@@ -1,0 +1,35 @@
+[*]
+[*] GTKWave Analyzer v3.3.34 (w)1999-2012 BSI
+[*] Tue Dec 18 20:15:43 2012
+[*]
+[dumpfile] "/home/ams2378/Documents/CHD/CSEE-4340/NoC RTL/waves/queue.vcd"
+[dumpfile_mtime] "Tue Dec 18 20:09:37 2012"
+[dumpfile_size] 1048
+[savefile] "/home/ams2378/Documents/CHD/CSEE-4340/NoC RTL/waves/test.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*0.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.dut.
+[treeopen] top.dut.inputbuffers_unit.
+[sst_width] 223
+[signals_width] 174
+[sst_expanded] 1
+[sst_vpaned_height] 149
+@28
+top.dut.inputbuffers_unit.n_queue.clk
+top.dut.inputbuffers_unit.n_queue.rst
+@22
+top.dut.inputbuffers_unit.n_queue.data_i[15:0]
+@29
+top.dut.inputbuffers_unit.n_queue.valid_i
+@28
+top.dut.inputbuffers_unit.n_queue.pop_req_i
+@22
+top.dut.inputbuffers_unit.n_queue.data_o[15:0]
+top.dut.inputbuffers_unit.n_queue.req_port_addr[4:0]
+@28
+top.dut.inputbuffers_unit.n_queue.en_o
+[pattern_trace] 1
+[pattern_trace] 0
