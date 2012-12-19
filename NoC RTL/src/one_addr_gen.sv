@@ -39,12 +39,12 @@ module one_addr_gen(
 		.b (myaddr_i),
 		.tc ('0),
 		.dplx ('1),
-		.lt1 (lt_y),
-		.gt1 (gt_y),
-		.eq1 (eq_y),
-		.lt2 (lt_x),
-		.gt2 (gt_x),
-		.eq2 (eq_x)
+		.lt1 (lt_x),
+		.gt1 (gt_x),
+		.eq1 (eq_x),
+		.lt2 (lt_y),
+		.gt2 (gt_y),
+		.eq2 (eq_y)
 	);
 
 	always_comb begin
