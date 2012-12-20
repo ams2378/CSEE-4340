@@ -4,8 +4,8 @@ File Name   : FF.sv
 Function    : Flip flop- modified from basic definition to support matching functionality
 *///-----------------------------------------------------
 
-module register (
-	input clk,
+module arb_reg (
+	//input clk,
 	input rst,
 
 	input en_i,
@@ -15,14 +15,12 @@ module register (
 );
 
 reg [2:0] data;
- 
-reg [2:0] read;
 
 
 /*
  * the write block
  */
-always_ff @(posedge clk) begin
+always_ff @(posedge en_i) begin
 	if (rst)
 		data <= '0;
 	else if (en_i)

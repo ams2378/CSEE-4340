@@ -66,8 +66,8 @@ ifc_agu a ();
 
 assign a.north_q_i = b.north_q_o;
 assign a.south_q_i = b.south_q_o;
-assign a.west_q_i = b.west_q_o;
-assign a.east_q_i = b.east_q_o;
+assign a.west_q_i = b.east_q_o;
+assign a.east_q_i = b.west_q_o;
 assign a.local_q_i = b.local_q_o;
 
 assign a.myaddr_i= ff.read_data_o;

@@ -72,6 +72,15 @@ class router_test;
    bit 		en_l;
 
    /*
+    * arbiter enable queues
+    */
+   bit		en_q_n[$:1];
+   bit		en_q_s[$:1];
+   bit		en_q_e[$:1];
+   bit		en_q_w[$:1];
+   bit		en_q_l[$:1];
+
+   /*
     * the masks for the 5 arbiters
     */
    bit [4:0] 	mask;
@@ -158,7 +167,7 @@ class router_test;
     * signals
     */
    logic [15:0] out_data[5];
-   bit 		valid_data[5];
+   bit 	valid_data[5];
 
    /*
     * instantiate the variables to hold popped values
@@ -177,6 +186,12 @@ class router_test;
       my_qe = {};
       my_qw = {};
       my_ql = {};
+
+      n_en_reset();
+      s_en_reset();
+      e_en_reset();
+      w_en_reset();
+      l_en_reset();
 
       n_agu_reset();
       s_agu_reset();
@@ -206,7 +221,7 @@ class router_test;
 
       last_dir = '{'1, '1, '1, '1, '1};
 
-      grant_arb = '{'1, '1, '1, '1, '1};
+      grant_arb = '{3'b111, 3'b111, 3'b111, 3'b111, 3'b111};
 
       grant = '{'0, '0, '0, '0, '0};
 
@@ -275,7 +290,8 @@ class router_test;
 	 if (grant[0] == 1) begin
 	    north_q_o = my_qn.pop_front();
 	    mask[0] = 1;
-	    count_mask_n++;		
+	    count_mask_n++;
+	    $display("We incremented count_mask_n\n");		
 	 end
 	 else begin
 	    mask[0] = 0;
@@ -284,14 +300,17 @@ class router_test;
       else begin
 	 mask[0] = 1;
 	 if (grant[0] == 1) begin
-	    north_q_o = my_qn.pop_front();			
+	    north_q_o = my_qn.pop_front();		
 	    count_mask_n++;
-	    if (count_mask_n == 5) begin
+	    if (count_mask_n == 6) begin
+	       $display("count_n = 6!\n");
+	       my_qn.push_front(north_q_o);
 	       mask[0] = 0;
 	       count_mask_n = 0;			
 	    end	
 	 end	
       end
+      $display("count_mask_n = %d\n", count_mask_n);
 
       /* south masking/popping */
       if (count_mask_s == 0) begin
@@ -309,7 +328,7 @@ class router_test;
 	 if (grant[1] == 1) begin
 	    south_q_o = my_qs.pop_front();			
 	    count_mask_s++;
-	    if (count_mask_s == 5) begin
+	    if (count_mask_s == 6) begin
 	       mask[1] = 0;
 	       count_mask_s = 0;			
 	    end	
@@ -332,7 +351,7 @@ class router_test;
 	 if (grant[2] == 1) begin
 	    east_q_o = my_qe.pop_front();			
 	    count_mask_e++;
-	    if (count_mask_e == 5) begin
+	    if (count_mask_e == 6) begin
 	       mask[2] = 0;
 	       count_mask_e = 0;			
 	    end	
@@ -355,7 +374,7 @@ class router_test;
 	 if (grant[3] == 1) begin
 	    west_q_o = my_qw.pop_front();			
 	    count_mask_w++;
-	    if (count_mask_w == 5) begin
+	    if (count_mask_w == 6) begin
 	       mask[3] = 0;
 	       count_mask_w = 0;			
 	    end	
@@ -378,7 +397,7 @@ class router_test;
 	 if (grant[4] == 1) begin
 	    local_q_o = my_ql.pop_front();			
 	    count_mask_l++;
-	    if (count_mask_l == 5) begin
+	    if (count_mask_l == 6) begin
 	       mask[4] = 0;
 	       count_mask_l = 0;			
 	    end	
@@ -399,7 +418,7 @@ class router_test;
 	     ((dir_i[ind][7:4] == 4'b0001) || (dir_i[ind][7:4] == 4'b0010) ||
 	      (dir_i[ind][7:4] == 4'b0100) || (dir_i[ind][7:4] == 4'b1000))) begin // valid address
 	    if (dir_i[ind][3:0] != Myaddr_i[3:0]) begin
-	       if (dir_i[ind][3:0] < Myaddr_i[3:0]) begin /* send north */
+	       if (dir_i[ind][3:0] > Myaddr_i[3:0]) begin /* send north */
 		  if (ind == 0) begin
 		     n_agu.push_back(5'b00001);
 		  end
@@ -516,115 +535,116 @@ class router_test;
       bit [4:0] req_w;
       bit [4:0] req_l;
 
-      req_n = {l_agu[0][0], w_agu[0][0], e_agu[0][0], s_agu[0][0], n_agu[0][0]};
+      req_n = {l_agu[$][0], w_agu[$][0], e_agu[$][0], s_agu[$][0], n_agu[$][0]};
       if (count_n == 0) begin
-	 if (req_n == '0) begin
-	    count_n++;
-	    en_n = 0;
+	 if (req_n == 5'b00000) begin
+	    en_q_n.push_back(1'b0);
 	 end
 	 else begin
-	    en_n = 1;
+	    count_n++;
+	    en_q_n.push_back(1'b1);
 	 end
       end
       else begin
-	 en_n = 0;
+	 en_q_n.push_back(1'b0);
 	 if (valid_n_o) begin
 	    count_n++;
-	    if (count_n == 6) begin
+	    if (count_n == 7) begin
+	       $display("SENT MESSAGE!!\n");
 	       count_n = 0;
-	       en_n = 1;
-	       n_agu_reset();
+	       n_en_reset();
+               n_agu_reset();
 	       north_reset();
 	    end
 	 end
       end
 
-      req_s = {l_agu[0][1], w_agu[0][1], e_agu[0][1], s_agu[0][1], n_agu[0][1]};
+      req_s = {l_agu[$][1], w_agu[$][1], e_agu[$][1], s_agu[$][1], n_agu[$][1]};
       if (count_s == 0) begin
-	 if (req_s == '0) begin
-	    count_s++;
-	    en_s = 0;
+	 if (req_s == 5'b00000) begin
+	    en_q_s.push_back(1'b0);
 	 end
 	 else begin
-	    en_s = 1;
+	    count_s++;
+	    en_q_s.push_back(1'b1);
 	 end
       end
       else begin
-	 en_s = 0;
+	 en_q_s.push_back(1'b0);
 	 if (valid_s_o) begin
 	    count_s++;
-	    if (count_s == 6) begin
+	    if (count_s == 7) begin
 	       count_s = 0;
-	       en_s = 1;
+	       s_en_reset();
 	       s_agu_reset();
 	       south_reset();
 	    end
 	 end
       end
 
-      req_e = {l_agu[0][2], w_agu[0][2], e_agu[0][2], s_agu[0][2], n_agu[0][2]};
+      req_e = {l_agu[$][2], w_agu[$][2], e_agu[$][2], s_agu[$][2], n_agu[$][2]};
       if (count_e == 0) begin
-	 if (req_e == '0) begin
-	    count_e++;
-	    en_e = 0;
+	 if (req_e == 5'b00000) begin
+	    en_q_e.push_back(1'b0);
 	 end
 	 else begin
-	    en_e = 1;
+	    count_e++;
+	    en_q_e.push_back(1'b1);
 	 end
       end
       else begin
-	 en_e = 0;
+	 en_q_e.push_back(1'b0);
 	 if (valid_e_o) begin
 	    count_e++;
-	    if (count_e == 6) begin
+	    if (count_e == 7) begin
 	       count_e = 0;
-	       en_e = 1;
+	       e_en_reset();
 	       e_agu_reset();
 	       east_reset();
 	    end
 	 end
       end
 
-      req_w = {l_agu[0][3], w_agu[0][3], e_agu[0][3], s_agu[0][3], n_agu[0][3]};
+      req_w = {l_agu[$][3], w_agu[$][3], e_agu[$][3], s_agu[$][3], n_agu[$][3]};
       if (count_w == 0) begin
-	 if (req_w == '0) begin
-	    count_w++;
-	    en_w = 0;
+	 if (req_w == 5'b00000) begin
+	    en_q_w.push_back(1'b0);
 	 end
 	 else begin
-	    en_w = 1;
+	    count_w++;
+	    en_q_w.push_back(1'b1);
 	 end
       end
       else begin
-	 en_w = 0;
+	 en_q_w.push_back(1'b0);
 	 if (valid_w_o) begin
 	    count_w++;
-	    if (count_w == 6) begin
+	    if (count_w == 7) begin
 	       count_w = 0;
-	       en_w = 1;
+	       w_en_reset();
 	       w_agu_reset();
 	       west_reset();
 	    end
 	 end
       end
 
-      req_l = {l_agu[0][4], w_agu[0][4], e_agu[0][4], s_agu[0][4], n_agu[0][4]};
+      req_l = {l_agu[$][4], w_agu[$][4], e_agu[$][4], s_agu[$][4], n_agu[$][4]};
       if (count_l == 0) begin
-	 if (req_l == '0) begin
-	    count_l++;
-	    en_l = 0;
+	 if (req_l == 5'b00000) begin
+	    en_q_l.push_back(1'b0);
 	 end
 	 else begin
-	    en_l = 1;
+	    count_l++;
+	    en_q_l.push_back(1'b1);
 	 end
       end
       else begin
-	 en_l = 0;
+	 en_q_l.push_back(1'b0);
 	 if (valid_l_o) begin
 	    count_l++;
-	    if (count_l == 6) begin
+	    if (count_l == 7) begin
 	       count_l = 0;
-	       en_l = 1;
+	       l_en_reset();
 	       l_agu_reset();
 	       local_reset();
 	    end
@@ -635,27 +655,28 @@ class router_test;
    function void arbiter_north();
       bit [4:0] request_vec = {l_agu[0][0], w_agu[0][0], e_agu[0][0], s_agu[0][0], n_agu[0][0]};
 
+      $display("request_vec = %b\n", request_vec);
+
       /* mask the bits */
       request_vec = request_vec ^ mask;
 
       n_north = 0;
       /* count the number of conflicts in the north output request */
-      if (request_vec[0] == 1) begin
+      if (request_vec[0] == 1'b1) begin
 	 n_north++;
       end
-      if (request_vec[1] == 1) begin
+      if (request_vec[1] == 1'b1) begin
 	 n_north++;
       end
-      if (request_vec[2] == 1) begin
+      if (request_vec[2] == 1'b1) begin
 	 n_north++;
       end
-      if (request_vec[3] == 1) begin
+      if (request_vec[3] == 1'b1) begin
 	 n_north++;
       end
-      if (request_vec[4] == 1) begin
+      if (request_vec[4] == 1'b1) begin
 	 n_north++;
       end
-
 
       if (n_north == 0) begin
 	 /* 
@@ -702,22 +723,21 @@ class router_test;
 
       n_south = 0;
       /* count the number of conflicts in the north output request */
-      if (request_vec[0] == 1) begin
+      if (request_vec[0] == 1'b1) begin
 	 n_south++;
       end
-      if (request_vec[1] == 1) begin
+      if (request_vec[1] == 1'b1) begin
 	 n_south++;
       end
-      if (request_vec[2] == 1) begin
+      if (request_vec[2] == 1'b1) begin
 	 n_south++;
       end
-      if (request_vec[3] == 1) begin
+      if (request_vec[3] == 1'b1) begin
 	 n_south++;
       end
-      if (request_vec[4] == 1) begin
+      if (request_vec[4] == 1'b1) begin
 	 n_south++;
       end
-
 
       if (n_south == 0) begin
 	 /* 
@@ -743,6 +763,7 @@ class router_test;
 	       success = 1;
 	       last_dir[1] = start;
 	       s_addr.push_back(start);
+	       $display("Client %b granted south output!\n", start);
 	    end
 
 	    /* cover the rollover properly */
@@ -764,19 +785,19 @@ class router_test;
 
       n_east = 0;
       /* count the number of conflicts in the north output request */
-      if (request_vec[0] == 1) begin
+      if (request_vec[0] == 1'b1) begin
 	 n_east++;
       end
-      if (request_vec[1] == 1) begin
+      if (request_vec[1] == 1'b1) begin
 	 n_east++;
       end
-      if (request_vec[2] == 1) begin
+      if (request_vec[2] == 1'b1) begin
 	 n_east++;
       end
-      if (request_vec[3] == 1) begin
+      if (request_vec[3] == 1'b1) begin
 	 n_east++;
       end
-      if (request_vec[4] == 1) begin
+      if (request_vec[4] == 1'b1) begin
 	 n_east++;
       end
 
@@ -825,19 +846,19 @@ class router_test;
 
       n_west = 0;
       /* count the number of conflicts in the north output request */
-      if (request_vec[0] == 1) begin
+      if (request_vec[0] == 1'b1) begin
 	 n_west++;
       end
-      if (request_vec[1] == 1) begin
+      if (request_vec[1] == 1'b1) begin
 	 n_west++;
       end
-      if (request_vec[2] == 1) begin
+      if (request_vec[2] == 1'b1) begin
 	 n_west++;
       end
-      if (request_vec[3] == 1) begin
+      if (request_vec[3] == 1'b1) begin
 	 n_west++;
       end
-      if (request_vec[4] == 1) begin
+      if (request_vec[4] == 1'b1) begin
 	 n_west++;
       end
 
@@ -887,19 +908,19 @@ class router_test;
 
       n_local = 0;
       /* count the number of conflicts in the north output request */
-      if (request_vec[0] == 1) begin
+      if (request_vec[0] == 1'b1) begin
 	 n_local++;
       end
-      if (request_vec[1] == 1) begin
+      if (request_vec[1] == 1'b1) begin
 	 n_local++;
       end
-      if (request_vec[2] == 1) begin
+      if (request_vec[2] == 1'b1) begin
 	 n_local++;
       end
-      if (request_vec[3] == 1) begin
+      if (request_vec[3] == 1'b1) begin
 	 n_local++;
       end
-      if (request_vec[4] == 1) begin
+      if (request_vec[4] == 1'b1) begin
 	 n_local++;
       end
 
@@ -939,6 +960,36 @@ class router_test;
 	 end
       end
    endfunction
+
+   function void n_en_reset();
+	en_q_n = {};
+	en_q_n.push_back(1'b0);
+	en_q_n.push_back(1'b0);
+   endfunction;
+
+   function void s_en_reset();
+	en_q_s = {};
+	en_q_s.push_back(1'b0);
+	en_q_s.push_back(1'b0);
+   endfunction;
+
+   function void e_en_reset();
+	en_q_e = {};
+	en_q_e.push_back(1'b0);
+	en_q_e.push_back(1'b0);
+   endfunction;
+
+   function void w_en_reset();
+	en_q_w = {};
+	en_q_w.push_back(1'b0);
+	en_q_w.push_back(1'b0);
+   endfunction;
+
+   function void l_en_reset();
+	en_q_l = {};
+	en_q_l.push_back(1'b0);
+	en_q_l.push_back(1'b0);
+   endfunction;
 
    function void n_agu_reset();
       n_agu = {};
@@ -1001,6 +1052,12 @@ class router_test;
    endfunction
 
    function void pop_queues();
+      en_q_n.pop_front();
+      en_q_s.pop_front();
+      en_q_e.pop_front();
+      en_q_w.pop_front();
+      en_q_l.pop_front();
+
       n_agu.pop_front();
       s_agu.pop_front();
       e_agu.pop_front();
@@ -1045,7 +1102,7 @@ class router_test;
       grant_arb[3] = w_addr[0];
       grant_arb[4] = l_addr[0];
 
-      grant = '{'0, '0, '0, '0, '0};
+      grant = {'0, '0, '0, '0, '0};
       n_incr_o = '0;
       s_incr_o = '0;
       e_incr_o = '0;
@@ -1053,8 +1110,9 @@ class router_test;
       l_incr_o = '0;
 
       for (int ind = 0; ind < 5; ind++) begin
+	 valid_data[ind] = 1'b0;
 	 if ((grant_arb[ind] != 3'b111) && count_en[ind]) begin
-	    valid_data[ind] = '1;
+	    valid_data[ind] = 1'b1;
 	    if (grant_arb[ind] == 3'b000) begin
 	       grant[0] = '1;
 	       n_incr_o = '1;
@@ -1083,7 +1141,6 @@ class router_test;
       valid_e_o = valid_data[2];
       valid_w_o = valid_data[3];
       valid_l_o = valid_data[4];
-      $display("valid_data = %b%b%b%b%b\n", valid_data[4], valid_data[3], valid_data[2], valid_data[1], valid_data[0]);
    endfunction
 
    function void xbar();
@@ -1122,50 +1179,72 @@ class router_test;
       else begin
 	 pop_queues();
 	 fsm();
-	 make_enables();
 	 input_buffer();
 	 address_gen();
+	 make_enables();
 
-	 if (en_n) begin
+	 if (en_q_n[0]) begin
 	    arbiter_north();
 	 end
 	 else begin
-	    n_addr.push_back(n_addr[0]);
+	    if (count_n < 6) begin
+	    	n_addr.push_back(n_addr[0]);
+	    end
+	    else begin
+		n_addr.push_back(3'b111);
+	    end
 	 end
-	 if (en_s) begin
+	 if (en_q_s[0]) begin
 	    arbiter_south();
 	 end
 	 else begin
-	    s_addr.push_back(s_addr[0]);
+	    if (count_s < 6) begin
+	    	s_addr.push_back(s_addr[0]);
+	    end
+	    else begin
+	    	s_addr.push_back(3'b111);
+	    end
 	 end
-	 if (en_e) begin
+	 if (en_q_e[0]) begin
 	    arbiter_east();
 	 end
 	 else begin
-	    e_addr.push_back(e_addr[0]);
+	    if (count_e < 6) begin
+	    	e_addr.push_back(e_addr[0]);
+	    end
+	    else begin
+	    	e_addr.push_back(3'b111);
+	    end
 	 end
-	 if (en_w) begin
+	 if (en_q_w[0]) begin
 	    arbiter_west();
 	 end
 	 else begin
-	    w_addr.push_back(w_addr[0]);
+	    if (count_w < 6) begin
+	    	w_addr.push_back(w_addr[0]);
+	    end
+	    else begin
+	    	w_addr.push_back(3'b111);
+	    end
 	 end
-	 if (en_l) begin
+	 if (en_q_l[0]) begin
 	    arbiter_local();
 	 end
 	 else begin
-	    l_addr.push_back(l_addr[0]);
+	    if (count_l < 6) begin
+	    	l_addr.push_back(l_addr[0]);
+	    end
+	    else begin
+	    	l_addr.push_back(3'b111);
+	    end
 	 end
 
 	 fcc();
 	 fcu();
 	 xbar();
-
-	 $display("End of Cycle\n");
-	 $display("n_agu[%d] = %b\n", 0, n_agu[0]);
-	 $display("n_agu[%d] = %b\n", 1, n_agu[$]);
-	 $display("n_addr[%d] = %b\n", 0, n_addr[0]);
-	 $display("n_addr[%d] = %b\n", 1, n_addr[$]);
+	 $display("AGU Output Arbiter Enables = %b%b%b%b%b\n", en_q_l[$], en_q_w[$], en_q_e[$], en_q_s[$], en_q_n[$]);
+	 $display("ARB Input Enables = %b%b%b%b%b\n", en_q_l[0], en_q_w[0], en_q_e[0], en_q_s[0], en_q_n[0]);
+         $display("North Queue Head %h\n", my_qn[0]);
       end
    endfunction
 endclass

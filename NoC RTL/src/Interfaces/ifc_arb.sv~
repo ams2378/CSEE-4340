@@ -64,11 +64,11 @@ interface ifc_arb ();
    		input valid_w_i,
    		input valid_l_i,
 
-		output grant_n_o,
-   		output grant_s_o,
-   		output grant_e_o,
-   		output grant_w_o,
-   		output grant_l_o,
+		output grant_n_o;
+   		output grant_s_o;
+   		output grant_e_o;
+   		output grant_w_o;
+   		output grant_l_o;
 
 		output req_port_addr1_o,
 		output req_port_addr2_o, 
