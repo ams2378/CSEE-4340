@@ -414,7 +414,7 @@ class router_test;
 	     ((dir_i[ind][7:4] == 4'b0001) || (dir_i[ind][7:4] == 4'b0010) ||
 	      (dir_i[ind][7:4] == 4'b0100) || (dir_i[ind][7:4] == 4'b1000))) begin // valid address
 	    if (dir_i[ind][3:0] != Myaddr_i[3:0]) begin
-	       if (dir_i[ind][3:0] < Myaddr_i[3:0]) begin /* send north */
+	       if (dir_i[ind][3:0] > Myaddr_i[3:0]) begin /* send north */
 		  if (ind == 0) begin
 		     n_agu.push_back(5'b00001);
 		  end
@@ -534,19 +534,20 @@ class router_test;
       req_n = {l_agu[$][0], w_agu[$][0], e_agu[$][0], s_agu[$][0], n_agu[$][0]};
       if (count_n == 0) begin
 	 if (req_n == 5'b00000) begin
-	    en_n = 0;
+	    en_q_n.push_back(1'b0);
 	 end
 	 else begin
 	    count_n++;
-	    en_n = 1;
+	    en_q_n.push_back(1'b1);
 	 end
       end
       else begin
-	 en_n = 0;
+	 en_q_n.push_back(1'b0);
 	 if (valid_n_o) begin
 	    count_n++;
 	    if (count_n == 6) begin
 	       count_n = 0;
+	       n_en_reset();
 	       n_agu_reset();
 	       north_reset();
 	    end
@@ -554,7 +555,7 @@ class router_test;
       end
 
       req_s = {l_agu[$][1], w_agu[$][1], e_agu[$][1], s_agu[$][1], n_agu[$][1]};
-      $display("req_s = %b%b%b%b%b\n", req_s[4], req_s[3], req_s[2], req_s[1], req_s[0]);
+      //$display("req_s = %b%b%b%b%b\n", req_s[4], req_s[3], req_s[2], req_s[1], req_s[0]);
       if (count_s == 0) begin
 	 if (req_s == 5'b00000) begin
 	    en_q_s.push_back(1'b0);
@@ -580,19 +581,20 @@ class router_test;
       req_e = {l_agu[$][2], w_agu[$][2], e_agu[$][2], s_agu[$][2], n_agu[$][2]};
       if (count_e == 0) begin
 	 if (req_e == 5'b00000) begin
-	    en_e = 0;
+	    en_q_e.push_back(1'b0);
 	 end
 	 else begin
 	    count_e++;
-	    en_e = 1;
+	    en_q_e.push_back(1'b1);
 	 end
       end
       else begin
-	 en_e = 0;
+	 en_q_e.push_back(1'b0);
 	 if (valid_e_o) begin
 	    count_e++;
 	    if (count_e == 6) begin
 	       count_e = 0;
+	       e_en_reset();
 	       e_agu_reset();
 	       east_reset();
 	    end
@@ -602,19 +604,20 @@ class router_test;
       req_w = {l_agu[$][3], w_agu[$][3], e_agu[$][3], s_agu[$][3], n_agu[$][3]};
       if (count_w == 0) begin
 	 if (req_w == 5'b00000) begin
-	    en_w = 0;
+	    en_q_w.push_back(1'b0);
 	 end
 	 else begin
 	    count_w++;
-	    en_w = 1;
+	    en_q_w.push_back(1'b1);
 	 end
       end
       else begin
-	 en_w = 0;
+	 en_q_w.push_back(1'b0);
 	 if (valid_w_o) begin
 	    count_w++;
 	    if (count_w == 6) begin
 	       count_w = 0;
+	       w_en_reset();
 	       w_agu_reset();
 	       west_reset();
 	    end
@@ -624,19 +627,20 @@ class router_test;
       req_l = {l_agu[$][4], w_agu[$][4], e_agu[$][4], s_agu[$][4], n_agu[$][4]};
       if (count_l == 0) begin
 	 if (req_l == 5'b00000) begin
-	    en_l = 0;
+	    en_q_l.push_back(1'b0);
 	 end
 	 else begin
 	    count_l++;
-	    en_l = 1;
+	    en_q_l.push_back(1'b1);
 	 end
       end
       else begin
-	 en_l = 0;
+	 en_q_l.push_back(1'b0);
 	 if (valid_l_o) begin
 	    count_l++;
 	    if (count_l == 6) begin
 	       count_l = 0;
+	       l_en_reset();
 	       l_agu_reset();
 	       local_reset();
 	    end
@@ -708,8 +712,8 @@ class router_test;
 
    function void arbiter_south();
       bit [4:0] request_vec = {l_agu[0][1], w_agu[0][1], e_agu[0][1], s_agu[0][1], n_agu[0][1]};
-      $display("request_vec = %b%b%b%b%b\n", request_vec[4], request_vec[3], request_vec[2], request_vec[1], request_vec[0]);
-      $display("mask = %b%b%b%b%b\n", mask[4], mask[3], mask[2], mask[1], mask[0]);
+      //$display("request_vec = %b%b%b%b%b\n", request_vec[4], request_vec[3], request_vec[2], request_vec[1], request_vec[0]);
+      //$display("mask = %b%b%b%b%b\n", mask[4], mask[3], mask[2], mask[1], mask[0]);
 
       /* mask the bits */
       request_vec = request_vec ^ mask;
@@ -1133,7 +1137,7 @@ class router_test;
       valid_e_o = valid_data[2];
       valid_w_o = valid_data[3];
       valid_l_o = valid_data[4];
-      $display("valid_data = %b%b%b%b%b\n", valid_data[4], valid_data[3], valid_data[2], valid_data[1], valid_data[0]);
+      //$display("valid_data = %b%b%b%b%b\n", valid_data[4], valid_data[3], valid_data[2], valid_data[1], valid_data[0]);
    endfunction
 
    function void xbar();
@@ -1207,18 +1211,18 @@ class router_test;
 	    l_addr.push_back(l_addr[0]);
 	 end
 	
-	 $display("AGU Ouput Enables = %b%b%b%b%b\n", en_q_l[$], en_q_w[$], en_q_e[$], en_q_s[$], en_q_n[$]);
-	 $display("Arbiter Input Enables = %b%b%b%b%b\n", en_q_l[0], en_q_w[0], en_q_e[0], en_q_s[0], en_q_n[0]);
+	 //$display("AGU Ouput Enables = %b%b%b%b%b\n", en_q_l[$], en_q_w[$], en_q_e[$], en_q_s[$], en_q_n[$]);
+	 //$display("Arbiter Input Enables = %b%b%b%b%b\n", en_q_l[0], en_q_w[0], en_q_e[0], en_q_s[0], en_q_n[0]);
 	 
 	 fcc();
 	 fcu();
 	 xbar();
 
-	 $display("End of Cycle\n");
-	 $display("n_agu[%d] = %b\n", 0, n_agu[0]);
-	 $display("n_agu[%d] = %b\n", 1, n_agu[$]);
-	 $display("s_addr[%d] = %b\n", 0, s_addr[0]);
-	 $display("s_addr[%d] = %b\n", 1, s_addr[$]);
+	 //$display("End of Cycle\n");
+	 //$display("n_agu[%d] = %b\n", 0, n_agu[0]);
+	 //$display("n_agu[%d] = %b\n", 1, n_agu[$]);
+	 //$display("s_addr[%d] = %b\n", 0, s_addr[0]);
+	 //$display("s_addr[%d] = %b\n", 1, s_addr[$]);
       end
    endfunction
 endclass

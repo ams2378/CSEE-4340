@@ -41,11 +41,11 @@ class router_check; //checker class
       bit 				 valid_w_passed = (dut_valid_w_o == bench_valid_w_o);
       bit 				 valid_l_passed = (dut_valid_l_o == bench_valid_l_o);
 
-      bit 				 north_passed = (dut_north_o == bench_north_o);
-      bit 				 south_passed = (dut_south_o == bench_south_o);
-      bit 				 east_passed = (dut_east_o == bench_east_o);
-      bit 				 west_passed = (dut_west_o == bench_west_o);                   
-      bit 				 local_passed = (dut_local_o == bench_local_o);
+      bit 				 north_passed = ((dut_valid_n_o == 0) && (bench_valid_n_o == 0)) ||(dut_north_o == bench_north_o);
+      bit 				 south_passed = ((dut_valid_s_o == 0) && (bench_valid_s_o == 0)) ||(dut_south_o == bench_south_o);
+      bit 				 east_passed = ((dut_valid_e_o == 0) && (bench_valid_e_o == 0)) ||(dut_east_o == bench_east_o);
+      bit 				 west_passed = ((dut_valid_w_o == 0) && (bench_valid_w_o == 0)) ||(dut_west_o == bench_west_o);                   
+      bit 				 local_passed = ((dut_valid_l_o == 0) && (bench_valid_l_o == 0)) ||(dut_local_o == bench_local_o);
 
       bit 				 incr_n_passed = (dut_incr_n_o == bench_incr_n_o); 
       bit 				 incr_s_passed = (dut_incr_s_o == bench_incr_s_o);

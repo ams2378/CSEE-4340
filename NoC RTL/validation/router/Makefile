@@ -32,7 +32,7 @@ bench:
         
 wave:
 	vcs -vpd2vcd vcdplus.vpd waveform.vcd
-#	gtkwave waveform.vcd &
+	gtkwave waveform.vcd &
 
 clean:
 	rm -rf *.o *~ *.vpd sim* csrc DVEfiles *daidir *exe *.key
