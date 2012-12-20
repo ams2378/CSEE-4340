@@ -73,7 +73,7 @@ pop_req_gen pop_north (
 	.address_route_l(d.address_route_l_i),
 	
 
-	.q_address(3'b001),
+	.q_address(3'b000),
 	
 	.valid_n(d.valid_n_i),
 	.valid_s(d.valid_s_i),
@@ -92,7 +92,7 @@ pop_req_gen pop_south (
 	.address_route_w(d.address_route_w_i),
 	.address_route_l(d.address_route_l_i),
 
-	.q_address(3'b010),
+	.q_address(3'b001),
 	
 	.valid_n(d.valid_n_i),
 	.valid_s(d.valid_s_i),
@@ -111,7 +111,7 @@ pop_req_gen pop_east (
 	.address_route_w(d.address_route_w_i),
 	.address_route_l(d.address_route_l_i),
 
-	.q_address(3'b100),
+	.q_address(3'b010),
 	
 	.valid_n(d.valid_n_i),
 	.valid_s(d.valid_s_i),
@@ -149,7 +149,7 @@ pop_req_gen pop_local (
 	.address_route_w(d.address_route_w_i),
 	.address_route_l(d.address_route_l_i),
 
-	.q_address(3'b101),
+	.q_address(3'b100),
 	
 	.valid_n(d.valid_n_i),
 	.valid_s(d.valid_s_i),
