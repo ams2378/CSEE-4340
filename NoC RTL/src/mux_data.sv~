@@ -10,11 +10,11 @@ module mux_data  (
 	output [15:0] data_o
 );
 
-logic north = 3'b000;
-logic south = 3'b001;
-logic east = 3'b010;
+logic north = 3'b001;
+logic south = 3'b010;
+logic east = 3'b100;
 logic west = 3'b011;
-logic loc = 3'b100;
+logic loc = 3'b101;
 logic none = 3'b111;
 
 logic [15:0] data;

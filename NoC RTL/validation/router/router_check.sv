@@ -212,7 +212,7 @@ class router_check; //checker class
             $display("bench value: %b", tb_incr_l_q[0]);
 	 end
 
-	 //$exit();
+	 $exit();
       end
       return passed;
    endfunction

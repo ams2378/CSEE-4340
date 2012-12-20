@@ -40,6 +40,13 @@ assign b.pop_req_e_i=x.pop_req_e;
 assign b.pop_req_w_i=x.pop_req_w; 
 assign b.pop_req_l_i=x.pop_req_l; 
 
+assign b.grant_n_i = ar.grant_n_o;
+assign b.grant_s_i = ar.grant_s_o;
+assign b.grant_e_i = ar.grant_e_o;
+assign b.grant_w_i = ar.grant_w_o;
+assign b.grant_l_i = ar.grant_l_o;
+
+
 
 
 /*
@@ -214,52 +221,6 @@ assign x.east_q_i= b.east_q_o;
 assign x.west_q_i= b.west_q_o;
 assign x.local_q_i= b.local_q_o;
 
-
-/* instantiate output register*/
-out_reg output_reg(
-	.clk(d.clk),
-	.rst(d.rst),
-	
-	.north_in(x.north_o),
-	.south_in(x.south_o),
-	.east_in(x.east_o),
-	.west_in(x.west_o),
-	.local_in(x.local_o),
-
-	.n_incr_i(x.pop_req_n),
-	.s_incr_i(x.pop_req_s),
-	.e_incr_i(x.pop_req_e),
-	.w_incr_i(x.pop_req_w),
-	.l_incr_i(x.pop_req_l),
-
-	.valid_n_i(f.grant_access_north_o),
-	.valid_s_i(f.grant_access_south_o),
-	.valid_e_i(f.grant_access_east_o),
-	.valid_w_i(f.grant_access_west_o),
-	.valid_l_i(f.grant_access_local_o),
-
-	.north_out(d.north_o),	
-	.south_out(d.south_o),
-	.east_out(d.east_o),
-	.west_out(d.west_o),
-	.local_out(d.local_o),
-
-	.n_incr_o(d.n_incr_o),
-	.s_incr_o(d.s_incr_o),
-	.e_incr_o(d.e_incr_o),
-	.w_incr_o(d.w_incr_o),
-	.l_incr_o(d.l_incr_o),
-
-	.valid_n_o(d.valid_n_o),
-	.valid_s_o(d.valid_s_o),
-	.valid_e_o(d.valid_e_o),
-	.valid_w_o(d.valid_w_o),
-	.valid_l_o(d.valid_l_o)
-);
-
-
-/*
-
 assign d.north_o = x.north_o;
 assign d.south_o = x.south_o;
 assign d.east_o = x.east_o;
@@ -272,13 +233,13 @@ assign d.e_incr_o = x.pop_req_e;
 assign d.w_incr_o = x.pop_req_w;
 assign d.l_incr_o = x.pop_req_l;
 
-assign d.valid_n_o = f.grant_access_north_o;
-assign d.valid_s_o = f.grant_access_south_o;
-assign d.valid_e_o = f.grant_access_east_o;
-assign d.valid_w_o = f.grant_access_west_o;
-assign d.valid_l_o = f.grant_access_local_o;
+assign d.valid_n_o = b.valid_n_o;
+assign d.valid_s_o = b.valid_s_o;
+assign d.valid_e_o = b.valid_e_o;
+assign d.valid_w_o = b.valid_w_o;
+assign d.valid_l_o = b.valid_l_o;
 
-*/
+
 /*
  * instantiate the xbar */
 xbar xbar_unit(

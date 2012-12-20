@@ -41,11 +41,11 @@ interface ifc_buffer ();
    logic mask_4;
    logic mask_5;
 
-   logic valid_n_o;
-   logic valid_s_o;
-   logic valid_e_o;
-   logic valid_w_o;
-   logic valid_l_o;
+   logic valid_n_o,
+   logic valid_s_o,
+   logic valid_e_o,
+   logic valid_w_o,
+   logic valid_l_o,
 
    logic grant_n_i;
    logic grant_s_i;
