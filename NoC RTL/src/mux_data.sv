@@ -24,8 +24,8 @@ always_comb begin
 	case (address_route_i) 
 		3'b001:	data = data_n_i;
 		3'b010:	data = data_s_i;
-		3'b100: 	data = data_e_i;
-		3'b011:	data = data_w_i;
+		3'b011: 	data = data_e_i;
+		3'b100:	data = data_w_i;
 		3'b101: 	data = data_l_i;
 		3'b111: 	data = '0;   	
 	endcase

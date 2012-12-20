@@ -66,8 +66,8 @@ ifc_agu a ();
 
 assign a.north_q_i = b.north_q_o;
 assign a.south_q_i = b.south_q_o;
-assign a.west_q_i = b.east_q_o;
-assign a.east_q_i = b.west_q_o;
+assign a.west_q_i = b.west_q_o;
+assign a.east_q_i = b.east_q_o;
 assign a.local_q_i = b.local_q_o;
 
 assign a.myaddr_i= ff.read_data_o;
@@ -156,6 +156,14 @@ assign f.credit_en_south_i = c.credit_en_south_o;
 assign f.credit_en_east_i  = c.credit_en_east_o;
 assign f.credit_en_west_i  = c.credit_en_west_o;
 assign f.credit_en_local_i = c.credit_en_local_o;
+
+assign f.clk = d.clk;
+assign f.granted_n = ar.grant_n_o;
+assign f.granted_s = ar.grant_s_o;
+assign f.granted_e = ar.grant_e_o;
+assign f.granted_w = ar.grant_w_o;
+assign f.granted_l = ar.grant_l_o;
+
    
 /*
  * instantiate the fcu */
@@ -233,11 +241,11 @@ assign d.e_incr_o = b.valid_e_o; //x.pop_req_e;
 assign d.w_incr_o = b.valid_w_o; //x.pop_req_w;
 assign d.l_incr_o = b.valid_l_o; //x.pop_req_l;
 
-assign d.valid_n_o = b.valid_n_o;
-assign d.valid_s_o = b.valid_s_o;
-assign d.valid_e_o = b.valid_e_o;
-assign d.valid_w_o = b.valid_w_o;
-assign d.valid_l_o = b.valid_l_o;
+assign d.valid_n_o = f.valid_north_o;
+assign d.valid_s_o = f.valid_south_o;
+assign d.valid_e_o = f.valid_east_o;
+assign d.valid_w_o = f.valid_west_o;
+assign d.valid_l_o = f.valid_local_o;
 
 
 /*
