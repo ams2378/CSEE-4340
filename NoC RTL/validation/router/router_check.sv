@@ -86,8 +86,6 @@ class router_check; //checker class
       
 	bit passed;	
 
-	pop_queues();
-
 	tb_valid_n_q.push_back(bench_valid_n_o);
 	tb_valid_s_q.push_back(bench_valid_s_o);
 	tb_valid_e_q.push_back(bench_valid_e_o);
@@ -102,6 +100,8 @@ class router_check; //checker class
 	tb_incr_e_q.push_back(bench_incr_e_o);
 	tb_incr_w_q.push_back(bench_incr_w_o);
 	tb_incr_l_q.push_back(bench_incr_l_o);
+
+	pop_queues();
 
 	//valid_n_passed = (dut_valid_n_o == tb_valid_n_q[0]);
 	valid_n_passed = (dut_valid_n_o == tb_valid_n_q[0]);
@@ -127,13 +127,6 @@ class router_check; //checker class
       	 
       pass 			  =	passed;
 
-	$display("DUT value = %h\n", dut_north_o);
-	$display("DUT valid = %h\n", dut_valid_n_o);
-
-	$display("Bench value = %h\n", bench_north_o);
-	$display("Old Bench valid = %h\n", tb_valid_n_q[$]);
-	$display("Current Bench valid = %h\n", tb_valid_n_q[0]);
-	//$display("Bench value = %h\n", tb_n_q[0]);
       if (passed)	begin
 	 if(verbose) $display("%t : pass \n", $realtime);
       end

@@ -129,11 +129,11 @@ class router_test;
    /*
     * queues for storing the address source
     */
-   bit [2:0] 	n_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
-   bit [2:0] 	s_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
-   bit [2:0] 	e_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
-   bit [2:0] 	w_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
-   bit [2:0] 	l_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
+   bit [2:0] 	n_addr[$:1] = '{3'b111, 3'b111};
+   bit [2:0] 	s_addr[$:1] = '{3'b111, 3'b111};
+   bit [2:0] 	e_addr[$:1] = '{3'b111, 3'b111};
+   bit [2:0] 	w_addr[$:1] = '{3'b111, 3'b111};
+   bit [2:0] 	l_addr[$:1] = '{3'b111, 3'b111};
 
    /*
     * queues for storing the AGU output/Arbiter input
@@ -290,7 +290,8 @@ class router_test;
 	 if (grant[0] == 1) begin
 	    north_q_o = my_qn.pop_front();
 	    mask[0] = 1;
-	    count_mask_n++;		
+	    count_mask_n++;
+	    $display("We incremented count_mask_n\n");		
 	 end
 	 else begin
 	    mask[0] = 0;
@@ -299,14 +300,17 @@ class router_test;
       else begin
 	 mask[0] = 1;
 	 if (grant[0] == 1) begin
-	    north_q_o = my_qn.pop_front();			
+	    north_q_o = my_qn.pop_front();		
 	    count_mask_n++;
 	    if (count_mask_n == 6) begin
+	       $display("count_n = 6!\n");
+	       my_qn.push_front(north_q_o);
 	       mask[0] = 0;
 	       count_mask_n = 0;			
 	    end	
 	 end	
       end
+      $display("count_mask_n = %d\n", count_mask_n);
 
       /* south masking/popping */
       if (count_mask_s == 0) begin
@@ -549,14 +553,13 @@ class router_test;
 	       $display("SENT MESSAGE!!\n");
 	       count_n = 0;
 	       n_en_reset();
-	       n_agu_reset();
+               n_agu_reset();
 	       north_reset();
 	    end
 	 end
       end
 
       req_s = {l_agu[$][1], w_agu[$][1], e_agu[$][1], s_agu[$][1], n_agu[$][1]};
-      //$display("req_s = %b%b%b%b%b\n", req_s[4], req_s[3], req_s[2], req_s[1], req_s[0]);
       if (count_s == 0) begin
 	 if (req_s == 5'b00000) begin
 	    en_q_s.push_back(1'b0);
@@ -652,6 +655,8 @@ class router_test;
    function void arbiter_north();
       bit [4:0] request_vec = {l_agu[0][0], w_agu[0][0], e_agu[0][0], s_agu[0][0], n_agu[0][0]};
 
+      $display("request_vec = %b\n", request_vec);
+
       /* mask the bits */
       request_vec = request_vec ^ mask;
 
@@ -672,7 +677,6 @@ class router_test;
       if (request_vec[4] == 1'b1) begin
 	 n_north++;
       end
-
 
       if (n_north == 0) begin
 	 /* 
@@ -1021,35 +1025,30 @@ class router_test;
       n_addr = {};
       n_addr.push_back(3'b111);
       n_addr.push_back(3'b111);
-      //n_addr.push_back(3'b111);
    endfunction
 
    function void south_reset();
       s_addr = {};
       s_addr.push_back(3'b111);
       s_addr.push_back(3'b111);
-      //s_addr.push_back(3'b111);
    endfunction
 
    function void east_reset();
       e_addr = {};
       e_addr.push_back(3'b111);
       e_addr.push_back(3'b111);
-      //e_addr.push_back(3'b111);
    endfunction
 
    function void west_reset();
       w_addr = {};
       w_addr.push_back(3'b111);
       w_addr.push_back(3'b111);
-      //w_addr.push_back(3'b111);
    endfunction
 
    function void local_reset();
       l_addr = {};
       l_addr.push_back(3'b111);
       l_addr.push_back(3'b111);
-      //l_addr.push_back(3'b111);
    endfunction
 
    function void pop_queues();
@@ -1103,7 +1102,6 @@ class router_test;
       grant_arb[3] = w_addr[0];
       grant_arb[4] = l_addr[0];
 
-      $display("grant_arb = %b\n", grant_arb[0]);
       grant = {'0, '0, '0, '0, '0};
       n_incr_o = '0;
       s_incr_o = '0;
@@ -1112,9 +1110,9 @@ class router_test;
       l_incr_o = '0;
 
       for (int ind = 0; ind < 5; ind++) begin
-	 valid_data[ind] = '0;
+	 valid_data[ind] = 1'b0;
 	 if ((grant_arb[ind] != 3'b111) && count_en[ind]) begin
-	    valid_data[ind] = '1;
+	    valid_data[ind] = 1'b1;
 	    if (grant_arb[ind] == 3'b000) begin
 	       grant[0] = '1;
 	       n_incr_o = '1;
@@ -1143,7 +1141,6 @@ class router_test;
       valid_e_o = valid_data[2];
       valid_w_o = valid_data[3];
       valid_l_o = valid_data[4];
-      //$display("valid_data = %b%b%b%b%b\n", valid_data[4], valid_data[3], valid_data[2], valid_data[1], valid_data[0]);
    endfunction
 
    function void xbar();
@@ -1190,45 +1187,64 @@ class router_test;
 	    arbiter_north();
 	 end
 	 else begin
-	    n_addr.push_back(n_addr[0]);
+	    if (count_n < 6) begin
+	    	n_addr.push_back(n_addr[0]);
+	    end
+	    else begin
+		n_addr.push_back(3'b111);
+	    end
 	 end
 	 if (en_q_s[0]) begin
 	    arbiter_south();
 	 end
 	 else begin
-	    s_addr.push_back(s_addr[0]);
+	    if (count_s < 6) begin
+	    	s_addr.push_back(s_addr[0]);
+	    end
+	    else begin
+	    	s_addr.push_back(3'b111);
+	    end
 	 end
 	 if (en_q_e[0]) begin
 	    arbiter_east();
 	 end
 	 else begin
-	    e_addr.push_back(e_addr[0]);
+	    if (count_e < 6) begin
+	    	e_addr.push_back(e_addr[0]);
+	    end
+	    else begin
+	    	e_addr.push_back(3'b111);
+	    end
 	 end
 	 if (en_q_w[0]) begin
 	    arbiter_west();
 	 end
 	 else begin
-	    w_addr.push_back(w_addr[0]);
+	    if (count_w < 6) begin
+	    	w_addr.push_back(w_addr[0]);
+	    end
+	    else begin
+	    	w_addr.push_back(3'b111);
+	    end
 	 end
 	 if (en_q_l[0]) begin
 	    arbiter_local();
 	 end
 	 else begin
-	    l_addr.push_back(l_addr[0]);
+	    if (count_l < 6) begin
+	    	l_addr.push_back(l_addr[0]);
+	    end
+	    else begin
+	    	l_addr.push_back(3'b111);
+	    end
 	 end
-	
-	 //$display("AGU Ouput Enables = %b%b%b%b%b\n", en_q_l[$], en_q_w[$], en_q_e[$], en_q_s[$], en_q_n[$]);
-	 //$display("Arbiter Input Enables = %b%b%b%b%b\n", en_q_l[0], en_q_w[0], en_q_e[0], en_q_s[0], en_q_n[0]);
-	 
+
 	 fcc();
 	 fcu();
 	 xbar();
-
-	 //$display("End of Cycle\n");
-	 //$display("n_agu[%d] = %b\n", 0, n_agu[0]);
-	 //$display("n_agu[%d] = %b\n", 1, n_agu[$]);
-	 //$display("s_addr[%d] = %b\n", 0, s_addr[0]);
-	 //$display("s_addr[%d] = %b\n", 1, s_addr[$]);
+	 $display("AGU Output Arbiter Enables = %b%b%b%b%b\n", en_q_l[$], en_q_w[$], en_q_e[$], en_q_s[$], en_q_n[$]);
+	 $display("ARB Input Enables = %b%b%b%b%b\n", en_q_l[0], en_q_w[0], en_q_e[0], en_q_s[0], en_q_n[0]);
+         $display("North Queue Head %h\n", my_qn[0]);
       end
    endfunction
 endclass

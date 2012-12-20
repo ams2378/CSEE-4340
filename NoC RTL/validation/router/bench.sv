@@ -289,9 +289,17 @@ program tb (ifc.bench ds);
 		   env.west_density, env.local_density, env.n_incr_density, env.s_incr_density,
 		   env.e_incr_density, env.w_incr_density, env.l_incr_density);
 
-      repeat (30) begin //env.max_transactions) begin
+      repeat (env.max_transactions) begin
+	 $display("----------------------Cycle number: %d\n", cycle);	 
 	 do_cycle();
-	 $display("----------------------Cycle number: %d\n", cycle);
+	 $display("North Data In: %h\n", packet.north_flit);
+	 $display("North Valid In: %b\n", packet.north_req);
+
+	 $display("DUT North Data: %h\n", ds.cb.north_o);
+	 $display("DUT North Valid: %b\n", ds.cb.valid_n_o);
+
+	 $display("Bench North Data: %h\n", test.north_o);
+	 $display("Bench North Valid: %b\n", test.valid_n_o);
 	 checker.check_result(ds.cb.valid_n_o, ds.cb.valid_s_o, ds.cb.valid_e_o, ds.cb.valid_w_o,
 			      ds.cb.valid_l_o,
 
