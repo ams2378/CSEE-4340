@@ -302,6 +302,7 @@ class router_test;
 	    north_q_o = my_qn.pop_front();			
 	    count_mask_n++;
 	    if (count_mask_n == 5) begin
+	       $display("SENT MESSAGE!!\n");
 	       mask[0] = 0;
 	       count_mask_n = 0;			
 	    end	
@@ -1107,6 +1108,7 @@ class router_test;
       l_incr_o = '0;
 
       for (int ind = 0; ind < 5; ind++) begin
+	 valid_data[ind] = '0;
 	 if ((grant_arb[ind] != 3'b111) && count_en[ind]) begin
 	    valid_data[ind] = '1;
 	    if (grant_arb[ind] == 3'b000) begin

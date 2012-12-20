@@ -289,9 +289,9 @@ program tb (ifc.bench ds);
 		   env.west_density, env.local_density, env.n_incr_density, env.s_incr_density,
 		   env.e_incr_density, env.w_incr_density, env.l_incr_density);
 
-      repeat (env.max_transactions) begin
+      repeat (30) begin //env.max_transactions) begin
 	 do_cycle();
-	 $display("Cycle number: %d\n", cycle);
+	 $display("----------------------Cycle number: %d\n", cycle);
 	 checker.check_result(ds.cb.valid_n_o, ds.cb.valid_s_o, ds.cb.valid_e_o, ds.cb.valid_w_o,
 			      ds.cb.valid_l_o,
 
@@ -311,7 +311,5 @@ program tb (ifc.bench ds);
 	 
 			      env.verbose);
       end
-      $display("s_addr[%d] = %b\n", 0, test.s_addr[0]);
-      $display("s_addr[%d] = %b\n", 1, test.s_addr[1]);
    end
 endprogram

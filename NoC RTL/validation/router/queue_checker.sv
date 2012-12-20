@@ -47,11 +47,11 @@ class router_check; //checker class
    endfunction
 
    function void pop_queues();
-	dut_valid_n_q.pop_back();
+	dut_valid_n_q.pop_front();
 
-	dut_data_n_q.pop_back();
+	dut_data_n_q.pop_front();
 
-	dut_incr_n_q.pop_back();
+	dut_incr_n_q.pop_front();
    endfunction
 
    function bit check_result (bit dut_valid_n_o, bit dut_valid_s_o, 
@@ -212,7 +212,7 @@ class router_check; //checker class
             $display("bench value: %b", bench_incr_l_o);
 	 end
 
-	 $exit();
+	 //$exit();
       end
       return passed;
    endfunction
