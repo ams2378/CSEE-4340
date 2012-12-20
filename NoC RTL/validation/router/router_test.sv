@@ -129,11 +129,11 @@ class router_test;
    /*
     * queues for storing the address source
     */
-   bit [2:0] 	n_addr[$:1] = '{3'b111, 3'b111};
-   bit [2:0] 	s_addr[$:1] = '{3'b111, 3'b111};
-   bit [2:0] 	e_addr[$:1] = '{3'b111, 3'b111};
-   bit [2:0] 	w_addr[$:1] = '{3'b111, 3'b111};
-   bit [2:0] 	l_addr[$:1] = '{3'b111, 3'b111};
+   bit [2:0] 	n_addr[$:2] = '{3'b111, 3'b111, 3'b111};
+   bit [2:0] 	s_addr[$:2] = '{3'b111, 3'b111, 3'b111};
+   bit [2:0] 	e_addr[$:2] = '{3'b111, 3'b111, 3'b111};
+   bit [2:0] 	w_addr[$:2] = '{3'b111, 3'b111, 3'b111};
+   bit [2:0] 	l_addr[$:2] = '{3'b111, 3'b111, 3'b111};
 
    /*
     * queues for storing the AGU output/Arbiter input
@@ -1023,10 +1023,12 @@ class router_test;
       n_addr = {};
       n_addr.push_back(3'b111);
       n_addr.push_back(3'b111);
+      n_addr.push_back(3'b111);
    endfunction
 
    function void south_reset();
       s_addr = {};
+      s_addr.push_back(3'b111);
       s_addr.push_back(3'b111);
       s_addr.push_back(3'b111);
    endfunction
@@ -1035,16 +1037,19 @@ class router_test;
       e_addr = {};
       e_addr.push_back(3'b111);
       e_addr.push_back(3'b111);
+      e_addr.push_back(3'b111);
    endfunction
 
    function void west_reset();
       w_addr = {};
       w_addr.push_back(3'b111);
       w_addr.push_back(3'b111);
+      w_addr.push_back(3'b111);
    endfunction
 
    function void local_reset();
       l_addr = {};
+      l_addr.push_back(3'b111);
       l_addr.push_back(3'b111);
       l_addr.push_back(3'b111);
    endfunction
