@@ -12,7 +12,6 @@ module router (
 	);
 
 
-
 /*
  * instantiate ifc_buffer interface and map the inputs and
  * outputs
@@ -137,7 +136,6 @@ arbiter arbiter_unit(
 
 
 
-
 /*
  * instantiate ifc_fcu interface and map the inputs and
  * outputs
@@ -247,6 +245,9 @@ assign d.valid_e_o = f.valid_east_o;
 assign d.valid_w_o = f.valid_west_o;
 assign d.valid_l_o = f.valid_local_o;
 
+//assign ff.location = d.location;
+
+assign ff.location = 8'b00100010;
 
 /*
  * instantiate the xbar */

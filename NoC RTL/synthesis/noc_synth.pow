@@ -1,0 +1,2011 @@
+Loading db file '/sim/synopsys/SAED_EDK90nm/Digital_Standard_Cell_Library/synopsys/models/saed90nm_typ.db'
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : noc
+Version: F-2011.09-SP2
+Date   : Thu Dec 20 15:23:42 2012
+****************************************
+
+
+Library(s) Used:
+
+    saed90nm_typ (File: /sim/synopsys/SAED_EDK90nm/Digital_Standard_Cell_Library/synopsys/models/saed90nm_typ.db)
+
+
+Operating Conditions: TYPICAL   Library: saed90nm_typ
+Wire Load Model Mode: enclosed
+
+Design        Wire Load Model            Library
+------------------------------------------------
+noc                    1000000           saed90nm_typ
+router_15              70000             saed90nm_typ
+router_14              70000             saed90nm_typ
+router_13              70000             saed90nm_typ
+router_12              70000             saed90nm_typ
+router_11              70000             saed90nm_typ
+router_10              70000             saed90nm_typ
+router_9               70000             saed90nm_typ
+router_8               70000             saed90nm_typ
+router_7               70000             saed90nm_typ
+router_6               70000             saed90nm_typ
+router_5               70000             saed90nm_typ
+router_4               70000             saed90nm_typ
+router_3               70000             saed90nm_typ
+router_2               70000             saed90nm_typ
+router_1               70000             saed90nm_typ
+router_0               70000             saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__15
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__15
+                       8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__15  8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__15
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__15
+                       8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__15
+                       8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__15
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__14
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__14
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__14
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__14
+                       8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__14
+                       8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__14
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__13
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__13
+                       8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__13  8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__13
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__13
+                       8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__13
+                       8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__13
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__12
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__12
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__12
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__12
+                       8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__12
+                       8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__12
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__11
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__11
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__11
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__11
+                       8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__11
+                       8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__11
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__10
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__10
+                       8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__10  8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__10
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__10
+                       8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__10
+                       8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__10
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__9
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__9
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__9
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__9 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__9 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__9
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__8
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__8
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__8
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__8 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__8 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__8
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__7
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__7
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__7
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__7 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__7 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__7
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__6
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__6
+                       8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__6   8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__6
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__6 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__6 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__6
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__5
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__5
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__5
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__5 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__5 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__5
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__4
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__4
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__4
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__4 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__4 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__4
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__3
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__3
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__3
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__3 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__3 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__3
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__2
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__2
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__2
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__2 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__2 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__2
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__1
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__1
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__1
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__1 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__1 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__1
+                       8000              saed90nm_typ
+inputbuffers_I_d_ifc_buffer_dut__0
+                       35000             saed90nm_typ
+address_gen_I_d_ifc_agu_dut__0
+                       8000              saed90nm_typ
+arbiter_I_d_ifc_arb_dut__0
+                       16000             saed90nm_typ
+fcu_I_d_ifc_fcu_dut__0 8000              saed90nm_typ
+fcc_I_d_ifc_fcc_dut__0 8000              saed90nm_typ
+xbar_I_d_ifc_xbar_dut__0
+                       8000              saed90nm_typ
+queue_79               8000              saed90nm_typ
+queue_78               8000              saed90nm_typ
+queue_77               8000              saed90nm_typ
+queue_76               8000              saed90nm_typ
+queue_75               8000              saed90nm_typ
+one_addr_gen_79        8000              saed90nm_typ
+one_addr_gen_78        8000              saed90nm_typ
+one_addr_gen_77        8000              saed90nm_typ
+single_arb_79          8000              saed90nm_typ
+single_arb_78          8000              saed90nm_typ
+single_arb_77          8000              saed90nm_typ
+single_arb_76          8000              saed90nm_typ
+single_arb_75          8000              saed90nm_typ
+single_fcu_79          8000              saed90nm_typ
+single_fcu_78          8000              saed90nm_typ
+counter_79             8000              saed90nm_typ
+counter_78             8000              saed90nm_typ
+counter_77             8000              saed90nm_typ
+counter_76             8000              saed90nm_typ
+counter_75             8000              saed90nm_typ
+mux_data_79            8000              saed90nm_typ
+pop_req_gen_79         8000              saed90nm_typ
+pop_req_gen_78         8000              saed90nm_typ
+pop_req_gen_77         8000              saed90nm_typ
+pop_req_gen_76         8000              saed90nm_typ
+pop_req_gen_75         8000              saed90nm_typ
+queue_74               8000              saed90nm_typ
+queue_73               8000              saed90nm_typ
+queue_72               8000              saed90nm_typ
+queue_71               8000              saed90nm_typ
+queue_70               8000              saed90nm_typ
+one_addr_gen_74        8000              saed90nm_typ
+one_addr_gen_73        8000              saed90nm_typ
+single_arb_74          8000              saed90nm_typ
+single_arb_73          8000              saed90nm_typ
+single_arb_72          8000              saed90nm_typ
+single_arb_71          8000              saed90nm_typ
+single_arb_70          8000              saed90nm_typ
+single_fcu_74          8000              saed90nm_typ
+counter_74             8000              saed90nm_typ
+counter_73             8000              saed90nm_typ
+counter_71             8000              saed90nm_typ
+counter_70             8000              saed90nm_typ
+pop_req_gen_74         8000              saed90nm_typ
+pop_req_gen_73         8000              saed90nm_typ
+pop_req_gen_72         8000              saed90nm_typ
+pop_req_gen_71         8000              saed90nm_typ
+pop_req_gen_70         8000              saed90nm_typ
+queue_69               8000              saed90nm_typ
+queue_68               8000              saed90nm_typ
+queue_67               8000              saed90nm_typ
+queue_66               8000              saed90nm_typ
+queue_65               8000              saed90nm_typ
+one_addr_gen_67        8000              saed90nm_typ
+single_arb_69          8000              saed90nm_typ
+single_arb_68          8000              saed90nm_typ
+single_arb_67          8000              saed90nm_typ
+single_arb_66          8000              saed90nm_typ
+single_arb_65          8000              saed90nm_typ
+counter_69             8000              saed90nm_typ
+counter_68             8000              saed90nm_typ
+counter_67             8000              saed90nm_typ
+counter_66             8000              saed90nm_typ
+counter_65             8000              saed90nm_typ
+pop_req_gen_69         8000              saed90nm_typ
+pop_req_gen_68         8000              saed90nm_typ
+pop_req_gen_67         8000              saed90nm_typ
+pop_req_gen_65         8000              saed90nm_typ
+queue_64               8000              saed90nm_typ
+queue_63               8000              saed90nm_typ
+queue_62               8000              saed90nm_typ
+queue_61               8000              saed90nm_typ
+queue_60               8000              saed90nm_typ
+single_arb_64          8000              saed90nm_typ
+single_arb_63          8000              saed90nm_typ
+single_arb_62          8000              saed90nm_typ
+single_arb_61          8000              saed90nm_typ
+single_arb_60          8000              saed90nm_typ
+counter_63             8000              saed90nm_typ
+counter_62             8000              saed90nm_typ
+counter_61             8000              saed90nm_typ
+counter_60             8000              saed90nm_typ
+pop_req_gen_64         8000              saed90nm_typ
+pop_req_gen_63         8000              saed90nm_typ
+pop_req_gen_61         8000              saed90nm_typ
+pop_req_gen_60         8000              saed90nm_typ
+queue_59               8000              saed90nm_typ
+queue_58               8000              saed90nm_typ
+queue_57               8000              saed90nm_typ
+queue_56               8000              saed90nm_typ
+queue_55               8000              saed90nm_typ
+single_arb_59          8000              saed90nm_typ
+single_arb_58          8000              saed90nm_typ
+single_arb_57          8000              saed90nm_typ
+single_arb_56          8000              saed90nm_typ
+single_arb_55          8000              saed90nm_typ
+single_fcu_59          8000              saed90nm_typ
+single_fcu_55          8000              saed90nm_typ
+counter_59             8000              saed90nm_typ
+counter_58             8000              saed90nm_typ
+counter_57             8000              saed90nm_typ
+counter_56             8000              saed90nm_typ
+counter_55             8000              saed90nm_typ
+pop_req_gen_59         8000              saed90nm_typ
+pop_req_gen_58         8000              saed90nm_typ
+pop_req_gen_57         8000              saed90nm_typ
+pop_req_gen_56         8000              saed90nm_typ
+queue_54               8000              saed90nm_typ
+queue_53               8000              saed90nm_typ
+queue_52               8000              saed90nm_typ
+queue_51               8000              saed90nm_typ
+queue_50               8000              saed90nm_typ
+one_addr_gen_52        8000              saed90nm_typ
+single_arb_54          8000              saed90nm_typ
+single_arb_53          8000              saed90nm_typ
+single_arb_52          8000              saed90nm_typ
+single_arb_51          8000              saed90nm_typ
+single_arb_50          8000              saed90nm_typ
+single_fcu_54          8000              saed90nm_typ
+counter_54             8000              saed90nm_typ
+counter_53             8000              saed90nm_typ
+counter_52             8000              saed90nm_typ
+counter_51             8000              saed90nm_typ
+counter_50             8000              saed90nm_typ
+pop_req_gen_54         8000              saed90nm_typ
+pop_req_gen_51         8000              saed90nm_typ
+pop_req_gen_50         8000              saed90nm_typ
+queue_49               8000              saed90nm_typ
+queue_48               8000              saed90nm_typ
+queue_47               8000              saed90nm_typ
+queue_46               8000              saed90nm_typ
+queue_45               8000              saed90nm_typ
+single_arb_49          8000              saed90nm_typ
+single_arb_48          8000              saed90nm_typ
+single_arb_47          8000              saed90nm_typ
+single_arb_46          8000              saed90nm_typ
+single_arb_45          8000              saed90nm_typ
+counter_49             8000              saed90nm_typ
+counter_48             8000              saed90nm_typ
+counter_47             8000              saed90nm_typ
+counter_46             8000              saed90nm_typ
+counter_45             8000              saed90nm_typ
+pop_req_gen_49         8000              saed90nm_typ
+pop_req_gen_48         8000              saed90nm_typ
+pop_req_gen_47         8000              saed90nm_typ
+pop_req_gen_46         8000              saed90nm_typ
+queue_44               8000              saed90nm_typ
+queue_43               8000              saed90nm_typ
+queue_42               8000              saed90nm_typ
+queue_41               8000              saed90nm_typ
+queue_40               8000              saed90nm_typ
+single_arb_44          8000              saed90nm_typ
+single_arb_43          8000              saed90nm_typ
+single_arb_42          8000              saed90nm_typ
+single_arb_41          8000              saed90nm_typ
+single_arb_40          8000              saed90nm_typ
+counter_44             8000              saed90nm_typ
+counter_43             8000              saed90nm_typ
+counter_42             8000              saed90nm_typ
+counter_41             8000              saed90nm_typ
+counter_40             8000              saed90nm_typ
+pop_req_gen_43         8000              saed90nm_typ
+pop_req_gen_42         8000              saed90nm_typ
+pop_req_gen_41         8000              saed90nm_typ
+pop_req_gen_40         8000              saed90nm_typ
+queue_39               8000              saed90nm_typ
+queue_38               8000              saed90nm_typ
+queue_37               8000              saed90nm_typ
+queue_36               8000              saed90nm_typ
+queue_35               8000              saed90nm_typ
+single_arb_39          8000              saed90nm_typ
+single_arb_38          8000              saed90nm_typ
+single_arb_37          8000              saed90nm_typ
+single_arb_36          8000              saed90nm_typ
+single_arb_35          8000              saed90nm_typ
+single_fcu_39          8000              saed90nm_typ
+counter_39             8000              saed90nm_typ
+counter_38             8000              saed90nm_typ
+counter_37             8000              saed90nm_typ
+counter_36             8000              saed90nm_typ
+pop_req_gen_39         8000              saed90nm_typ
+pop_req_gen_38         8000              saed90nm_typ
+pop_req_gen_37         8000              saed90nm_typ
+pop_req_gen_36         8000              saed90nm_typ
+pop_req_gen_35         8000              saed90nm_typ
+queue_34               8000              saed90nm_typ
+queue_33               8000              saed90nm_typ
+queue_32               8000              saed90nm_typ
+queue_31               8000              saed90nm_typ
+queue_30               8000              saed90nm_typ
+single_arb_34          8000              saed90nm_typ
+single_arb_33          8000              saed90nm_typ
+single_arb_32          8000              saed90nm_typ
+single_arb_31          8000              saed90nm_typ
+single_arb_30          8000              saed90nm_typ
+single_fcu_34          8000              saed90nm_typ
+counter_34             8000              saed90nm_typ
+counter_33             8000              saed90nm_typ
+counter_32             8000              saed90nm_typ
+counter_31             8000              saed90nm_typ
+counter_30             8000              saed90nm_typ
+pop_req_gen_33         8000              saed90nm_typ
+pop_req_gen_30         8000              saed90nm_typ
+queue_29               8000              saed90nm_typ
+queue_28               8000              saed90nm_typ
+queue_27               8000              saed90nm_typ
+queue_26               8000              saed90nm_typ
+queue_25               8000              saed90nm_typ
+single_arb_29          8000              saed90nm_typ
+single_arb_28          8000              saed90nm_typ
+single_arb_27          8000              saed90nm_typ
+single_arb_26          8000              saed90nm_typ
+single_arb_25          8000              saed90nm_typ
+single_fcu_29          8000              saed90nm_typ
+counter_29             8000              saed90nm_typ
+counter_28             8000              saed90nm_typ
+counter_27             8000              saed90nm_typ
+counter_26             8000              saed90nm_typ
+counter_25             8000              saed90nm_typ
+pop_req_gen_29         8000              saed90nm_typ
+pop_req_gen_28         8000              saed90nm_typ
+pop_req_gen_27         8000              saed90nm_typ
+pop_req_gen_25         8000              saed90nm_typ
+queue_24               8000              saed90nm_typ
+queue_23               8000              saed90nm_typ
+queue_22               8000              saed90nm_typ
+queue_21               8000              saed90nm_typ
+queue_20               8000              saed90nm_typ
+single_arb_24          8000              saed90nm_typ
+single_arb_23          8000              saed90nm_typ
+single_arb_22          8000              saed90nm_typ
+single_arb_21          8000              saed90nm_typ
+single_arb_20          8000              saed90nm_typ
+counter_24             8000              saed90nm_typ
+counter_23             8000              saed90nm_typ
+counter_22             8000              saed90nm_typ
+counter_21             8000              saed90nm_typ
+counter_20             8000              saed90nm_typ
+pop_req_gen_22         8000              saed90nm_typ
+queue_19               8000              saed90nm_typ
+queue_18               8000              saed90nm_typ
+queue_17               8000              saed90nm_typ
+queue_16               8000              saed90nm_typ
+queue_15               8000              saed90nm_typ
+single_arb_19          8000              saed90nm_typ
+single_arb_18          8000              saed90nm_typ
+single_arb_17          8000              saed90nm_typ
+single_arb_16          8000              saed90nm_typ
+single_arb_15          8000              saed90nm_typ
+counter_19             8000              saed90nm_typ
+counter_18             8000              saed90nm_typ
+counter_16             8000              saed90nm_typ
+counter_15             8000              saed90nm_typ
+pop_req_gen_19         8000              saed90nm_typ
+pop_req_gen_18         8000              saed90nm_typ
+pop_req_gen_17         8000              saed90nm_typ
+pop_req_gen_16         8000              saed90nm_typ
+pop_req_gen_15         8000              saed90nm_typ
+queue_14               8000              saed90nm_typ
+queue_13               8000              saed90nm_typ
+queue_12               8000              saed90nm_typ
+queue_11               8000              saed90nm_typ
+queue_10               8000              saed90nm_typ
+single_arb_14          8000              saed90nm_typ
+single_arb_13          8000              saed90nm_typ
+single_arb_12          8000              saed90nm_typ
+single_arb_11          8000              saed90nm_typ
+single_arb_10          8000              saed90nm_typ
+counter_14             8000              saed90nm_typ
+counter_12             8000              saed90nm_typ
+counter_11             8000              saed90nm_typ
+counter_10             8000              saed90nm_typ
+pop_req_gen_14         8000              saed90nm_typ
+pop_req_gen_13         8000              saed90nm_typ
+pop_req_gen_12         8000              saed90nm_typ
+pop_req_gen_11         8000              saed90nm_typ
+pop_req_gen_10         8000              saed90nm_typ
+queue_9                8000              saed90nm_typ
+queue_8                8000              saed90nm_typ
+queue_7                8000              saed90nm_typ
+queue_6                8000              saed90nm_typ
+queue_5                8000              saed90nm_typ
+single_arb_9           8000              saed90nm_typ
+single_arb_8           8000              saed90nm_typ
+single_arb_7           8000              saed90nm_typ
+single_arb_6           8000              saed90nm_typ
+single_arb_5           8000              saed90nm_typ
+counter_9              8000              saed90nm_typ
+counter_7              8000              saed90nm_typ
+counter_6              8000              saed90nm_typ
+counter_5              8000              saed90nm_typ
+pop_req_gen_9          8000              saed90nm_typ
+pop_req_gen_8          8000              saed90nm_typ
+pop_req_gen_7          8000              saed90nm_typ
+pop_req_gen_6          8000              saed90nm_typ
+pop_req_gen_5          8000              saed90nm_typ
+queue_4                8000              saed90nm_typ
+queue_3                8000              saed90nm_typ
+queue_2                8000              saed90nm_typ
+queue_1                8000              saed90nm_typ
+queue_0                8000              saed90nm_typ
+single_arb_4           8000              saed90nm_typ
+single_arb_3           8000              saed90nm_typ
+single_arb_2           8000              saed90nm_typ
+single_arb_1           8000              saed90nm_typ
+single_arb_0           8000              saed90nm_typ
+counter_4              8000              saed90nm_typ
+counter_3              8000              saed90nm_typ
+counter_2              8000              saed90nm_typ
+counter_1              8000              saed90nm_typ
+pop_req_gen_4          8000              saed90nm_typ
+pop_req_gen_3          8000              saed90nm_typ
+pop_req_gen_2          8000              saed90nm_typ
+pop_req_gen_1          8000              saed90nm_typ
+pop_req_gen_0          8000              saed90nm_typ
+queue_79_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_78_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_77_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_76_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_75_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+arb_reg_79             ForQA             saed90nm_typ
+single_arb_79_DW_arb_rr_0
+                       8000              saed90nm_typ
+arb_reg_78             ForQA             saed90nm_typ
+single_arb_78_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_77_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_76_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_75_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_74_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_73_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_72_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_71_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_70_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_74_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_73_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_72_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_71_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_70_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_69_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_68_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_67_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_66_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_65_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_69_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_68_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_67_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_66_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_65_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_64_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_63_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_62_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_61_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_60_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_64_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_63_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_62_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_61_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_60_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_59_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_58_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_57_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_56_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_55_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_59_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_58_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_57_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_56_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_55_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_54_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_53_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_52_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_51_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_50_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_54_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_53_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_52_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_51_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_50_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_49_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_48_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_47_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_46_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_45_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_49_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_48_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_47_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_46_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_45_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_44_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_43_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_42_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_41_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_40_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_44_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_43_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_42_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_41_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_40_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_39_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_38_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_37_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_36_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_35_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_39_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_38_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_37_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_36_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_35_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_34_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_33_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_32_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_31_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_30_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_34_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_33_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_32_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_31_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_30_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_29_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_28_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_27_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_26_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_25_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_29_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_28_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_27_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_26_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_25_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_24_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_23_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_22_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_21_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_20_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_24_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_23_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_22_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_21_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_20_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_19_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_18_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_17_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_16_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_15_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_19_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_18_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_17_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_16_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_15_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_14_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_13_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_12_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_11_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_10_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_14_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_13_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_12_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_11_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_10_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_9_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_8_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_7_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_6_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_5_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_9_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_8_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_7_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_6_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_5_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_4_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_3_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_2_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_1_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+queue_0_DW_fifo_s1_sf_0
+                       8000              saed90nm_typ
+single_arb_4_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_3_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_2_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_1_DW_arb_rr_0
+                       8000              saed90nm_typ
+single_arb_0_DW_arb_rr_0
+                       8000              saed90nm_typ
+queue_79_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_79_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_78_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_78_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_77_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_77_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_76_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_76_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_75_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_75_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_74_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_74_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_73_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_73_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_72_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_72_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_71_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_71_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_70_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_70_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_69_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_69_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_68_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_68_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_67_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_67_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_66_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_66_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_65_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_65_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_64_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_64_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_63_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_63_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_62_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_62_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_61_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_61_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_60_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_60_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_59_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_59_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_58_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_58_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_57_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_57_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_56_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_56_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_55_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_55_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_54_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_54_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_53_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_53_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_52_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_52_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_51_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_51_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_50_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_50_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_49_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_49_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_48_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_48_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_47_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_47_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_46_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_46_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_45_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_45_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_44_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_44_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_43_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_43_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_42_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_42_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_41_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_41_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_40_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_40_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_39_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_39_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_38_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_38_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_37_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_37_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_36_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_36_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_35_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_35_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_34_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_34_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_33_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_33_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_32_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_32_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_31_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_31_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_30_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_30_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_29_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_29_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_28_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_28_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_27_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_27_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_26_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_26_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_25_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_25_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_24_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_24_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_23_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_23_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_22_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_22_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_21_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_21_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_20_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_20_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_19_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_19_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_18_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_18_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_17_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_17_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_16_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_16_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_15_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_15_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_14_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_14_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_13_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_13_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_12_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_12_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_11_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_11_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_10_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_10_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_9_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_9_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_8_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_8_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_7_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_7_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_6_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_6_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_5_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_5_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_4_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_4_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_3_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_3_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_2_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_2_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_1_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_1_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_0_DW_fifoctl_s1_sf_0
+                       8000              saed90nm_typ
+queue_0_DW_ram_r_w_s_dff_0
+                       8000              saed90nm_typ
+queue_79_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_79_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_78_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_78_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_77_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_77_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_76_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_76_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_75_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_75_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_74_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_74_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_73_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_73_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_72_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_72_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_71_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_71_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_70_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_70_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_69_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_69_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_68_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_68_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_67_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_67_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_66_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_66_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_65_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_65_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_64_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_64_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_63_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_63_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_62_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_62_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_61_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_61_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_60_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_60_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_59_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_59_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_58_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_58_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_57_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_57_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_56_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_56_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_55_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_55_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_54_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_54_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_53_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_53_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_52_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_52_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_51_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_51_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_50_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_50_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_49_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_49_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_48_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_48_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_47_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_47_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_46_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_46_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_45_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_45_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_44_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_44_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_43_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_43_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_42_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_42_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_41_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_41_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_40_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_40_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_39_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_39_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_38_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_38_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_37_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_37_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_36_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_36_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_35_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_35_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_34_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_34_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_33_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_33_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_32_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_32_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_31_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_31_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_30_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_30_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_29_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_29_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_28_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_28_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_27_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_27_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_26_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_26_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_25_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_25_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_24_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_24_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_23_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_23_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_22_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_22_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_21_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_21_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_20_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_20_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_19_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_19_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_18_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_18_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_17_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_17_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_16_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_16_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_15_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_15_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_14_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_14_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_13_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_13_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_12_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_12_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_11_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_11_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_10_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_10_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_9_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_9_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_8_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_8_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_7_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_7_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_6_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_6_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_5_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_5_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_4_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_4_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_3_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_3_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_2_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_2_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_1_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_1_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_0_DWsc_fifoctl_s1_df_0
+                       8000              saed90nm_typ
+queue_0_DW_MEM_R_W_S_DFF_0
+                       8000              saed90nm_typ
+queue_79_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_78_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_77_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_76_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_75_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_74_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_73_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_72_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_71_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_70_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_69_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_68_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_67_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_66_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_65_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_64_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_63_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_62_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_61_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_60_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_59_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_58_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_57_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_56_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_55_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_54_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_53_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_52_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_51_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_50_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_49_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_48_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_47_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_46_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_45_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_44_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_43_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_42_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_41_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_40_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_39_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_38_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_37_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_36_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_35_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_34_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_33_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_32_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_31_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_30_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_29_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_28_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_27_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_26_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_25_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_24_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_23_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_22_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_21_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_20_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_19_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_18_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_17_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_16_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_15_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_14_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_13_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_12_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_11_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_10_DW01_mux_any_0
+                       8000              saed90nm_typ
+queue_9_DW01_mux_any_0 8000              saed90nm_typ
+queue_8_DW01_mux_any_0 8000              saed90nm_typ
+queue_7_DW01_mux_any_0 8000              saed90nm_typ
+queue_6_DW01_mux_any_0 8000              saed90nm_typ
+queue_5_DW01_mux_any_0 8000              saed90nm_typ
+queue_4_DW01_mux_any_0 8000              saed90nm_typ
+queue_3_DW01_mux_any_0 8000              saed90nm_typ
+queue_2_DW01_mux_any_0 8000              saed90nm_typ
+queue_1_DW01_mux_any_0 8000              saed90nm_typ
+queue_0_DW01_mux_any_0 8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__0   8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__1   8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__2   8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__3   8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__4   8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__7   8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__8   8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__9   8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__11  8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__5   8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__12  8000              saed90nm_typ
+FF_I_d_ifc_FF_dut__14  8000              saed90nm_typ
+one_addr_gen_0         8000              saed90nm_typ
+one_addr_gen_2         8000              saed90nm_typ
+one_addr_gen_4         8000              saed90nm_typ
+one_addr_gen_5         8000              saed90nm_typ
+one_addr_gen_7         8000              saed90nm_typ
+one_addr_gen_10        8000              saed90nm_typ
+one_addr_gen_12        8000              saed90nm_typ
+one_addr_gen_15        8000              saed90nm_typ
+one_addr_gen_17        8000              saed90nm_typ
+one_addr_gen_18        8000              saed90nm_typ
+one_addr_gen_20        8000              saed90nm_typ
+one_addr_gen_24        8000              saed90nm_typ
+one_addr_gen_25        8000              saed90nm_typ
+one_addr_gen_30        8000              saed90nm_typ
+one_addr_gen_35        8000              saed90nm_typ
+one_addr_gen_38        8000              saed90nm_typ
+one_addr_gen_40        8000              saed90nm_typ
+one_addr_gen_44        8000              saed90nm_typ
+one_addr_gen_45        8000              saed90nm_typ
+one_addr_gen_50        8000              saed90nm_typ
+one_addr_gen_55        8000              saed90nm_typ
+one_addr_gen_58        8000              saed90nm_typ
+one_addr_gen_60        8000              saed90nm_typ
+one_addr_gen_61        8000              saed90nm_typ
+one_addr_gen_64        8000              saed90nm_typ
+one_addr_gen_65        8000              saed90nm_typ
+one_addr_gen_66        8000              saed90nm_typ
+one_addr_gen_70        8000              saed90nm_typ
+one_addr_gen_71        8000              saed90nm_typ
+one_addr_gen_75        8000              saed90nm_typ
+one_addr_gen_76        8000              saed90nm_typ
+one_addr_gen_1         8000              saed90nm_typ
+one_addr_gen_13        8000              saed90nm_typ
+one_addr_gen_21        8000              saed90nm_typ
+one_addr_gen_33        8000              saed90nm_typ
+one_addr_gen_42        8000              saed90nm_typ
+one_addr_gen_51        8000              saed90nm_typ
+one_addr_gen_53        8000              saed90nm_typ
+one_addr_gen_3         8000              saed90nm_typ
+one_addr_gen_8         8000              saed90nm_typ
+one_addr_gen_16        8000              saed90nm_typ
+one_addr_gen_23        8000              saed90nm_typ
+one_addr_gen_26        8000              saed90nm_typ
+one_addr_gen_28        8000              saed90nm_typ
+one_addr_gen_31        8000              saed90nm_typ
+one_addr_gen_34        8000              saed90nm_typ
+one_addr_gen_36        8000              saed90nm_typ
+one_addr_gen_43        8000              saed90nm_typ
+one_addr_gen_46        8000              saed90nm_typ
+one_addr_gen_63        8000              saed90nm_typ
+one_addr_gen_68        8000              saed90nm_typ
+one_addr_gen_6         8000              saed90nm_typ
+one_addr_gen_9         8000              saed90nm_typ
+one_addr_gen_11        8000              saed90nm_typ
+one_addr_gen_22        8000              saed90nm_typ
+one_addr_gen_27        8000              saed90nm_typ
+one_addr_gen_29        8000              saed90nm_typ
+one_addr_gen_32        8000              saed90nm_typ
+one_addr_gen_37        8000              saed90nm_typ
+one_addr_gen_39        8000              saed90nm_typ
+one_addr_gen_41        8000              saed90nm_typ
+one_addr_gen_54        8000              saed90nm_typ
+one_addr_gen_56        8000              saed90nm_typ
+one_addr_gen_57        8000              saed90nm_typ
+one_addr_gen_62        8000              saed90nm_typ
+one_addr_gen_14        8000              saed90nm_typ
+one_addr_gen_19        8000              saed90nm_typ
+one_addr_gen_47        8000              saed90nm_typ
+one_addr_gen_49        8000              saed90nm_typ
+one_addr_gen_48        8000              saed90nm_typ
+one_addr_gen_59        8000              saed90nm_typ
+one_addr_gen_69        8000              saed90nm_typ
+one_addr_gen_72        8000              saed90nm_typ
+single_fcu_0           8000              saed90nm_typ
+single_fcu_1           8000              saed90nm_typ
+single_fcu_2           8000              saed90nm_typ
+single_fcu_3           8000              saed90nm_typ
+single_fcu_4           8000              saed90nm_typ
+single_fcu_5           8000              saed90nm_typ
+single_fcu_6           8000              saed90nm_typ
+single_fcu_7           8000              saed90nm_typ
+single_fcu_8           8000              saed90nm_typ
+single_fcu_9           8000              saed90nm_typ
+single_fcu_15          8000              saed90nm_typ
+single_fcu_16          8000              saed90nm_typ
+single_fcu_17          8000              saed90nm_typ
+single_fcu_18          8000              saed90nm_typ
+single_fcu_19          8000              saed90nm_typ
+single_fcu_20          8000              saed90nm_typ
+single_fcu_21          8000              saed90nm_typ
+single_fcu_22          8000              saed90nm_typ
+single_fcu_23          8000              saed90nm_typ
+single_fcu_24          8000              saed90nm_typ
+single_fcu_35          8000              saed90nm_typ
+single_fcu_36          8000              saed90nm_typ
+single_fcu_37          8000              saed90nm_typ
+single_fcu_38          8000              saed90nm_typ
+single_fcu_10          8000              saed90nm_typ
+single_fcu_11          8000              saed90nm_typ
+single_fcu_12          8000              saed90nm_typ
+single_fcu_13          8000              saed90nm_typ
+single_fcu_14          8000              saed90nm_typ
+single_fcu_30          8000              saed90nm_typ
+single_fcu_31          8000              saed90nm_typ
+single_fcu_32          8000              saed90nm_typ
+single_fcu_33          8000              saed90nm_typ
+single_fcu_25          8000              saed90nm_typ
+single_fcu_26          8000              saed90nm_typ
+single_fcu_27          8000              saed90nm_typ
+single_fcu_28          8000              saed90nm_typ
+single_fcu_40          8000              saed90nm_typ
+single_fcu_41          8000              saed90nm_typ
+single_fcu_42          8000              saed90nm_typ
+single_fcu_43          8000              saed90nm_typ
+single_fcu_44          8000              saed90nm_typ
+single_fcu_56          8000              saed90nm_typ
+single_fcu_57          8000              saed90nm_typ
+single_fcu_58          8000              saed90nm_typ
+single_fcu_45          8000              saed90nm_typ
+single_fcu_46          8000              saed90nm_typ
+single_fcu_47          8000              saed90nm_typ
+single_fcu_48          8000              saed90nm_typ
+single_fcu_49          8000              saed90nm_typ
+single_fcu_50          8000              saed90nm_typ
+single_fcu_51          8000              saed90nm_typ
+single_fcu_52          8000              saed90nm_typ
+single_fcu_53          8000              saed90nm_typ
+single_fcu_60          8000              saed90nm_typ
+single_fcu_61          8000              saed90nm_typ
+single_fcu_62          8000              saed90nm_typ
+single_fcu_63          8000              saed90nm_typ
+single_fcu_64          8000              saed90nm_typ
+single_fcu_65          8000              saed90nm_typ
+single_fcu_66          8000              saed90nm_typ
+single_fcu_67          8000              saed90nm_typ
+single_fcu_68          8000              saed90nm_typ
+single_fcu_69          8000              saed90nm_typ
+single_fcu_70          8000              saed90nm_typ
+single_fcu_71          8000              saed90nm_typ
+single_fcu_72          8000              saed90nm_typ
+single_fcu_73          8000              saed90nm_typ
+single_fcu_75          8000              saed90nm_typ
+single_fcu_76          8000              saed90nm_typ
+single_fcu_77          8000              saed90nm_typ
+counter_0              8000              saed90nm_typ
+counter_8              8000              saed90nm_typ
+counter_13             8000              saed90nm_typ
+counter_17             8000              saed90nm_typ
+counter_35             8000              saed90nm_typ
+counter_64             8000              saed90nm_typ
+counter_72             8000              saed90nm_typ
+mux_data_0             8000              saed90nm_typ
+mux_data_1             8000              saed90nm_typ
+mux_data_2             8000              saed90nm_typ
+mux_data_3             8000              saed90nm_typ
+mux_data_4             8000              saed90nm_typ
+mux_data_5             8000              saed90nm_typ
+mux_data_6             8000              saed90nm_typ
+mux_data_7             8000              saed90nm_typ
+mux_data_8             8000              saed90nm_typ
+mux_data_9             8000              saed90nm_typ
+mux_data_10            8000              saed90nm_typ
+mux_data_11            8000              saed90nm_typ
+mux_data_12            8000              saed90nm_typ
+mux_data_13            8000              saed90nm_typ
+mux_data_14            8000              saed90nm_typ
+mux_data_15            8000              saed90nm_typ
+mux_data_16            8000              saed90nm_typ
+mux_data_17            8000              saed90nm_typ
+mux_data_18            8000              saed90nm_typ
+mux_data_19            8000              saed90nm_typ
+mux_data_20            8000              saed90nm_typ
+mux_data_21            8000              saed90nm_typ
+mux_data_22            8000              saed90nm_typ
+mux_data_23            8000              saed90nm_typ
+mux_data_24            8000              saed90nm_typ
+mux_data_25            8000              saed90nm_typ
+mux_data_26            8000              saed90nm_typ
+mux_data_27            8000              saed90nm_typ
+mux_data_28            8000              saed90nm_typ
+mux_data_29            8000              saed90nm_typ
+mux_data_30            8000              saed90nm_typ
+mux_data_31            8000              saed90nm_typ
+mux_data_32            8000              saed90nm_typ
+mux_data_33            8000              saed90nm_typ
+mux_data_34            8000              saed90nm_typ
+mux_data_35            8000              saed90nm_typ
+mux_data_36            8000              saed90nm_typ
+mux_data_37            8000              saed90nm_typ
+mux_data_38            8000              saed90nm_typ
+mux_data_39            8000              saed90nm_typ
+mux_data_40            8000              saed90nm_typ
+mux_data_41            8000              saed90nm_typ
+mux_data_42            8000              saed90nm_typ
+mux_data_43            8000              saed90nm_typ
+mux_data_44            8000              saed90nm_typ
+mux_data_45            8000              saed90nm_typ
+mux_data_46            8000              saed90nm_typ
+mux_data_47            8000              saed90nm_typ
+mux_data_48            8000              saed90nm_typ
+mux_data_49            8000              saed90nm_typ
+mux_data_50            8000              saed90nm_typ
+mux_data_51            8000              saed90nm_typ
+mux_data_52            8000              saed90nm_typ
+mux_data_53            8000              saed90nm_typ
+mux_data_54            8000              saed90nm_typ
+mux_data_55            8000              saed90nm_typ
+mux_data_56            8000              saed90nm_typ
+mux_data_57            8000              saed90nm_typ
+mux_data_58            8000              saed90nm_typ
+mux_data_59            8000              saed90nm_typ
+mux_data_60            8000              saed90nm_typ
+mux_data_61            8000              saed90nm_typ
+mux_data_62            8000              saed90nm_typ
+mux_data_63            8000              saed90nm_typ
+mux_data_64            8000              saed90nm_typ
+mux_data_65            8000              saed90nm_typ
+mux_data_66            8000              saed90nm_typ
+mux_data_67            8000              saed90nm_typ
+mux_data_68            8000              saed90nm_typ
+mux_data_69            8000              saed90nm_typ
+mux_data_70            8000              saed90nm_typ
+mux_data_71            8000              saed90nm_typ
+mux_data_72            8000              saed90nm_typ
+mux_data_73            8000              saed90nm_typ
+mux_data_74            8000              saed90nm_typ
+mux_data_75            8000              saed90nm_typ
+mux_data_76            8000              saed90nm_typ
+mux_data_77            8000              saed90nm_typ
+mux_data_78            8000              saed90nm_typ
+pop_req_gen_20         8000              saed90nm_typ
+pop_req_gen_21         8000              saed90nm_typ
+pop_req_gen_23         8000              saed90nm_typ
+pop_req_gen_24         8000              saed90nm_typ
+pop_req_gen_31         8000              saed90nm_typ
+pop_req_gen_32         8000              saed90nm_typ
+pop_req_gen_34         8000              saed90nm_typ
+pop_req_gen_66         8000              saed90nm_typ
+pop_req_gen_26         8000              saed90nm_typ
+pop_req_gen_44         8000              saed90nm_typ
+pop_req_gen_52         8000              saed90nm_typ
+pop_req_gen_45         8000              saed90nm_typ
+pop_req_gen_53         8000              saed90nm_typ
+pop_req_gen_55         8000              saed90nm_typ
+pop_req_gen_62         8000              saed90nm_typ
+arb_reg_0              ForQA             saed90nm_typ
+arb_reg_3              ForQA             saed90nm_typ
+arb_reg_4              ForQA             saed90nm_typ
+arb_reg_5              ForQA             saed90nm_typ
+arb_reg_6              ForQA             saed90nm_typ
+arb_reg_7              ForQA             saed90nm_typ
+arb_reg_8              ForQA             saed90nm_typ
+arb_reg_10             ForQA             saed90nm_typ
+arb_reg_11             ForQA             saed90nm_typ
+arb_reg_12             ForQA             saed90nm_typ
+arb_reg_13             ForQA             saed90nm_typ
+arb_reg_14             ForQA             saed90nm_typ
+arb_reg_16             ForQA             saed90nm_typ
+arb_reg_17             ForQA             saed90nm_typ
+arb_reg_18             ForQA             saed90nm_typ
+arb_reg_19             ForQA             saed90nm_typ
+arb_reg_20             ForQA             saed90nm_typ
+arb_reg_21             ForQA             saed90nm_typ
+arb_reg_23             ForQA             saed90nm_typ
+arb_reg_24             ForQA             saed90nm_typ
+arb_reg_25             ForQA             saed90nm_typ
+arb_reg_26             ForQA             saed90nm_typ
+arb_reg_27             ForQA             saed90nm_typ
+arb_reg_28             ForQA             saed90nm_typ
+arb_reg_29             ForQA             saed90nm_typ
+arb_reg_30             ForQA             saed90nm_typ
+arb_reg_32             ForQA             saed90nm_typ
+arb_reg_33             ForQA             saed90nm_typ
+arb_reg_34             ForQA             saed90nm_typ
+arb_reg_37             ForQA             saed90nm_typ
+arb_reg_38             ForQA             saed90nm_typ
+arb_reg_39             ForQA             saed90nm_typ
+arb_reg_40             ForQA             saed90nm_typ
+arb_reg_41             ForQA             saed90nm_typ
+arb_reg_42             ForQA             saed90nm_typ
+arb_reg_43             ForQA             saed90nm_typ
+arb_reg_44             ForQA             saed90nm_typ
+arb_reg_46             ForQA             saed90nm_typ
+arb_reg_47             ForQA             saed90nm_typ
+arb_reg_48             ForQA             saed90nm_typ
+arb_reg_49             ForQA             saed90nm_typ
+arb_reg_50             ForQA             saed90nm_typ
+arb_reg_51             ForQA             saed90nm_typ
+arb_reg_53             ForQA             saed90nm_typ
+arb_reg_54             ForQA             saed90nm_typ
+arb_reg_57             ForQA             saed90nm_typ
+arb_reg_58             ForQA             saed90nm_typ
+arb_reg_59             ForQA             saed90nm_typ
+arb_reg_60             ForQA             saed90nm_typ
+arb_reg_61             ForQA             saed90nm_typ
+arb_reg_63             ForQA             saed90nm_typ
+arb_reg_64             ForQA             saed90nm_typ
+arb_reg_65             ForQA             saed90nm_typ
+arb_reg_66             ForQA             saed90nm_typ
+arb_reg_68             ForQA             saed90nm_typ
+arb_reg_69             ForQA             saed90nm_typ
+arb_reg_70             ForQA             saed90nm_typ
+arb_reg_71             ForQA             saed90nm_typ
+arb_reg_72             ForQA             saed90nm_typ
+arb_reg_73             ForQA             saed90nm_typ
+arb_reg_74             ForQA             saed90nm_typ
+arb_reg_75             ForQA             saed90nm_typ
+arb_reg_76             ForQA             saed90nm_typ
+arb_reg_1              ForQA             saed90nm_typ
+arb_reg_2              ForQA             saed90nm_typ
+arb_reg_9              ForQA             saed90nm_typ
+arb_reg_15             ForQA             saed90nm_typ
+arb_reg_22             ForQA             saed90nm_typ
+arb_reg_31             ForQA             saed90nm_typ
+arb_reg_35             ForQA             saed90nm_typ
+arb_reg_36             ForQA             saed90nm_typ
+arb_reg_45             ForQA             saed90nm_typ
+arb_reg_52             ForQA             saed90nm_typ
+arb_reg_55             ForQA             saed90nm_typ
+arb_reg_56             ForQA             saed90nm_typ
+arb_reg_62             ForQA             saed90nm_typ
+arb_reg_67             ForQA             saed90nm_typ
+arb_reg_77             ForQA             saed90nm_typ
+
+
+Global Operating Voltage = 1.2  
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000ff
+    Time Units = 1ns
+    Dynamic Power Units = 1uW    (derived from V,C,T units)
+    Leakage Power Units = 1pW
+
+
+  Cell Internal Power  = 778.5772 uW   (50%)
+  Net Switching Power  = 766.4350 uW   (50%)
+                         ---------
+Total Dynamic Power    =   1.5450 mW  (100%)
+
+Cell Leakage Power     =   3.5045 mW
+
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+register          46.9148           39.2506        1.1250e+09        1.2111e+03  (  23.99%)
+sequential     1.7224e-02        4.5843e-02        2.0160e+08          201.6667  (   3.99%)
+combinational    731.6389          727.1295        2.1778e+09        3.6365e+03  (  72.02%)
+--------------------------------------------------------------------------------------------------
+Total            778.5709 uW       766.4260 uW     3.5043e+09 pW     5.0493e+03 uW
+1

@@ -12,7 +12,6 @@ module router (
 	);
 
 
-
 /*
  * instantiate ifc_buffer interface and map the inputs and
  * outputs
@@ -66,8 +65,8 @@ ifc_agu a ();
 
 assign a.north_q_i = b.north_q_o;
 assign a.south_q_i = b.south_q_o;
-assign a.west_q_i = b.east_q_o;
-assign a.east_q_i = b.west_q_o;
+assign a.west_q_i = b.west_q_o;
+assign a.east_q_i = b.east_q_o;
 assign a.local_q_i = b.local_q_o;
 
 assign a.myaddr_i= ff.read_data_o;
@@ -134,7 +133,6 @@ assign ar.rst = d.rst;
 arbiter arbiter_unit(
 	.d (ar.dut)
 );
-
 
 
 
@@ -247,6 +245,9 @@ assign d.valid_e_o = f.valid_east_o;
 assign d.valid_w_o = f.valid_west_o;
 assign d.valid_l_o = f.valid_local_o;
 
+assign ff.location = d.location;
+
+//assign ff.location = 8'b00100010;
 
 /*
  * instantiate the xbar */

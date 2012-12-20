@@ -1,0 +1,120 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : noc
+Version: F-2011.09-SP2
+Date   : Thu Dec 20 15:23:36 2012
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: TYPICAL   Library: saed90nm_typ
+Wire Load Model Mode: enclosed
+
+  Startpoint: d.rst (input port clocked by d.clk)
+  Endpoint: router_4_1/inputbuffers_unit/w_queue/state_reg[0]
+            (rising edge-triggered flip-flop clocked by d.clk)
+  Path Group: d.clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  noc                1000000               saed90nm_typ
+  fcu_I_d_ifc_fcu_dut__3
+                     8000                  saed90nm_typ
+  router_3           70000                 saed90nm_typ
+  xbar_I_d_ifc_xbar_dut__3
+                     8000                  saed90nm_typ
+  pop_req_gen_16     8000                  saed90nm_typ
+  queue_16           8000                  saed90nm_typ
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock d.clk (rise edge)                                 0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  input external delay                                    0.50       0.50 f
+  d.rst (in)                                              0.00       0.50 f
+  U14/Z (DELLN1X2)                                        0.85       1.35 f
+  U10/Z (DELLN1X2)                                        0.73       2.08 f
+  router_4_1/rst (router_3)                               0.00       2.08 f
+  router_4_1/fcu_unit/d.rst (fcu_I_d_ifc_fcu_dut__3)      0.00       2.08 f
+  router_4_1/fcu_unit/U1/ZN (INVX0)                       0.65       2.73 r
+  router_4_1/fcu_unit/U13/Q (AND3X1)                      0.12       2.85 r
+  router_4_1/fcu_unit/d.grant_access_local_o (fcu_I_d_ifc_fcu_dut__3)
+                                                          0.00       2.85 r
+  router_4_1/xbar_unit/d.valid_l_i (xbar_I_d_ifc_xbar_dut__3)
+                                                          0.00       2.85 r
+  router_4_1/xbar_unit/U6/ZN (INVX0)                      0.43       3.28 f
+  router_4_1/xbar_unit/U7/ZN (INVX0)                      0.09       3.37 r
+  router_4_1/xbar_unit/pop_west/valid_l (pop_req_gen_16)
+                                                          0.00       3.37 r
+  router_4_1/xbar_unit/pop_west/U11/QN (NAND3X0)          0.11       3.48 f
+  router_4_1/xbar_unit/pop_west/U1/QN (NAND4X0)           0.12       3.60 r
+  router_4_1/xbar_unit/pop_west/pop_req_o (pop_req_gen_16)
+                                                          0.00       3.60 r
+  router_4_1/xbar_unit/d.pop_req_w (xbar_I_d_ifc_xbar_dut__3)
+                                                          0.00       3.60 r
+  router_4_1/inputbuffers_unit/d.pop_req_w_i (inputbuffers_I_d_ifc_buffer_dut__3)
+                                                          0.00       3.60 r
+  router_4_1/inputbuffers_unit/w_queue/pop_req_i (queue_16)
+                                                          0.00       3.60 r
+  router_4_1/inputbuffers_unit/w_queue/U11/ZN (INVX0)     0.59       4.19 f
+  router_4_1/inputbuffers_unit/w_queue/U29/QN (NAND3X0)
+                                                          0.11       4.30 r
+  router_4_1/inputbuffers_unit/w_queue/U20/QN (NAND2X0)
+                                                          0.07       4.37 f
+  router_4_1/inputbuffers_unit/w_queue/U24/Q (AND3X1)     0.12       4.49 f
+  router_4_1/inputbuffers_unit/w_queue/U30/QN (NOR2X0)
+                                                          0.14       4.63 r
+  router_4_1/inputbuffers_unit/w_queue/U22/Q (AND4X1)     0.14       4.77 r
+  router_4_1/inputbuffers_unit/w_queue/U21/Q (AO221X1)
+                                                          0.13       4.90 r
+  router_4_1/inputbuffers_unit/w_queue/state_reg[0]/D (DFFX1)
+                                                          0.04       4.93 r
+  data arrival time                                                  4.93
+
+  clock d.clk (rise edge)                                 5.00       5.00
+  clock network delay (ideal)                             0.00       5.00
+  router_4_1/inputbuffers_unit/w_queue/state_reg[0]/CLK (DFFX1)
+                                                          0.00       5.00 r
+  library setup time                                     -0.07       4.93
+  data required time                                                 4.93
+  --------------------------------------------------------------------------
+  data required time                                                 4.93
+  data arrival time                                                 -4.93
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1
+ 
+****************************************
+Report : area
+Design : noc
+Version: F-2011.09-SP2
+Date   : Thu Dec 20 15:23:36 2012
+****************************************
+
+Library(s) Used:
+
+    saed90nm_typ (File: /sim/synopsys/SAED_EDK90nm/Digital_Standard_Cell_Library/synopsys/models/saed90nm_typ.db)
+
+Number of ports:                          578
+Number of nets:                          1458
+Number of cells:                           30
+Number of combinational cells:             14
+Number of sequential cells:                 0
+Number of macros:                           0
+Number of buf/inv:                         14
+Number of references:                      17
+
+Combinational area:       471916.343274
+Noncombinational area:    347789.726532
+Net Interconnect area:    83382.869721 
+
+Total cell area:          819706.069806
+Total area:               903088.939527
+1

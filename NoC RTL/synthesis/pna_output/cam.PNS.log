@@ -1,0 +1,20 @@
+
+Name of design : cam
+Number of cell instance masters in the library : 58
+Number of cell instances in the design : 62326
+Processing net VDD ...
+Average power dissipation in cam :  1000.00 mW
+Power supply voltage :     1.20 V
+Average current in cam :   833.33 mA
+Number of power pad nodes reaching to the power ports of the leaf cells or blocks : 124
+Maximum IR drop in cam : 141.42 mV
+Maximum current in cam : 13.783 mA
+Processing net VSS ...
+Average power dissipation in cam :  1000.00 mW
+Power supply voltage :     1.20 V
+Average current in cam :   833.33 mA
+Number of power pad nodes reaching to the power ports of the leaf cells or blocks : 124
+Maximum IR drop in cam : 140.79 mV
+Maximum current in cam : 13.770 mA
+Memory usage for design data :      33103.872 Kbytes
+Overall takes     6.22 seconds

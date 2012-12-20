@@ -37,6 +37,8 @@ interface ifc (input bit clk);
         logic w_incr_o;
         logic l_incr_o;
 
+//	logic location;
+
 	 clocking cb @(posedge clk);
       			default output #1;
 
@@ -59,6 +61,7 @@ interface ifc (input bit clk);
      			output 	e_incr_i;
       			output 	w_incr_i;
      			output 	l_incr_i;
+//			output  location;
 
      	 		input 	north_o;
      			input 	south_o;
