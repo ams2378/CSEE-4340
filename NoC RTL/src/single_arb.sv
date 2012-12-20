@@ -93,7 +93,7 @@ always_ff @(posedge clk) begin
 		state <= s1;
 	else case(state)
 		s1:  	if (req_port_addr1_i ||  req_port_addr2_i ||  req_port_addr3_i ||  req_port_addr4_i ||  req_port_addr5_i) begin
-				enable <= 1;
+				enable <= 0;
 				state <= s2;
 			end else begin
 				enable <= 1;
