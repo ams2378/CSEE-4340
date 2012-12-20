@@ -50,35 +50,35 @@ class router_transaction;
    rand int onepos_y_local;
 
    constraint hotBits {
-	onepos_x_north >= 4;
-        onepos_x_north <= 7;
+      onepos_x_north >= 4;
+      onepos_x_north <= 7;
 
-	onepos_x_south >= 4;
-        onepos_x_south <= 7;
+      onepos_x_south >= 4;
+      onepos_x_south <= 7;
 
-	onepos_x_east >= 4;
-        onepos_x_east <= 7;
+      onepos_x_east >= 4;
+      onepos_x_east <= 7;
 
-	onepos_x_west >= 4;
-        onepos_x_west <= 7;
+      onepos_x_west >= 4;
+      onepos_x_west <= 7;
 
-	onepos_x_local >= 4;
-        onepos_x_local <= 7;
+      onepos_x_local >= 4;
+      onepos_x_local <= 7;
 
-	onepos_y_north >= 0;
-        onepos_y_north <= 3;
+      onepos_y_north >= 0;
+      onepos_y_north <= 3;
 
-	onepos_y_south >= 0;
-        onepos_y_south <= 3;
+      onepos_y_south >= 0;
+      onepos_y_south <= 3;
 
-	onepos_y_east >= 0;
-        onepos_y_east <= 3;
+      onepos_y_east >= 0;
+      onepos_y_east <= 3;
 
-	onepos_y_west >= 0;
-        onepos_y_west <= 3;
+      onepos_y_west >= 0;
+      onepos_y_west <= 3;
 
-	onepos_y_local >= 0;
-        onepos_y_local <= 3;
+      onepos_y_local >= 0;
+      onepos_y_local <= 3;
    }
 
    /* counter increment requests */
@@ -101,19 +101,19 @@ class router_transaction;
 		int w_incr_d,
 		int l_incr_d);
 
-	reset_density = rst_d;
+      reset_density = rst_d;
 
-	north_density = north_d;
-	south_density = south_d;
-	east_density = east_d;
-	west_density = west_d;
-	local_density = loc_d;
+      north_density = north_d;
+      south_density = south_d;
+      east_density = east_d;
+      west_density = west_d;
+      local_density = loc_d;
 
-	n_incr_density = n_incr_d;
-	s_incr_density = s_incr_d;
-	e_incr_density = e_incr_d;
-	w_incr_density = w_incr_d;
-	l_incr_density = l_incr_d;
+      n_incr_density = n_incr_d;
+      s_incr_density = s_incr_d;
+      e_incr_density = e_incr_d;
+      w_incr_density = w_incr_d;
+      l_incr_density = l_incr_d;
    endfunction
 
    /*
@@ -143,18 +143,18 @@ class router_transaction;
     * the randomly generated value
     */
    constraint density_dist {
-	reset_req dist {0:/100-reset_density, 1:/reset_density};
+      reset_req dist {0:/100-reset_density, 1:/reset_density};
 
-	north_req dist {0:/100-north_density, 1:/north_density};
-	south_req dist {0:/100-south_density, 1:/south_density};
-	east_req dist {0:/100-east_density, 1:/east_density};
-	west_req dist {0:/100-west_density, 1:/west_density};
-	local_req dist {0:/100-local_density, 1:/local_density};
+      north_req dist {0:/100-north_density, 1:/north_density};
+      south_req dist {0:/100-south_density, 1:/south_density};
+      east_req dist {0:/100-east_density, 1:/east_density};
+      west_req dist {0:/100-west_density, 1:/west_density};
+      local_req dist {0:/100-local_density, 1:/local_density};
 
-	n_incr_req dist {0:/100-n_incr_density, 1:/n_incr_density};
-	s_incr_req dist {0:/100-s_incr_density, 1:/s_incr_density};
-	e_incr_req dist {0:/100-e_incr_density, 1:/e_incr_density};
-	w_incr_req dist {0:/100-w_incr_density, 1:/w_incr_density};
-	l_incr_req dist {0:/100-l_incr_density, 1:/l_incr_density};
+      n_incr_req dist {0:/100-n_incr_density, 1:/n_incr_density};
+      s_incr_req dist {0:/100-s_incr_density, 1:/s_incr_density};
+      e_incr_req dist {0:/100-e_incr_density, 1:/e_incr_density};
+      w_incr_req dist {0:/100-w_incr_density, 1:/w_incr_density};
+      l_incr_req dist {0:/100-l_incr_density, 1:/l_incr_density};
    }
 endclass

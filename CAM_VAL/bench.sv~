@@ -251,10 +251,10 @@ program tb (ifc.bench ds);
 	ds.cb_w.search_i 		<= 	packet.search_i;
 	ds.cb_w.search_data_i	 	<= 	packet.search_data_i;  
  
-	test.golden_result();
-
         @(ds.cb_w);
 	@(ds.cb_r_s);
+
+        test.golden_result();
     endtask
 
     initial begin
