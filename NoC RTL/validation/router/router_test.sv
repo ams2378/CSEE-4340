@@ -129,11 +129,11 @@ class router_test;
    /*
     * queues for storing the address source
     */
-   bit [2:0] 	n_addr[$:2] = '{3'b111, 3'b111, 3'b111};
-   bit [2:0] 	s_addr[$:2] = '{3'b111, 3'b111, 3'b111};
-   bit [2:0] 	e_addr[$:2] = '{3'b111, 3'b111, 3'b111};
-   bit [2:0] 	w_addr[$:2] = '{3'b111, 3'b111, 3'b111};
-   bit [2:0] 	l_addr[$:2] = '{3'b111, 3'b111, 3'b111};
+   bit [2:0] 	n_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
+   bit [2:0] 	s_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
+   bit [2:0] 	e_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
+   bit [2:0] 	w_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
+   bit [2:0] 	l_addr[$:1] = '{3'b111, 3'b111};//, 3'b111};
 
    /*
     * queues for storing the AGU output/Arbiter input
@@ -221,7 +221,7 @@ class router_test;
 
       last_dir = '{'1, '1, '1, '1, '1};
 
-      grant_arb = '{'1, '1, '1, '1, '1};
+      grant_arb = '{3'b111, 3'b111, 3'b111, 3'b111, 3'b111};
 
       grant = '{'0, '0, '0, '0, '0};
 
@@ -301,8 +301,7 @@ class router_test;
 	 if (grant[0] == 1) begin
 	    north_q_o = my_qn.pop_front();			
 	    count_mask_n++;
-	    if (count_mask_n == 5) begin
-	       $display("SENT MESSAGE!!\n");
+	    if (count_mask_n == 6) begin
 	       mask[0] = 0;
 	       count_mask_n = 0;			
 	    end	
@@ -325,7 +324,7 @@ class router_test;
 	 if (grant[1] == 1) begin
 	    south_q_o = my_qs.pop_front();			
 	    count_mask_s++;
-	    if (count_mask_s == 5) begin
+	    if (count_mask_s == 6) begin
 	       mask[1] = 0;
 	       count_mask_s = 0;			
 	    end	
@@ -348,7 +347,7 @@ class router_test;
 	 if (grant[2] == 1) begin
 	    east_q_o = my_qe.pop_front();			
 	    count_mask_e++;
-	    if (count_mask_e == 5) begin
+	    if (count_mask_e == 6) begin
 	       mask[2] = 0;
 	       count_mask_e = 0;			
 	    end	
@@ -371,7 +370,7 @@ class router_test;
 	 if (grant[3] == 1) begin
 	    west_q_o = my_qw.pop_front();			
 	    count_mask_w++;
-	    if (count_mask_w == 5) begin
+	    if (count_mask_w == 6) begin
 	       mask[3] = 0;
 	       count_mask_w = 0;			
 	    end	
@@ -394,7 +393,7 @@ class router_test;
 	 if (grant[4] == 1) begin
 	    local_q_o = my_ql.pop_front();			
 	    count_mask_l++;
-	    if (count_mask_l == 5) begin
+	    if (count_mask_l == 6) begin
 	       mask[4] = 0;
 	       count_mask_l = 0;			
 	    end	
@@ -546,7 +545,8 @@ class router_test;
 	 en_q_n.push_back(1'b0);
 	 if (valid_n_o) begin
 	    count_n++;
-	    if (count_n == 6) begin
+	    if (count_n == 7) begin
+	       $display("SENT MESSAGE!!\n");
 	       count_n = 0;
 	       n_en_reset();
 	       n_agu_reset();
@@ -570,7 +570,7 @@ class router_test;
 	 en_q_s.push_back(1'b0);
 	 if (valid_s_o) begin
 	    count_s++;
-	    if (count_s == 6) begin
+	    if (count_s == 7) begin
 	       count_s = 0;
 	       s_en_reset();
 	       s_agu_reset();
@@ -593,7 +593,7 @@ class router_test;
 	 en_q_e.push_back(1'b0);
 	 if (valid_e_o) begin
 	    count_e++;
-	    if (count_e == 6) begin
+	    if (count_e == 7) begin
 	       count_e = 0;
 	       e_en_reset();
 	       e_agu_reset();
@@ -616,7 +616,7 @@ class router_test;
 	 en_q_w.push_back(1'b0);
 	 if (valid_w_o) begin
 	    count_w++;
-	    if (count_w == 6) begin
+	    if (count_w == 7) begin
 	       count_w = 0;
 	       w_en_reset();
 	       w_agu_reset();
@@ -639,7 +639,7 @@ class router_test;
 	 en_q_l.push_back(1'b0);
 	 if (valid_l_o) begin
 	    count_l++;
-	    if (count_l == 6) begin
+	    if (count_l == 7) begin
 	       count_l = 0;
 	       l_en_reset();
 	       l_agu_reset();
@@ -713,8 +713,6 @@ class router_test;
 
    function void arbiter_south();
       bit [4:0] request_vec = {l_agu[0][1], w_agu[0][1], e_agu[0][1], s_agu[0][1], n_agu[0][1]};
-      //$display("request_vec = %b%b%b%b%b\n", request_vec[4], request_vec[3], request_vec[2], request_vec[1], request_vec[0]);
-      //$display("mask = %b%b%b%b%b\n", mask[4], mask[3], mask[2], mask[1], mask[0]);
 
       /* mask the bits */
       request_vec = request_vec ^ mask;
@@ -1023,35 +1021,35 @@ class router_test;
       n_addr = {};
       n_addr.push_back(3'b111);
       n_addr.push_back(3'b111);
-      n_addr.push_back(3'b111);
+      //n_addr.push_back(3'b111);
    endfunction
 
    function void south_reset();
       s_addr = {};
       s_addr.push_back(3'b111);
       s_addr.push_back(3'b111);
-      s_addr.push_back(3'b111);
+      //s_addr.push_back(3'b111);
    endfunction
 
    function void east_reset();
       e_addr = {};
       e_addr.push_back(3'b111);
       e_addr.push_back(3'b111);
-      e_addr.push_back(3'b111);
+      //e_addr.push_back(3'b111);
    endfunction
 
    function void west_reset();
       w_addr = {};
       w_addr.push_back(3'b111);
       w_addr.push_back(3'b111);
-      w_addr.push_back(3'b111);
+      //w_addr.push_back(3'b111);
    endfunction
 
    function void local_reset();
       l_addr = {};
       l_addr.push_back(3'b111);
       l_addr.push_back(3'b111);
-      l_addr.push_back(3'b111);
+      //l_addr.push_back(3'b111);
    endfunction
 
    function void pop_queues();
@@ -1105,7 +1103,8 @@ class router_test;
       grant_arb[3] = w_addr[0];
       grant_arb[4] = l_addr[0];
 
-      grant = '{'0, '0, '0, '0, '0};
+      $display("grant_arb = %b\n", grant_arb[0]);
+      grant = {'0, '0, '0, '0, '0};
       n_incr_o = '0;
       s_incr_o = '0;
       e_incr_o = '0;

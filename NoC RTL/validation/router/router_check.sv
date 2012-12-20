@@ -128,6 +128,11 @@ class router_check; //checker class
       pass 			  =	passed;
 
 	$display("DUT value = %h\n", dut_north_o);
+	$display("DUT valid = %h\n", dut_valid_n_o);
+
+	$display("Bench value = %h\n", bench_north_o);
+	$display("Old Bench valid = %h\n", tb_valid_n_q[$]);
+	$display("Current Bench valid = %h\n", tb_valid_n_q[0]);
 	//$display("Bench value = %h\n", tb_n_q[0]);
       if (passed)	begin
 	 if(verbose) $display("%t : pass \n", $realtime);
