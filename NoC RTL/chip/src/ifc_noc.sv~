@@ -1,3 +1,5 @@
+
+
 interface ifc_noc (input bit clk);
 	logic rst;
 	
