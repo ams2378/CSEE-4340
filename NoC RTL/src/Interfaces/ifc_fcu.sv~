@@ -7,8 +7,6 @@
  */
 
 interface ifc_fcu ();
-   logic rst;
-
    logic [2:0] req_port_addr1_i;
    logic [2:0] req_port_addr2_i;
    logic [2:0] req_port_addr3_i;
@@ -28,8 +26,6 @@ interface ifc_fcu ();
    logic       grant_access_local_o;
 
    modport dut (
-		input rst,		
-	
 		input  req_port_addr1_i,
 		input  req_port_addr2_i, 
 		input  req_port_addr3_i,

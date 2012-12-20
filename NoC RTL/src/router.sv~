@@ -136,7 +136,6 @@ arbiter arbiter_unit(
  * outputs
  */
 ifc_fcu f ();
-assign f.rst = d.rst;
 
 assign f.req_port_addr1_i= ar.req_port_addr1_o;
 assign f.req_port_addr2_i= ar.req_port_addr2_o;
