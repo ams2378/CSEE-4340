@@ -27,6 +27,8 @@ logic [4:0] masks;
 
 logic [2:0] req_port_addr;
 logic [2:0] req_port_addr_o_temp;
+logic [2:0] req_port_addr_o_temp2;
+logic en_reg;
 
 parameter s1 =  3'b000;
 parameter s2 =  3'b001;
@@ -66,7 +68,7 @@ end
 
 
 
-DW_arb_rr #(.n(5)) arb(
+DW_arb_rr #(.n(5), .output_mode(1)) arb(
 	.clk(clk),
 	.rst_n(~rst),
 	.enable(enable),
@@ -74,7 +76,8 @@ DW_arb_rr #(.n(5)) arb(
 	.request(requests),
 	.mask(masks),
 	
-	.grant_index(req_port_addr)
+	.grant_index(req_port_addr),
+	.granted(en_reg)
 );
 
 always_comb begin
@@ -93,10 +96,10 @@ always_ff @(posedge clk) begin
 		state <= s1;
 	else case(state)
 		s1:  	if (req_port_addr1_i ||  req_port_addr2_i ||  req_port_addr3_i ||  req_port_addr4_i ||  req_port_addr5_i) begin
-				enable <= 0;
+				enable <= 1;    // changes
 				state <= s2;
 			end else begin
-				enable <= 1;
+				enable <= 0;
 				state <= s1;
 			end
 		
@@ -131,15 +134,27 @@ always_ff @(posedge clk) begin
 		s6:	if (valid == 0)
 				enable <= 0;
 			else if (valid == 1) begin 
-				enable <= 1;
+				enable <= 0;
 				state <= s1;
 			end
 	endcase
 end
 
 
+	arb_reg register(
+		//.clk(clk),
+		.rst(rst),
+		
+		.write_i(req_port_addr_o_temp),
+		.en_i(en_reg),
+		
+		.read_o(req_port_addr_o_temp2)	
+	);
 
-assign req_port_addr_o = req_port_addr_o_temp;
+
+
+
+assign req_port_addr_o = req_port_addr_o_temp2;
 
 endmodule
 
