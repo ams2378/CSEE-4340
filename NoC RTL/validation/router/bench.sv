@@ -15,88 +15,88 @@
  * cycle
  */
 function make_north(router_transaction packet, router_env env);
-	if (env.n_sent == 0) begin // need a header flit
-		if (packet.north_req == 1) begin
-			packet.north_flit = '0;
-			packet.north_flit[packet.onepos_x_north] = 1;
-			packet.north_flit[packet.onepos_y_north] = 1;
-			env.n_sent++;
-		end
-	end
-	else if (env.n_sent == 4) begin // sending the last body flit
-		env.n_sent = 0;
-	end
-	else begin // sending a middle body flit
-		env.n_sent++;	
-	end
+   if (env.n_sent == 0) begin // need a header flit
+      if (packet.north_req == 1) begin
+	 packet.north_flit = '0;
+	 packet.north_flit[packet.onepos_x_north] = 1;
+	 packet.north_flit[packet.onepos_y_north] = 1;
+	 env.n_sent++;
+      end
+   end
+   else if (env.n_sent == 4) begin // sending the last body flit
+      env.n_sent = 0;
+   end
+   else begin // sending a middle body flit
+      env.n_sent++;	
+   end
 endfunction
 
 function make_south(router_transaction packet, router_env env);
-	if (env.s_sent == 0) begin // need a header flit
-		if (packet.south_req == 1) begin
-			packet.south_flit = '0;
-			packet.south_flit[packet.onepos_x_south] = 1;
-			packet.south_flit[packet.onepos_y_south] = 1;
-			env.s_sent++;
-		end
-	end
-	else if (env.s_sent == 4) begin // sending the last body flit
-		env.s_sent = 0;
-	end
-	else begin // sending a middle body flit
-		env.s_sent++;	
-	end
+   if (env.s_sent == 0) begin // need a header flit
+      if (packet.south_req == 1) begin
+	 packet.south_flit = '0;
+	 packet.south_flit[packet.onepos_x_south] = 1;
+	 packet.south_flit[packet.onepos_y_south] = 1;
+	 env.s_sent++;
+      end
+   end
+   else if (env.s_sent == 4) begin // sending the last body flit
+      env.s_sent = 0;
+   end
+   else begin // sending a middle body flit
+      env.s_sent++;	
+   end
 endfunction
 
 function make_east(router_transaction packet, router_env env);
-	if (env.e_sent == 0) begin // need a header flit
-		if (packet.east_req == 1) begin
-			packet.east_flit = '0;
-			packet.east_flit[packet.onepos_x_east] = 1;
-			packet.east_flit[packet.onepos_y_east] = 1;
-			env.e_sent++;
-		end
-	end
-	else if (env.e_sent == 4) begin // sending the last body flit
-		env.e_sent = 0;
-	end
-	else begin // sending a middle body flit
-		env.e_sent++;	
-	end
+   if (env.e_sent == 0) begin // need a header flit
+      if (packet.east_req == 1) begin
+	 packet.east_flit = '0;
+	 packet.east_flit[packet.onepos_x_east] = 1;
+	 packet.east_flit[packet.onepos_y_east] = 1;
+	 env.e_sent++;
+      end
+   end
+   else if (env.e_sent == 4) begin // sending the last body flit
+      env.e_sent = 0;
+   end
+   else begin // sending a middle body flit
+      env.e_sent++;	
+   end
 endfunction
 
 function make_west(router_transaction packet, router_env env);
-	if (env.w_sent == 0) begin // need a header flit
-		if (packet.west_req == 1) begin
-			packet.west_flit = '0;
-			packet.west_flit[packet.onepos_x_west] = 1;
-			packet.west_flit[packet.onepos_y_west] = 1;
-			env.w_sent++;
-		end
-	end
-	else if (env.w_sent == 4) begin // sending the last body flit
-		env.w_sent = 0;
-	end
-	else begin // sending a middle body flit
-		env.w_sent++;	
-	end
+   if (env.w_sent == 0) begin // need a header flit
+      if (packet.west_req == 1) begin
+	 packet.west_flit = '0;
+	 packet.west_flit[packet.onepos_x_west] = 1;
+	 packet.west_flit[packet.onepos_y_west] = 1;
+	 env.w_sent++;
+      end
+   end
+   else if (env.w_sent == 4) begin // sending the last body flit
+      env.w_sent = 0;
+   end
+   else begin // sending a middle body flit
+      env.w_sent++;	
+   end
 endfunction
 
 function make_local(router_transaction packet, router_env env);
-	if (env.l_sent == 0) begin // need a header flit
-		if (packet.local_req == 1) begin
-			packet.local_flit = '0;
-			packet.local_flit[packet.onepos_x_local] = 1;
-			packet.local_flit[packet.onepos_y_local] = 1;
-			env.l_sent++;
-		end
-	end
-	else if (env.l_sent == 4) begin // sending the last body flit
-		env.l_sent = 0;
-	end
-	else begin // sending a middle body flit
-		env.l_sent++;	
-	end
+   if (env.l_sent == 0) begin // need a header flit
+      if (packet.local_req == 1) begin
+	 packet.local_flit = '0;
+	 packet.local_flit[packet.onepos_x_local] = 1;
+	 packet.local_flit[packet.onepos_y_local] = 1;
+	 env.l_sent++;
+      end
+   end
+   else if (env.l_sent == 4) begin // sending the last body flit
+      env.l_sent = 0;
+   end
+   else begin // sending a middle body flit
+      env.l_sent++;	
+   end
 endfunction
 
 program tb (ifc.bench ds);
@@ -117,68 +117,68 @@ program tb (ifc.bench ds);
        * the router based on if it has space in its input buffer
        */
       if (env.n_q_free > 0) begin
-	make_north(packet, env);
-	if (packet.reset_req == 0) begin
-		env.n_q_free--;
-		if (env.n_q_free < 0) begin
-			env.n_q_free = 0;
-		end
-	end
+	 make_north(packet, env);
+	 if (packet.reset_req == 0) begin
+	    env.n_q_free--;
+	    if (env.n_q_free < 0) begin
+	       env.n_q_free = 0;
+	    end
+	 end
       end
       else begin
-	packet.north_req = 0;
+	 packet.north_req = 0;
       end
 
       if (env.s_q_free > 0) begin
-	make_south(packet, env);
-	if (packet.reset_req == 0) begin
-		env.s_q_free--; 
-		if (env.s_q_free < 0) begin
-			env.s_q_free = 0;
-		end   
-	end 
+	 make_south(packet, env);
+	 if (packet.reset_req == 0) begin
+	    env.s_q_free--; 
+	    if (env.s_q_free < 0) begin
+	       env.s_q_free = 0;
+	    end   
+	 end 
       end
       else begin
-	packet.south_req = 0;
+	 packet.south_req = 0;
       end
 
       if (env.e_q_free > 0) begin
-	make_east(packet, env);
-	if (packet.reset_req == 0) begin
-		env.e_q_free--; 
-		if (env.e_q_free < 0) begin
-			env.e_q_free = 0;
-		end
-	end
+	 make_east(packet, env);
+	 if (packet.reset_req == 0) begin
+	    env.e_q_free--; 
+	    if (env.e_q_free < 0) begin
+	       env.e_q_free = 0;
+	    end
+	 end
       end
       else begin
-	packet.east_req = 0;
+	 packet.east_req = 0;
       end
 
       if (env.w_q_free > 0) begin
-	make_west(packet, env);
-	if (packet.reset_req == 0) begin
-		env.w_q_free--; 
-		if (env.w_q_free < 0) begin
-			env.w_q_free = 0;
-		end
-	end
+	 make_west(packet, env);
+	 if (packet.reset_req == 0) begin
+	    env.w_q_free--; 
+	    if (env.w_q_free < 0) begin
+	       env.w_q_free = 0;
+	    end
+	 end
       end
       else begin
-	packet.west_req = 0;
+	 packet.west_req = 0;
       end
 
       if (env.l_q_free > 0) begin
-	make_local(packet, env);
-	if (packet.reset_req == 0) begin
-		env.l_q_free--; 
-		if (env.l_q_free < 0) begin
-			env.l_q_free = 0;
-		end
-	end
+	 make_local(packet, env);
+	 if (packet.reset_req == 0) begin
+	    env.l_q_free--; 
+	    if (env.l_q_free < 0) begin
+	       env.l_q_free = 0;
+	    end
+	 end
       end
       else begin
-	packet.local_req = 0;
+	 packet.local_req = 0;
       end
 
       /*
@@ -232,38 +232,38 @@ program tb (ifc.bench ds);
       test.golden_model();
 
       if(test.n_incr_o == 1) begin
-      	env.n_q_free++;
-	if (env.n_q_free > 5) begin
-		env.n_q_free = 5;
-	end
+      	 env.n_q_free++;
+	 if (env.n_q_free > 5) begin
+	    env.n_q_free = 5;
+	 end
       end
 
       if(test.s_incr_o == 1) begin
-      	env.s_q_free++;
-	if (env.s_q_free > 5) begin
-		env.s_q_free = 5;
-	end
+      	 env.s_q_free++;
+	 if (env.s_q_free > 5) begin
+	    env.s_q_free = 5;
+	 end
       end
 
       if(test.e_incr_o == 1) begin
-      	env.e_q_free++;
-	if (env.e_q_free > 5) begin
-		env.e_q_free = 5;
-	end
+      	 env.e_q_free++;
+	 if (env.e_q_free > 5) begin
+	    env.e_q_free = 5;
+	 end
       end
 
       if(test.w_incr_o == 1) begin
-      	env.w_q_free++;
-	if (env.w_q_free > 5) begin
-		env.w_q_free = 5;
-	end
+      	 env.w_q_free++;
+	 if (env.w_q_free > 5) begin
+	    env.w_q_free = 5;
+	 end
       end
 
       if(test.l_incr_o == 1) begin
-      	env.l_q_free++;
-	if (env.l_q_free > 5) begin
-		env.l_q_free = 5;
-	end
+      	 env.l_q_free++;
+	 if (env.l_q_free > 5) begin
+	    env.l_q_free = 5;
+	 end
       end
 
       @(ds.cb);
@@ -308,8 +308,10 @@ program tb (ifc.bench ds);
 
 			      test.n_incr_o, test.s_incr_o, test.e_incr_o, test.w_incr_o,
 			      test.l_incr_o,
-				
+	 
 			      env.verbose);
       end
+      $display("s_addr[%d] = %b\n", 0, test.s_addr[0]);
+      $display("s_addr[%d] = %b\n", 1, test.s_addr[1]);
    end
 endprogram
