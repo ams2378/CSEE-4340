@@ -4,7 +4,7 @@ File Name   : FF.sv
 Function    : Flip flop- modified from basic definition to support matching functionality
 *///-----------------------------------------------------
 
-module reg (
+module register (
 	input clk,
 	input rst,
 

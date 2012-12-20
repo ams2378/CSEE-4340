@@ -78,7 +78,7 @@ DW_arb_rr #(.n(5)) arb(
 );
 
 always_comb begin
-	if (!req_port_addr1_i && !req_port_addr2_i  && !req_port_addr3_i  && !req_port_addr4_i  && !req_port_addr5_i) begin
+	if (!req_port_addr1_i && !req_port_addr2_i  && !req_port_addr3_i  && !req_port_addr4_i  && !req_port_addr5_i && state==s1) begin
 		req_port_addr_o_temp = 3'b111;
 	end else begin
 		req_port_addr_o_temp = req_port_addr;
