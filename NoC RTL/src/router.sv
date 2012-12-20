@@ -227,11 +227,11 @@ assign d.east_o = x.east_o;
 assign d.west_o = x.west_o;
 assign d.local_o = x.local_o;
 
-assign d.n_incr_o = x.pop_req_n;
-assign d.s_incr_o = x.pop_req_s;
-assign d.e_incr_o = x.pop_req_e;
-assign d.w_incr_o = x.pop_req_w;
-assign d.l_incr_o = x.pop_req_l;
+assign d.n_incr_o = b.valid_n_o; //x.pop_req_n;
+assign d.s_incr_o = b.valid_s_o; //x.pop_req_s;
+assign d.e_incr_o = b.valid_e_o; //x.pop_req_e;
+assign d.w_incr_o = b.valid_w_o; //x.pop_req_w;
+assign d.l_incr_o = b.valid_l_o; //x.pop_req_l;
 
 assign d.valid_n_o = b.valid_n_o;
 assign d.valid_s_o = b.valid_s_o;
