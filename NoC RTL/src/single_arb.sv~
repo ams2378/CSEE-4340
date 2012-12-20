@@ -16,6 +16,12 @@ module single_arb (
 		input mask_4,
 		input mask_5,
 
+		output grant_n,
+		output grant_s,
+		output grant_e,
+		output grant_w,
+		output grant_l,
+
 		output [2:0] req_port_addr_o
 		);
 
@@ -29,13 +35,15 @@ logic [2:0] req_port_addr;
 logic [2:0] req_port_addr_o_temp;
 logic [2:0] req_port_addr_o_temp2;
 logic en_reg;
+logic granted;
+logic [4:0] grant_one_hot;
 
-parameter s1 =  3'b000;
-parameter s2 =  3'b001;
-parameter s3 =  3'b010;
-parameter s4 =  3'b011;
-parameter s5 =  3'b100;
-parameter s6 =  3'b101;
+//parameter s1 =  3'b000;
+//parameter s2 =  3'b001;
+//parameter s3 =  3'b010;
+//parameter s4 =  3'b011;
+//parameter s5 =  3'b100;
+//parameter s6 =  3'b101;
 
 
 always_comb begin
@@ -76,12 +84,13 @@ DW_arb_rr #(.n(5), .output_mode(1)) arb(
 	.request(requests),
 	.mask(masks),
 	
+	.grant(grant_one_hot),
 	.grant_index(req_port_addr),
 	.granted(en_reg)
 );
 
 always_comb begin
-	if (!req_port_addr1_i && !req_port_addr2_i  && !req_port_addr3_i  && !req_port_addr4_i  && !req_port_addr5_i && state==s1) begin
+	if (!req_port_addr1_i && !req_port_addr2_i  && !req_port_addr3_i  && !req_port_addr4_i  && !req_port_addr5_i && state== 3'b000) begin
 		req_port_addr_o_temp = 3'b111;
 	end else begin
 		req_port_addr_o_temp = req_port_addr;
@@ -91,52 +100,65 @@ end
 
 
 //FSM
-always_ff @(posedge clk) begin
+always_ff @(posedge clk or valid or req_port_addr1_i or  req_port_addr2_i or  req_port_addr3_i or  req_port_addr4_i or req_port_addr5_i) begin
 	if (rst)
-		state <= s1;
+		state <= 3'b000; //s1;
 	else case(state)
-		s1:  	if (req_port_addr1_i ||  req_port_addr2_i ||  req_port_addr3_i ||  req_port_addr4_i ||  req_port_addr5_i) begin
+		3'b000:  begin	
+
+			if (req_port_addr1_i ||  req_port_addr2_i ||  req_port_addr3_i ||  req_port_addr4_i 				||  req_port_addr5_i) begin
+				state <= 3'b001; //s2;
 				enable <= 1;    // changes
-				state <= s2;
 			end else begin
+				state <= 3'b000; //s1;
 				enable <= 0;
-				state <= s1;
 			end
-		
-		s2:	if (valid == 0)
+		end
+		3'b001: begin	
+			if (valid == 0) begin
+				state <=  3'b001; //s2;
 				enable <= 0;
-			else if (valid == 1) begin 
+			end else if (valid == 1) begin
+				state <= 3'b010; //s3; 
 				enable <= 0;
-				state <= s3;
 			end
-		
-		s3:	if (valid == 0)
+		end
+		3'b010:	begin
+			if (valid == 0) begin
+				state <=  3'b010; //s3;
 				enable <= 0;
-			else if (valid == 1) begin 
+			end else if (valid == 1) begin 
+				state <= 3'b011;// s4;
 				enable <= 0;
-				state <= s4;
 			end
-
-		s4:	if (valid == 0)
+		end
+		3'b011:	begin
+			if (valid == 0) begin
+				state <=  3'b011; //s4;
 				enable <= 0;
-			else if (valid == 1) begin 
+			end else if (valid == 1) begin 
+				state <= 3'b100; //s5;
 				enable <= 0;
-				state <= s5;
 			end
-
-		s5: 	if (valid == 0)
+		end
+		3'b100: begin
+		 	if (valid == 0) begin
+				state <=  3'b100; //s5;
 				enable <= 0;
-			else if (valid == 1) begin 
+			end else if (valid == 1) begin 
+				state <= 3'b101; //s6;
 				enable <= 0;
-				state <= s6;
 			end
-
-		s6:	if (valid == 0)
+		end
+		3'b101: begin
+			if (valid == 0) begin
+				state <=  3'b101; //s6;
 				enable <= 0;
-			else if (valid == 1) begin 
+			end else if (valid == 1) begin 
+				state <= 3'b000; //s1;
 				enable <= 0;
-				state <= s1;
 			end
+		end
 	endcase
 end
 
@@ -155,6 +177,13 @@ end
 
 
 assign req_port_addr_o = req_port_addr_o_temp2;
+assign granted = en_reg;
+
+assign grant_n = granted && grant_one_hot[0];
+assign grant_s = granted && grant_one_hot[1];
+assign grant_e = granted && grant_one_hot[2];
+assign grant_w = granted && grant_one_hot[3];
+assign grant_l = granted && grant_one_hot[4];
 
 endmodule
 

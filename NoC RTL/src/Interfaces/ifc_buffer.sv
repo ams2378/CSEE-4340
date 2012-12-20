@@ -41,6 +41,18 @@ interface ifc_buffer ();
    logic mask_4;
    logic mask_5;
 
+   logic valid_n_o;
+   logic valid_s_o;
+   logic valid_e_o;
+   logic valid_w_o;
+   logic valid_l_o;
+
+   logic grant_n_i;
+   logic grant_s_i;
+   logic grant_e_i;
+   logic grant_w_i;
+   logic grant_l_i;
+
 
    modport dut (
 		input  clk,
@@ -63,6 +75,18 @@ interface ifc_buffer ();
 		input valid_e_i,
 		input valid_w_i,
 		input valid_l_i,
+
+		input grant_n_i,
+		input grant_s_i,
+		input grant_e_i,
+		input grant_w_i,
+		input grant_l_i,
+		
+		output valid_n_o,
+		output valid_s_o,
+		output valid_e_o,
+		output valid_w_o,
+		output valid_l_o,
 
 		output north_q_o, 
 		output south_q_o, 

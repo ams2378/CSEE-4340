@@ -906,25 +906,30 @@ class router_test;
    function void north_reset();
 	n_addr = {};
 	n_addr.push_back('1);
+	n_addr.push_back('1);
    endfunction
 
    function void south_reset();
 	s_addr = {};
+	s_addr.push_back('1);
 	s_addr.push_back('1);
    endfunction
 
    function void east_reset();
 	e_addr = {};
 	e_addr.push_back('1);
+	e_addr.push_back('1);
    endfunction
 
    function void west_reset();
 	w_addr = {};
 	w_addr.push_back('1);
+	w_addr.push_back('1);
    endfunction
 
    function void local_reset();
 	l_addr = {};
+	l_addr.push_back('1);
 	l_addr.push_back('1);
    endfunction
 

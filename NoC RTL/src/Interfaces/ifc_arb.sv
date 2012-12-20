@@ -30,6 +30,12 @@ interface ifc_arb ();
    logic valid_w_i;
    logic valid_l_i;
 
+   logic grant_n_o;
+   logic grant_s_o;
+   logic grant_e_o;
+   logic grant_w_o;
+   logic grant_l_o;
+
    logic [2:0] req_port_addr1_o;
    logic [2:0] req_port_addr2_o;	
    logic [2:0] req_port_addr3_o;
@@ -57,6 +63,12 @@ interface ifc_arb ();
    		input valid_e_i,
    		input valid_w_i,
    		input valid_l_i,
+
+		output grant_n_o,
+   		output grant_s_o,
+   		output grant_e_o,
+   		output grant_w_o,
+   		output grant_l_o,
 
 		output req_port_addr1_o,
 		output req_port_addr2_o, 

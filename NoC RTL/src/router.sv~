@@ -40,6 +40,13 @@ assign b.pop_req_e_i=x.pop_req_e;
 assign b.pop_req_w_i=x.pop_req_w; 
 assign b.pop_req_l_i=x.pop_req_l; 
 
+assign b.grant_n_i = ar.grant_n_o;
+assign b.grant_s_i = ar.grant_s_o;
+assign b.grant_e_i = ar.grant_e_o;
+assign b.grant_w_i = ar.grant_w_o;
+assign b.grant_l_i = ar.grant_l_o;
+
+
 
 
 /*
@@ -136,6 +143,7 @@ arbiter arbiter_unit(
  * outputs
  */
 ifc_fcu f ();
+assign f.rst = d.rst;
 
 assign f.req_port_addr1_i= ar.req_port_addr1_o;
 assign f.req_port_addr2_i= ar.req_port_addr2_o;
@@ -225,11 +233,11 @@ assign d.e_incr_o = x.pop_req_e;
 assign d.w_incr_o = x.pop_req_w;
 assign d.l_incr_o = x.pop_req_l;
 
-assign d.valid_n_o = f.grant_access_north_o;
-assign d.valid_s_o = f.grant_access_south_o;
-assign d.valid_e_o = f.grant_access_east_o;
-assign d.valid_w_o = f.grant_access_west_o;
-assign d.valid_l_o = f.grant_access_local_o;
+assign d.valid_n_o = b.valid_n_o;
+assign d.valid_s_o = b.valid_s_o;
+assign d.valid_e_o = b.valid_e_o;
+assign d.valid_w_o = b.valid_w_o;
+assign d.valid_l_o = b.valid_l_o;
 
 
 /*

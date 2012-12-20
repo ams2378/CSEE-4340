@@ -26,7 +26,9 @@ queue n_queue (
 	.pop_req_i(d.pop_req_n_i),
 	.data_i(d.north_i),
 	.valid_i(d.valid_n_i), 
+	.grant_i(d.grant_n_i),
 
+	.valid_o(d.valid_n_o),
 	.data_o(d.north_q_o),
 	.mask_o(d.mask_1)
 
@@ -38,8 +40,10 @@ queue s_queue (
 		
 	.pop_req_i(d.pop_req_s_i),
 	.data_i(d.south_i),
-	.valid_i(d.valid_s_i), 
+	.valid_i(d.valid_s_i),
+	.grant_i(d.grant_s_i), 
 
+	.valid_o(d.valid_s_o),
 	.data_o(d.south_q_o),
 	.mask_o(d.mask_2)	
 );
@@ -50,8 +54,10 @@ queue e_queue (
 		
 	.pop_req_i(d.pop_req_e_i),
 	.data_i(d.east_i),
-	.valid_i(d.valid_e_i), 
+	.valid_i(d.valid_e_i),
+	.grant_i(d.grant_e_i), 
 
+	.valid_o(d.valid_e_o),
 	.data_o(d.east_q_o),
 	.mask_o(d.mask_3)	
 );
@@ -62,8 +68,10 @@ queue w_queue (
 		
 	.pop_req_i(d.pop_req_w_i),
 	.data_i(d.west_i),
-	.valid_i(d.valid_w_i), 
+	.valid_i(d.valid_w_i),
+	.grant_i(d.grant_w_i), 
 
+	.valid_o(d.valid_w_o),
 	.data_o(d.west_q_o),
 	.mask_o(d.mask_4)
 );
@@ -74,8 +82,10 @@ queue l_queue (
 		
 	.pop_req_i(d.pop_req_l_i),
 	.data_i(d.local_i),
-	.valid_i(d.valid_l_i), 
+	.valid_i(d.valid_l_i),
+	.grant_i(d.grant_l_i), 
 
+	.valid_o(d.valid_l_o),
 	.data_o(d.local_q_o),
 	.mask_o(d.mask_5)	
 );
