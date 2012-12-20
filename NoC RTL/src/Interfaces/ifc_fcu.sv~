@@ -7,11 +7,20 @@
  */
 
 interface ifc_fcu ();
+   logic rst; 
+   logic clk;
+
    logic [2:0] req_port_addr1_i;
    logic [2:0] req_port_addr2_i;
    logic [2:0] req_port_addr3_i;
    logic [2:0] req_port_addr4_i;
    logic [2:0] req_port_addr5_i;
+
+   logic  granted_n;
+   logic  granted_s;
+   logic  granted_e;
+   logic  granted_w;
+   logic  granted_l;
 
    logic       credit_en_north_i;
    logic       credit_en_south_i;
@@ -25,7 +34,21 @@ interface ifc_fcu ();
    logic       grant_access_west_o;
    logic       grant_access_local_o;
 
+		logic valid_north_o;
+		logic valid_south_o;
+		logic valid_east_o;
+		logic valid_west_o;
+		logic valid_local_o;
+
    modport dut (
+		input rst,
+		input clk,		
+
+		input  granted_n,
+		input  granted_s,
+		input  granted_e,
+		input  granted_w,
+		input  granted_l,	
 		input  req_port_addr1_i,
 		input  req_port_addr2_i, 
 		input  req_port_addr3_i,
@@ -43,6 +66,13 @@ interface ifc_fcu ();
 		output grant_access_east_o,
 		output grant_access_west_o,
 		output grant_access_local_o
+
+		output valid_north_o, 
+		output valid_south_o,
+		output valid_east_o,
+		output valid_west_o,
+		output valid_local_o
+
 		);
 
 endinterface
