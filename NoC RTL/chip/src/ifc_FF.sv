@@ -1,0 +1,23 @@
+/**
+ * @filename  		ifc_FF.sv 
+ *
+ * @authors   		Ayushi Rajeev		<ar3110@columbia.edu>
+ *			Ashwin Ramachandran	<ar2648@columbia.edu>
+ *	 
+ */
+
+interface ifc_FF ();
+   logic rst;
+   logic clk;
+   logic [7:0] location;
+   logic [7:0] read_data_o;
+
+   modport dut (
+		input clk,
+		input rst,
+		input location,
+
+		output read_data_o
+		);
+
+endinterface
