@@ -1180,7 +1180,7 @@ class router_test;
 	 address_gen();
 	 make_enables();
 
-	 if (en_n) begin
+	 if (en_q_n[0]) begin
 	    arbiter_north();
 	 end
 	 else begin
@@ -1192,19 +1192,19 @@ class router_test;
 	 else begin
 	    s_addr.push_back(s_addr[0]);
 	 end
-	 if (en_e) begin
+	 if (en_q_e[0]) begin
 	    arbiter_east();
 	 end
 	 else begin
 	    e_addr.push_back(e_addr[0]);
 	 end
-	 if (en_w) begin
+	 if (en_q_w[0]) begin
 	    arbiter_west();
 	 end
 	 else begin
 	    w_addr.push_back(w_addr[0]);
 	 end
-	 if (en_l) begin
+	 if (en_q_l[0]) begin
 	    arbiter_local();
 	 end
 	 else begin
